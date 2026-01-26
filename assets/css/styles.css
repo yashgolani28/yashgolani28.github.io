@@ -269,10 +269,20 @@ h1 {
 
 .kpiIcon {
   font-size: 32px;
-  margin-bottom: 12px;
-  display: block;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   line-height: 1;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  color: color-mix(in srgb, var(--accent) 85%, transparent);
+  transition: color 280ms ease;
+  width: 48px;
+  height: 48px;
+}
+
+.kpi:hover .kpiIcon {
+  color: var(--accent);
 }
 
 .kpi b {
@@ -470,10 +480,28 @@ h1 {
   margin-bottom: 8px;
 }
 
+.tlContent {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.tlLeft {
+  flex: 1;
+}
+
+.tlRight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
 .tlWhen {
   color: var(--accent);
   font-size: 12px;
-  text-align: left;
+  text-align: right;
   padding: 8px 14px;
   white-space: nowrap;
   line-height: 1.5;
@@ -484,10 +512,14 @@ h1 {
   letter-spacing: 0.5px;
 }
 
-@media (max-width: 768px) {
-  .tlHeader {
+@media (max-width: 900px) {
+  .tlContent {
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: 20px;
+  }
+
+  .tlRight {
+    align-items: flex-start;
   }
 
   .tlWhen {
