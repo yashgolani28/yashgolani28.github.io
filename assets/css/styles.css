@@ -358,7 +358,7 @@ h1 {
 
 .tlItem {
   display: grid;
-  grid-template-columns: 1fr 140px;
+  grid-template-columns: 1fr;
   gap: 20px;
   align-items: flex-start;
 }
@@ -372,16 +372,17 @@ h1 {
 .tlWhen {
   color: var(--muted);
   font-size: 13px;
-  text-align: right;
-  padding-top: 4px;
+  text-align: left;
+  padding-top: 12px;
   white-space: nowrap;
   line-height: 1.5;
+  margin-top: auto;
 }
 
 @media (max-width: 768px) {
   .tlWhen {
     text-align: left;
-    padding-top: 0;
+    padding-top: 12px;
   }
 }
 
@@ -390,7 +391,8 @@ h1 {
   border-radius: 16px;
   background: color-mix(in srgb, var(--surface) 88%, transparent);
   padding: 18px;
-  order: -1;
+  display: flex;
+  flex-direction: column;
 }
 
 @media (max-width: 768px) {
@@ -477,6 +479,36 @@ h1 {
   box-shadow: var(--shadow-soft);
 }
 
+.statBox {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  padding: 18px 14px;
+  text-align: center;
+}
+
+.statNumber {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+
+.statLabel {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text);
+  margin-bottom: 6px;
+  display: block;
+}
+
+.statDescription {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
 .switch {
   position: relative;
   width: 46px;
@@ -509,4 +541,128 @@ h1 {
 
 .switchInput:checked+.switchKnob {
   transform: translateX(20px);
+}
+
+/* Skills Page Styles */
+.skillsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  margin: 32px 0;
+}
+
+@media (max-width: 900px) {
+  .skillsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.skillCard {
+  background: linear-gradient(135deg, 
+    color-mix(in srgb, var(--surface) 95%, transparent),
+    color-mix(in srgb, var(--surface) 85%, transparent));
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+  transition: all 280ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: var(--shadow);
+}
+
+.skillCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(600px at 20% 0%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 80%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 280ms ease;
+}
+
+.skillCard:hover {
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--line));
+  box-shadow: 
+    0 0 40px color-mix(in srgb, var(--accent) 15%, transparent),
+    var(--shadow);
+  transform: translateY(-6px);
+}
+
+.skillCard:hover .skillIcon {
+  color: var(--text);
+  background: color-mix(in srgb, var(--accent) 25%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 50%, var(--line));
+  transform: scale(1.1);
+}
+
+.skillCard:hover::before {
+  opacity: 1;
+}
+
+.skillCard.fullWidth {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 600px) {
+  .skillCard.fullWidth {
+    grid-column: auto;
+  }
+}
+
+.skillIcon {
+  font-size: 40px;
+  margin-bottom: 12px;
+  display: block;
+  color: color-mix(in srgb, var(--accent) 75%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  border: 1px solid color-mix(in srgb, var(--accent) 25%, var(--line));
+  transition: all 280ms ease;
+}
+
+.skillTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 4px 0;
+  letter-spacing: -0.3px;
+}
+
+.skillSubtitle {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 0 0 14px 0;
+}
+
+.skillCard .tagRow {
+  position: relative;
+  z-index: 1;
+}
+
+.skillCard .tag {
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 20%, var(--line));
+  color: var(--text);
+  font-size: 13px;
+  padding: 8px 12px;
+  transition: all 180ms ease;
+}
+
+.skillCard:hover .tag {
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--line));
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface));
+  color: var(--text);
+}
+
+.skillCard .sep {
+  margin: 12px 0;
+  background: color-mix(in srgb, var(--line) 60%, transparent);
 }
