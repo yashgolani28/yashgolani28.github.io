@@ -6,8 +6,218 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Education | Yash Golani</title>
   <meta name="description"
-    content="Education: B.Tech Robotics and Automation, Symbiosis Institute of Technology, Pune." />
+    content="Education: B.Tech Robotics and Automation, Symbiosis Institute of Technology, Pune (2022 to 2026)." />
   <link rel="stylesheet" href="assets/css/styles.css" />
+
+  <style>
+    /* Page-only UI boost */
+    .eduHero {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .eduHero::before {
+      content: "";
+      position: absolute;
+      inset: -30%;
+      background: radial-gradient(circle at 20% 10%, rgba(255, 255, 255, 0.10), transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.08), transparent 55%),
+        radial-gradient(circle at 60% 80%, rgba(255, 255, 255, 0.06), transparent 55%);
+      pointer-events: none;
+      filter: grayscale(1);
+    }
+
+    .eduHeroInner {
+      position: relative;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .iconBadge {
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: color-mix(in srgb, var(--surface) 92%, transparent);
+      box-shadow: var(--shadow-soft);
+      user-select: none;
+    }
+
+    .iconBadge .ico {
+      width: 18px;
+      height: 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.9;
+    }
+
+    .iconBadge svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      opacity: 0.9;
+    }
+
+    .statGrid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    @media (max-width: 1000px) {
+      .statGrid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .stat {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px;
+      background: color-mix(in srgb, var(--surface) 95%, transparent);
+    }
+
+    .stat .k {
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+
+    .stat .v {
+      margin-top: 6px;
+      opacity: 0.9;
+    }
+
+    .sectionHeadRow {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-top: 22px;
+      margin-bottom: 10px;
+    }
+
+    .sectionHeadRow .left {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .softLine {
+      height: 1px;
+      background: var(--line);
+      opacity: 0.8;
+      margin: 14px 0;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    @media (max-width: 900px) {
+      .timeline {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .phaseCard {
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px;
+      background: color-mix(in srgb, var(--surface) 94%, transparent);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+    }
+
+    .phaseTop {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .phaseTitle {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .phaseTitle b {
+      font-size: 1.02rem;
+    }
+
+    .phasePill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: color-mix(in srgb, var(--surface) 92%, transparent);
+      font-size: 0.92rem;
+      opacity: 0.95;
+    }
+
+    .miniList {
+      margin: 12px 0 0 0;
+      padding-left: 18px;
+      line-height: 1.9;
+    }
+
+    .miniList li {
+      margin: 2px 0;
+    }
+
+    details.eduDetails {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px;
+      background: color-mix(in srgb, var(--surface) 96%, transparent);
+      box-shadow: var(--shadow-soft);
+    }
+
+    details.eduDetails summary {
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-weight: 700;
+    }
+
+    details.eduDetails summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .chev {
+      width: 18px;
+      height: 18px;
+      display: inline-flex;
+      opacity: 0.75;
+      transform: rotate(0deg);
+      transition: transform 160ms ease;
+    }
+
+    details[open] .chev {
+      transform: rotate(90deg);
+    }
+  </style>
 </head>
 
 <body>
@@ -16,7 +226,8 @@
   <div class="topbar">
     <div class="container">
       <div class="nav">
-        <div class="brand"><span>Yash Golani</span></div>
+        <div class="brand"><span class="brandDot"></span><span>Yash Golani</span></div>
+
         <nav class="navLinks" aria-label="Primary">
           <a href="index.html">Home</a>
           <a href="skills.html">Skills</a>
@@ -25,6 +236,7 @@
           <a href="education.html">Education</a>
           <a href="contact.html">Contact</a>
         </nav>
+
         <div class="actions">
           <a class="btn btnPrimary" href="resume.html">Resume</a>
           <div class="themeSwitch">
@@ -42,18 +254,279 @@
   <main id="main" class="container">
     <div class="pageTitle">
       <h1>Education</h1>
-      <p>Academic foundation</p>
+      <p>Academic foundation and the coursework that shaped my build style</p>
     </div>
 
-    <div class="card">
-      <div class="itemTop">
+    <div class="card eduHero">
+      <div class="eduHeroInner">
         <div>
-          <b>B.Tech, Robotics and Automation</b>
-          <div class="meta">Symbiosis Institute of Technology, Pune | 2022 to 2026</div>
+          <b style="font-size:1.15rem">B.Tech, Robotics and Automation</b>
+          <div class="meta">Symbiosis Institute of Technology, Pune</div>
+          <div class="meta">September 2022 to May 2026 (expected) | CGPA: 7.51</div>
+        </div>
+
+        <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end">
+          <div class="iconBadge" title="Robotics">
+            <span class="ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M7 14h10"></path>
+                <path d="M9 18h6"></path>
+                <path d="M10 2v3"></path>
+                <path d="M14 2v3"></path>
+                <path d="M5 9a7 7 0 0 1 14 0v5a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4V9Z"></path>
+              </svg>
+            </span>
+            <span class="note">Robotics</span>
+          </div>
+
+          <div class="iconBadge" title="Automation">
+            <span class="ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M14 7l-5 5"></path>
+                <path d="M9 7h5v5"></path>
+                <path d="M7 17h10"></path>
+                <path d="M5 21h14"></path>
+              </svg>
+            </span>
+            <span class="note">Automation</span>
+          </div>
+
+          <div class="iconBadge" title="Applied AI">
+            <span class="ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 3v18"></path>
+                <path d="M3 12h18"></path>
+                <path d="M7 7l10 10"></path>
+                <path d="M17 7L7 17"></path>
+              </svg>
+            </span>
+            <span class="note">Applied AI</span>
+          </div>
         </div>
       </div>
-      <div class="sep"></div>
+
+      <div class="statGrid">
+        <div class="stat">
+          <div class="k">Batch</div>
+          <div class="v note">2022 to 2026</div>
+        </div>
+        <div class="stat">
+          <div class="k">CGPA</div>
+          <div class="v note">7.51</div>
+        </div>
+        <div class="stat">
+          <div class="k">Focus</div>
+          <div class="v note">Embedded, perception, reliability</div>
+        </div>
+        <div class="stat">
+          <div class="k">Location</div>
+          <div class="v note">Pune, India</div>
+        </div>
+      </div>
+
+      <div class="softLine"></div>
+
+      <div class="tagRow">
+        <span class="tag">ROS</span>
+        <span class="tag">Embedded systems</span>
+        <span class="tag">Computer vision</span>
+        <span class="tag">Control systems</span>
+        <span class="tag">Industrial automation</span>
+        <span class="tag">AI in robotics</span>
+      </div>
     </div>
+
+    <div class="sectionHeadRow">
+      <div class="left">
+        <div class="iconBadge">
+          <span class="ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M4 19V6"></path>
+              <path d="M20 19V6"></path>
+              <path d="M4 6c3 0 5-2 8-2s5 2 8 2"></path>
+              <path d="M6 8v10"></path>
+              <path d="M18 8v10"></path>
+            </svg>
+          </span>
+          <span class="note">Relevant coursework</span>
+        </div>
+        <span class="note">Grouped by learning phase</span>
+      </div>
+
+      <a class="btn" href="projects.html">See projects that used this</a>
+    </div>
+
+    <div class="timeline">
+      <div class="phaseCard">
+        <div class="phaseTop">
+          <div class="phaseTitle">
+            <span class="ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 20V10"></path>
+                <path d="M8 10h8"></path>
+                <path d="M7 20h10"></path>
+                <path d="M9 4h6"></path>
+                <path d="M10 4V2h4v2"></path>
+              </svg>
+            </span>
+            <b>Foundations</b>
+          </div>
+          <span class="phasePill">Year 1</span>
+        </div>
+
+        <ul class="miniList note">
+          <li>Fundamentals of Robotics</li>
+          <li>Introduction to Artificial Intelligence</li>
+          <li>Advanced Python Lab</li>
+          <li>Basics of Operating Systems (with lab)</li>
+          <li>Sensor and Electronics Drives (with lab)</li>
+        </ul>
+
+        <div class="sep"></div>
+        <div class="tagRow">
+          <span class="tag">Math and systems</span>
+          <span class="tag">Programming</span>
+          <span class="tag">Electronics</span>
+        </div>
+      </div>
+
+      <div class="phaseCard">
+        <div class="phaseTop">
+          <div class="phaseTitle">
+            <span class="ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 3l8 4v10l-8 4-8-4V7l8-4Z"></path>
+                <path d="M12 12l8-5"></path>
+                <path d="M12 12l-8-5"></path>
+                <path d="M12 12v9"></path>
+              </svg>
+            </span>
+            <b>Core robotics</b>
+          </div>
+          <span class="phasePill">Year 2</span>
+        </div>
+
+        <ul class="miniList note">
+          <li>Kinematics and Dynamics of Robotics (with lab)</li>
+          <li>Robotic Control Systems (with lab)</li>
+          <li>Robotics Operating System (with lab)</li>
+          <li>Simulator for Robotics Lab</li>
+          <li>Application of AI in Robotics and Automation (with lab)</li>
+        </ul>
+
+        <div class="sep"></div>
+        <div class="tagRow">
+          <span class="tag">Kinematics</span>
+          <span class="tag">Control</span>
+          <span class="tag">ROS</span>
+          <span class="tag">Simulation</span>
+        </div>
+      </div>
+
+      <div class="phaseCard">
+        <div class="phaseTop">
+          <div class="phaseTitle">
+            <span class="ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M9 9h6"></path>
+                <path d="M9 12h6"></path>
+                <path d="M9 15h6"></path>
+                <path d="M7 4h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"></path>
+              </svg>
+            </span>
+            <b>Embedded and automation</b>
+          </div>
+          <span class="phasePill">Year 3</span>
+        </div>
+
+        <ul class="miniList note">
+          <li>Microcontroller and Embedded Systems (with lab)</li>
+          <li>PLC and SCADA (with lab)</li>
+          <li>Lean Manufacturing</li>
+          <li>Introduction to Image Processing</li>
+          <li>Computer Vision for Robotics (with lab)</li>
+        </ul>
+
+        <div class="sep"></div>
+        <div class="tagRow">
+          <span class="tag">Embedded</span>
+          <span class="tag">PLC</span>
+          <span class="tag">Vision</span>
+          <span class="tag">Manufacturing</span>
+        </div>
+      </div>
+
+      <div class="phaseCard">
+        <div class="phaseTop">
+          <div class="phaseTitle">
+            <span class="ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M3 17l6-6 4 4 7-7"></path>
+                <path d="M21 7v6h-6"></path>
+              </svg>
+            </span>
+            <b>Advanced and electives</b>
+          </div>
+          <span class="phasePill">Year 4</span>
+        </div>
+
+        <ul class="miniList note">
+          <li>Probabilistic Robotics (elective)</li>
+          <li>Computational Fluid Dynamics with Artificial Intelligence (elective)</li>
+          <li>Robot system design and simulation (capstone focus)</li>
+          <li>Seminar (presentation and research writing)</li>
+          <li>Industry aligned labs and projects</li>
+        </ul>
+
+        <div class="sep"></div>
+        <div class="tagRow">
+          <span class="tag">Estimation</span>
+          <span class="tag">Modeling</span>
+          <span class="tag">Design</span>
+          <span class="tag">Research</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="softLine"></div>
+
+    <details class="eduDetails">
+      <summary>
+        <span>Why this coursework matters to my work</span>
+        <span class="chev" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M9 18l6-6-6-6"></path>
+          </svg>
+        </span>
+      </summary>
+
+      <div class="sep"></div>
+
+      <div class="grid2">
+        <div class="item">
+          <b>Reliability mindset</b>
+          <div class="sep"></div>
+          <div class="note">
+            Control, sensing, and automation courses pushed me toward building systems that stay stable under noise, drift, and
+            changing environments.
+          </div>
+        </div>
+
+        <div class="item">
+          <b>Perception and verification</b>
+          <div class="sep"></div>
+          <div class="note">
+            Vision and AI in robotics courses map directly to my focus on calibrated outputs, evidence friendly workflows,
+            and reviewer ready results.
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <p class="note" style="margin-top:12px">
+      Notes: Coursework is shown as a selected, portfolio friendly set from the programme structure. Adjust names to match what you
+      actually took.
+    </p>
   </main>
 
   <footer class="footer">
