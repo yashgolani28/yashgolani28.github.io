@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Yash Golani portfolio" />
+  <title>Yash Golani | Portfolio</title>
+
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#0f1a30;
+      --text:#e8eefc;
+      --muted:#a8b3cf;
+      --line:rgba(232,238,252,.12);
+      --accent:#5aa7ff;
+      --accent2:#7cf0c5;
+      --shadow: 0 12px 28px rgba(0,0,0,.35);
+      --radius: 18px;
+      --max: 1080px;
+    }
+    [data-theme="light"]{
+      --bg:#f6f8ff;
+      --card:#ffffff;
+      --text:#0b1220;
+      --muted:#4b5875;
+      --line:rgba(11,18,32,.12);
+      --accent:#2563eb;
+      --accent2:#059669;
+      --shadow: 0 12px 28px rgba(15,23,42,.12);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+      background: radial-gradient(900px 600px at 15% 5%, rgba(90,167,255,.18), transparent 55%),
+                  radial-gradient(800px 600px at 85% 20%, rgba(124,240,197,.14), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.55;
+    }
+    a{color:inherit; text-decoration:none}
+    .container{max-width:var(--max); margin:0 auto; padding:0 18px}
+
+    /* Navbar */
+    .navWrap{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: color-mix(in srgb, var(--bg) 75%, transparent);
+      border-bottom:1px solid var(--line);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      height:64px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px; font-weight:750; letter-spacing:.2px;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 18%, transparent);
+    }
+    .links{display:flex; gap:14px; align-items:center; flex-wrap:wrap}
+    .links a{
+      padding:8px 10px; border-radius:12px; color:var(--muted);
+      border:1px solid transparent;
+    }
+    .links a:hover{color:var(--text); border-color:var(--line); background:color-mix(in srgb, var(--card) 70%, transparent)}
+    .btn{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:10px 14px; border-radius:14px;
+      border:1px solid var(--line);
+      background: color-mix(in srgb, var(--card) 78%, transparent);
+      box-shadow: var(--shadow);
+      cursor:pointer;
+      user-select:none;
+      white-space:nowrap;
+    }
+    .btn:hover{border-color:color-mix(in srgb, var(--accent) 55%, var(--line))}
+    .btnPrimary{
+      border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+      background: linear-gradient(135deg,
+        color-mix(in srgb, var(--accent) 28%, var(--card)),
+        color-mix(in srgb, var(--accent2) 18%, var(--card))
+      );
+    }
+
+    /* Hero */
+    header{padding:56px 0 20px}
+    .hero{
+      display:grid;
+      grid-template-columns: 1.35fr .65fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    @media (max-width: 900px){
+      .hero{grid-template-columns: 1fr}
+    }
+    .card{
+      background: color-mix(in srgb, var(--card) 82%, transparent);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:18px;
+    }
+    h1{
+      margin:0 0 8px 0;
+      font-size: clamp(28px, 3.2vw, 44px);
+      letter-spacing:-.4px;
+      line-height:1.15;
+    }
+    .subtitle{
+      color:var(--muted);
+      font-size: 15.5px;
+      margin: 0 0 14px 0;
+      max-width: 68ch;
+    }
+    .pillRow{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
+    .pill{
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: color-mix(in srgb, var(--card) 78%, transparent);
+      color:var(--muted);
+      font-size:13px;
+    }
+    .heroActions{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
+
+    .kpis{display:grid; gap:12px; height:100%}
+    .kpi{
+      padding:14px;
+      border-radius: 16px;
+      border:1px solid var(--line);
+      background: color-mix(in srgb, var(--card) 86%, transparent);
+    }
+    .kpi b{font-size:20px}
+    .kpi span{display:block; color:var(--muted); font-size:13px; margin-top:4px}
+
+    /* Sections */
+    section{padding:18px 0}
+    .sectionTitle{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px;
+      margin: 18px 0 12px;
+    }
+    .sectionTitle h2{
+      margin:0;
+      font-size: 20px;
+      letter-spacing:.2px;
+    }
+    .grid2{
+      display:grid; grid-template-columns: 1fr 1fr; gap:14px;
+    }
+    @media (max-width: 900px){
+      .grid2{grid-template-columns:1fr}
+    }
+    .muted{color:var(--muted)}
+    .list{margin:10px 0 0; padding-left:18px; color:var(--muted)}
+    .list li{margin: 6px 0}
+
+    .tagGrid{display:flex; flex-wrap:wrap; gap:10px}
+    .tag{
+      padding:9px 10px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: color-mix(in srgb, var(--card) 85%, transparent);
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    .item{
+      border: 1px solid var(--line);
+      background: color-mix(in srgb, var(--card) 84%, transparent);
+      border-radius: 16px;
+      padding:14px;
+    }
+    .itemHeader{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:10px;
+    }
+    .itemHeader b{font-size:15px}
+    .meta{color:var(--muted); font-size:13px; margin-top:4px}
+    .sep{height:1px; background:var(--line); margin:12px 0}
+
+    footer{
+      padding: 22px 0 40px;
+      color:var(--muted);
+      border-top:1px solid var(--line);
+      margin-top: 10px;
+    }
+
+    .srOnly{
+      position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0;
+    }
+  </style>
+</head>
+
+<body data-theme="dark">
+  <div class="navWrap">
+    <div class="container">
+      <div class="nav">
+        <div class="brand">
+          <span class="dot" aria-hidden="true"></span>
+          <span>Yash Golani</span>
+        </div>
+
+        <div class="links">
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#experience">Experience</a>
+          <a href="#projects">Projects</a>
+          <a href="#education">Education</a>
+          <a href="#contact">Contact</a>
+
+          <a class="btn btnPrimary" href="./resume.pdf" target="_blank" rel="noreferrer">
+            Resume PDF
+          </a>
+
+          <button class="btn" id="themeBtn" type="button" aria-label="Toggle theme">
+            <span id="themeLabel">Dark</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <header class="container">
+    <div class="hero">
+      <div class="card">
+        <h1>Machine learning and embedded robotics engineer</h1>
+        <p class="subtitle">
+          I build production systems across radar based speed enforcement, multi camera analytics, and ANPR pipelines.
+          Strong focus on reliability, calibration, and evidence workflows for real world deployments.
+        </p>
+
+        <div class="pillRow">
+          <span class="pill">Python</span>
+          <span class="pill">FastAPI</span>
+          <span class="pill">Flask</span>
+          <span class="pill">Kafka</span>
+          <span class="pill">Redis</span>
+          <span class="pill">PostgreSQL</span>
+          <span class="pill">Docker</span>
+          <span class="pill">OpenCV</span>
+        </div>
+
+        <div class="heroActions">
+          <a class="btn btnPrimary" href="#contact">Contact</a>
+          <a class="btn" href="https://github.com/yashgolani28" target="_blank" rel="noreferrer">GitHub</a>
+          <a class="btn" href="https://www.linkedin.com/in/yash-golani-5556a424a" target="_blank" rel="noreferrer">LinkedIn</a>
+        </div>
+
+        <div class="sep"></div>
+        <div class="muted">
+          Currently: PLC Programming and Systems Engineering Intern at ESSI Integrated Technologies (New Delhi)
+        </div>
+      </div>
+
+      <div class="card kpis" aria-label="Highlights">
+        <div class="kpi">
+          <b>20 targets</b>
+          <span>multi object tracking in radar enforcement</span>
+        </div>
+        <div class="kpi">
+          <b>50 ms</b>
+          <span>decision latency in roadside trials</span>
+        </div>
+        <div class="kpi">
+          <b>95% uptime</b>
+          <span>with watchdogs and crash recovery</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="about">
+      <div class="sectionTitle">
+        <h2>About</h2>
+      </div>
+      <div class="card">
+        <p class="muted" style="margin:0">
+          I work on applied AI and embedded sensing systems, combining radar perception, camera analytics, and scalable backend services.
+          I care about end to end reliability, observability, and clean evidence pipelines that support field workflows.
+        </p>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="sectionTitle">
+        <h2>Skills</h2>
+      </div>
+
+      <div class="grid2">
+        <div class="card">
+          <b>Programming</b>
+          <div class="sep"></div>
+          <div class="tagGrid">
+            <span class="tag">Python</span>
+            <span class="tag">C</span>
+            <span class="tag">C++</span>
+            <span class="tag">Embedded C</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">React</span>
+            <span class="tag">Flask</span>
+            <span class="tag">FastAPI</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <b>DevOps and data</b>
+          <div class="sep"></div>
+          <div class="tagGrid">
+            <span class="tag">Kafka</span>
+            <span class="tag">Redis</span>
+            <span class="tag">Celery</span>
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">Docker</span>
+            <span class="tag">Git</span>
+            <span class="tag">Postman</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:14px">
+        <b>Machine learning</b>
+        <div class="sep"></div>
+        <div class="tagGrid">
+          <span class="tag">OpenCV</span>
+          <span class="tag">Scikit learn</span>
+          <span class="tag">TensorFlow</span>
+          <span class="tag">PyTorch</span>
+          <span class="tag">XGBoost</span>
+          <span class="tag">LightGBM</span>
+          <span class="tag">Pandas</span>
+          <span class="tag">NumPy</span>
+          <span class="tag">Matplotlib</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="sectionTitle">
+        <h2>Experience</h2>
+      </div>
+
+      <div class="card">
+        <div class="item">
+          <div class="itemHeader">
+            <div>
+              <b>ESSI Integrated Technologies</b>
+              <div class="meta">PLC Programming, Systems Engineering Intern | New Delhi | Jun 2025 to May 2026</div>
+            </div>
+          </div>
+
+          <div class="sep"></div>
+
+          <b>Radar based speed detection and evidence system</b>
+          <ul class="list">
+            <li>Built a production radar and camera speed enforcement pipeline using TI mmWave radar with multi object tracking up to 20 targets and configurable business logic, achieving ~50 ms decision latency.</li>
+            <li>Developed a Flask and JavaScript dashboard for real time monitoring, analytics, and violation review with structured evidence bundles.</li>
+            <li>Improved reliability with watchdogs, health checks, and crash recovery to reach ~95% uptime with average recovery around 2 minutes.</li>
+            <li>Implemented radar camera calibration and PTZ auto slew using mounting geometry and road alignment, enabling fast target lock success.</li>
+          </ul>
+
+          <div class="sep"></div>
+
+          <b>ANPR and MLOps</b>
+          <ul class="list">
+            <li>Worked on high throughput pipelines supporting large scale camera fleets using Kafka for transport and Redis for state, delivering end to end alert generation under 10 seconds.</li>
+            <li>Designed resilient microservices with automatic restarts and RTSP reconnection to handle unstable live feeds.</li>
+            <li>Built an MLOps retraining platform with ingest up to 10 GB, YOLO assisted auto annotation, GPU training, benchmarking, and exports using FastAPI, Celery, Redis, and Docker.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="sectionTitle">
+        <h2>Projects</h2>
+      </div>
+
+      <div class="grid2">
+        <div class="card">
+          <div class="item">
+            <b>Turtlebot 4 object detection</b>
+            <div class="meta">ROS | YOLOv8n</div>
+            <div class="sep"></div>
+            <div class="muted">
+              Real time perception and object classification on Turtlebot 4 using YOLO.
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="item">
+            <b>Smart agriculture hydroponics system</b>
+            <div class="meta">ESP32 | Sensors | Firebase</div>
+            <div class="sep"></div>
+            <div class="muted">
+              Automatic hydroponics monitoring and control with sensors and IoT integration.
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="item">
+            <b>Spider mimic quadruped</b>
+            <div class="meta">Arduino | IoT | Mechanical modeling</div>
+            <div class="sep"></div>
+            <div class="muted">
+              Four legged bio inspired robot with mechanical modeling and control prototyping.
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="item">
+            <b>Radar evidence pipeline (internship project)</b>
+            <div class="meta">TI mmWave | Flask | Tracking and calibration</div>
+            <div class="sep"></div>
+            <div class="muted">
+              Radar speed enforcement with tracking, calibration, and review ready evidence bundles.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="education">
+      <div class="sectionTitle">
+        <h2>Education</h2>
+      </div>
+
+      <div class="card">
+        <div class="item">
+          <b>B.Tech Robotics and Automation</b>
+          <div class="meta">Symbiosis Institute of Technology, Pune | 2022 to 2026 | CGPA 7.51</div>
+          <div class="sep"></div>
+          <div class="muted">
+            Coursework and projects across robotics, automation, sensing, and applied AI.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="sectionTitle">
+        <h2>Contact</h2>
+      </div>
+
+      <div class="grid2">
+        <div class="card">
+          <b>Reach out</b>
+          <div class="sep"></div>
+
+          <div class="muted" style="display:grid; gap:10px">
+            <div>
+              <b style="color:var(--text)">Email</b><br />
+              <a href="mailto:yashgolani287@gmail.com">yashgolani287@gmail.com</a>
+              <button class="btn" style="margin-left:10px" type="button" id="copyEmail">Copy</button>
+            </div>
+
+            <div>
+              <b style="color:var(--text)">Phone</b><br />
+              <a href="tel:+919643704828">+91 9643704828</a>
+            </div>
+
+            <div class="heroActions" style="margin-top:6px">
+              <a class="btn" href="https://github.com/yashgolani28" target="_blank" rel="noreferrer">GitHub</a>
+              <a class="btn" href="https://www.linkedin.com/in/yash-golani-5556a424a" target="_blank" rel="noreferrer">LinkedIn</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <b>Quick message</b>
+          <div class="sep"></div>
+          <p class="muted" style="margin-top:0">
+            This uses your mail app (no backend). Click below.
+          </p>
+          <a class="btn btnPrimary" href="mailto:yashgolani287@gmail.com?subject=Portfolio%20Inquiry&body=Hi%20Yash%2C%0A%0A">Email me</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap">
+        <div>© <span id="year"></span> Yash Golani</div>
+        <div class="muted">Built with HTML, CSS, and JavaScript. Hosted on GitHub Pages.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const themeBtn = document.getElementById("themeBtn");
+    const themeLabel = document.getElementById("themeLabel");
+    const body = document.body;
+
+    function setTheme(mode){
+      body.setAttribute("data-theme", mode);
+      themeLabel.textContent = mode === "light" ? "Light" : "Dark";
+      localStorage.setItem("theme", mode);
+    }
+
+    const saved = localStorage.getItem("theme");
+    setTheme(saved || "dark");
+
+    themeBtn.addEventListener("click", () => {
+      const next = body.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      setTheme(next);
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    document.getElementById("copyEmail").addEventListener("click", async () => {
+      try{
+        await navigator.clipboard.writeText("yashgolani287@gmail.com");
+        alert("Email copied");
+      }catch(e){
+        alert("Copy failed");
+      }
+    });
+  </script>
+</body>
+</html>
