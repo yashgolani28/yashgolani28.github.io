@@ -353,26 +353,50 @@ h1 {
 
 .timeline {
   display: grid;
-  gap: 12px;
+  gap: 20px;
 }
 
 .tlItem {
-  display: block;
+  display: grid;
+  grid-template-columns: 1fr 140px;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+@media (max-width: 768px) {
+  .tlItem {
+    grid-template-columns: 1fr;
+  }
 }
 
 .tlWhen {
   color: var(--muted);
   font-size: 13px;
   text-align: right;
-  padding-top: 2px;
+  padding-top: 4px;
   white-space: nowrap;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .tlWhen {
+    text-align: left;
+    padding-top: 0;
+  }
 }
 
 .tlBody {
   border: 1px solid var(--line);
   border-radius: 16px;
   background: color-mix(in srgb, var(--surface) 88%, transparent);
-  padding: 14px;
+  padding: 18px;
+  order: -1;
+}
+
+@media (max-width: 768px) {
+  .tlBody {
+    order: 0;
+  }
 }
 
 .pageTitle {
