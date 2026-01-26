@@ -22,7 +22,6 @@ This portfolio highlights professional experience and projects in:
 
 ```
 ├── index.html              # Home page - Hero section and introduction
-├── about.html              # About section - Background and expertise
 ├── skills.html             # Technical skills and proficiencies
 ├── experience.html         # Work experience and career history
 ├── projects.html           # Featured projects and case studies
