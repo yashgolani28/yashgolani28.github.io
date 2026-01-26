@@ -226,26 +226,69 @@ h1 {
 
 .kpis {
   display: grid;
-  gap: 12px;
+  gap: 16px;
   height: 100%;
 }
 
 .kpi {
-  padding: 14px;
+  padding: 20px;
   border-radius: 16px;
   border: 1px solid var(--line);
-  background: color-mix(in srgb, var(--surface) 90%, transparent);
+  background: linear-gradient(135deg,
+    color-mix(in srgb, var(--surface) 95%, transparent),
+    color-mix(in srgb, var(--surface) 85%, transparent));
+  transition: all 280ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.kpi::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(400px at 20% 0%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 80%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 280ms ease;
+}
+
+.kpi:hover {
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--line));
+  box-shadow: 
+    0 0 30px color-mix(in srgb, var(--accent) 12%, transparent),
+    var(--shadow-soft);
+  transform: translateY(-3px);
+}
+
+.kpi:hover::before {
+  opacity: 1;
+}
+
+.kpiIcon {
+  font-size: 32px;
+  margin-bottom: 12px;
+  display: block;
+  line-height: 1;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
 .kpi b {
-  font-size: 20px
+  font-size: 16px;
+  display: block;
+  position: relative;
+  z-index: 1;
 }
 
 .kpi span {
   display: block;
-  margin-top: 4px;
+  margin-top: 6px;
   color: var(--muted);
-  font-size: 13px
+  font-size: 13px;
+  position: relative;
+  z-index: 1;
 }
 
 .section {
@@ -299,8 +342,50 @@ h1 {
 .item {
   border: 1px solid var(--line);
   border-radius: 16px;
-  background: color-mix(in srgb, var(--surface) 88%, transparent);
-  padding: 14px;
+  background: linear-gradient(135deg,
+    color-mix(in srgb, var(--surface) 95%, transparent),
+    color-mix(in srgb, var(--surface) 88%, transparent));
+  padding: 24px;
+  transition: all 280ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(500px at 30% 10%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 80%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 280ms ease;
+}
+
+.item:hover {
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--line));
+  box-shadow: 
+    0 0 30px color-mix(in srgb, var(--accent) 10%, transparent),
+    var(--shadow-soft);
+  transform: translateY(-4px);
+}
+
+.item:hover::before {
+  opacity: 1;
+}
+
+.itemIcon {
+  font-size: 36px;
+  line-height: 1;
+  margin-bottom: 14px;
+  display: block;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  position: relative;
+  z-index: 1;
 }
 
 .itemTop {
@@ -308,10 +393,18 @@ h1 {
   align-items: flex-start;
   justify-content: space-between;
   gap: 12px;
+  position: relative;
+  z-index: 1;
 }
 
 .itemTop b {
-  font-size: 15px
+  font-size: 16px;
+}
+
+.item .sep,
+.item .note {
+  position: relative;
+  z-index: 1;
 }
 
 .meta {
@@ -369,34 +462,64 @@ h1 {
   }
 }
 
+.tlHeader {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 20px;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
 .tlWhen {
-  color: var(--muted);
-  font-size: 13px;
+  color: var(--accent);
+  font-size: 12px;
   text-align: left;
-  padding-top: 12px;
+  padding: 8px 14px;
   white-space: nowrap;
   line-height: 1.5;
-  margin-top: auto;
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 25%, var(--line));
+  border-radius: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
 @media (max-width: 768px) {
+  .tlHeader {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
   .tlWhen {
     text-align: left;
-    padding-top: 12px;
+    padding: 8px 12px;
   }
 }
 
 .tlBody {
   border: 1px solid var(--line);
-  border-radius: 16px;
-  background: color-mix(in srgb, var(--surface) 88%, transparent);
-  padding: 18px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, 
+    color-mix(in srgb, var(--surface) 95%, transparent),
+    color-mix(in srgb, var(--surface) 88%, transparent));
+  padding: 28px;
   display: flex;
   flex-direction: column;
+  transition: all 280ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: var(--shadow-soft);
+}
+
+.tlBody:hover {
+  border-color: color-mix(in srgb, var(--accent) 30%, var(--line));
+  box-shadow: 
+    0 0 30px color-mix(in srgb, var(--accent) 10%, transparent),
+    var(--shadow-soft);
+  transform: translateY(-4px);
 }
 
 @media (max-width: 768px) {
   .tlBody {
+    padding: 22px;
     order: 0;
   }
 }
@@ -645,6 +768,53 @@ h1 {
 .skillCard .tagRow {
   position: relative;
   z-index: 1;
+}
+
+.skillTagRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.skillTag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 20%, var(--line));
+  color: var(--text);
+  font-size: 12px;
+  padding: 8px 11px;
+  border-radius: 12px;
+  transition: all 180ms ease;
+  white-space: nowrap;
+}
+
+.skillTag i,
+.skillTag svg {
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: color-mix(in srgb, var(--accent) 85%, transparent);
+  transition: color 180ms ease;
+}
+
+.skillTag span {
+  font-weight: 500;
+}
+
+.skillCard:hover .skillTag {
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--line));
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface));
+  color: var(--text);
+}
+
+.skillCard:hover .skillTag i,
+.skillCard:hover .skillTag svg {
+  color: var(--accent);
 }
 
 .skillCard .tag {
