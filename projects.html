@@ -1,12 +1,35 @@
 <!doctype html>
 <html lang="en" data-theme="dark">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Projects | Yash Golani</title>
-  <meta name="description" content="Projects: robotics, radar perception, ANPR, and applied AI systems with production focus." />
+  <meta name="description"
+    content="Projects from my resume: Turtlebot 4 object detection, Smart Agriculture System, Spider Mimic Quadruped." />
   <link rel="stylesheet" href="assets/css/styles.css" />
+
+  <style>
+    /* Page-only styling for aesthetic images */
+    .projImg {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: color-mix(in srgb, var(--surface) 90%, transparent);
+      box-shadow: var(--shadow-soft);
+      filter: grayscale(0.25) contrast(1.05);
+    }
+
+    @media (max-width: 900px) {
+      .projImg {
+        height: 200px;
+      }
+    }
+  </style>
 </head>
+
 <body>
   <a class="skip" href="#main">Skip to content</a>
 
@@ -40,93 +63,121 @@
   <main id="main" class="container">
     <div class="pageTitle">
       <h1>Projects</h1>
-      <p>Selected work with practical outcomes</p>
+      <p>Projects from my resume, with quick links and visuals</p>
     </div>
 
     <div class="grid2">
-      <div class="card">
-        <div class="itemTop">
-          <div>
-            <b>Radar based speed enforcement</b>
-            <div class="meta">TI mmWave | Tracking | Evidence</div>
-          </div>
-        </div>
-        <div class="sep"></div>
-        <div class="note">
-          Real world enforcement pipeline focusing on reliability, calibration, and reviewer friendly outputs.
-        </div>
-        <div class="sep"></div>
-        <div class="tagRow">
-          <span class="tag">Radar</span>
-          <span class="tag">Calibration</span>
-          <span class="tag">Flask</span>
-          <span class="tag">Tracking</span>
-        </div>
-      </div>
 
+      <!-- Project 1 -->
       <div class="card">
-        <div class="itemTop">
-          <div>
-            <b>ANPR pipeline hardening</b>
-            <div class="meta">Detection | OCR | Stream ingest</div>
-          </div>
-        </div>
-        <div class="sep"></div>
-        <div class="note">
-          Camera analytics workflows built for stable throughput, recoverability, and consistent outputs.
-        </div>
-        <div class="sep"></div>
-        <div class="tagRow">
-          <span class="tag">Computer vision</span>
-          <span class="tag">Kafka</span>
-          <span class="tag">Redis</span>
-          <span class="tag">Docker</span>
-        </div>
-      </div>
+        <img class="projImg" src="assets/images/img1.jpg" alt="Object detection using Turtlebot 4 preview"
+          loading="lazy" />
 
-      <div class="card">
-        <div class="itemTop">
-          <div>
-            <b>MLOps retraining workflow</b>
-            <div class="meta">Ingest | Annotation | Training | Export</div>
-          </div>
-        </div>
         <div class="sep"></div>
-        <div class="note">
-          Practical retraining loop with assisted annotation, training orchestration, benchmarking, and export packaging.
-        </div>
-        <div class="sep"></div>
-        <div class="tagRow">
-          <span class="tag">FastAPI</span>
-          <span class="tag">Celery</span>
-          <span class="tag">Redis</span>
-          <span class="tag">YOLO</span>
-        </div>
-      </div>
 
-      <div class="card">
         <div class="itemTop">
           <div>
-            <b>Robotics projects</b>
-            <div class="meta">ROS | Embedded | Prototyping</div>
+            <b>Object detection using Turtlebot 4</b>
+            <div class="meta">ROS | Real time perception | YOLOv8n</div>
           </div>
         </div>
+
         <div class="sep"></div>
+
         <div class="note">
-          Robotics and automation builds spanning sensing, control, and perception experiments.
+          Operating through ROS with real time perception and object classification using YOLOv8n.
+          GitHub:
+          <a href="https://github.com/yashgolani28" target="_blank" rel="noreferrer"><b>github.com/yashgolani28</b></a>
         </div>
+
         <div class="sep"></div>
+
         <div class="tagRow">
           <span class="tag">ROS</span>
-          <span class="tag">Embedded</span>
-          <span class="tag">Sensors</span>
+          <span class="tag">YOLOv8n</span>
+          <span class="tag">Perception</span>
+          <span class="tag">Robotics</span>
+        </div>
+
+        <div class="links" style="margin-top:14px">
+          <a class="btn btnPrimary" href="https://github.com/yashgolani28" target="_blank" rel="noreferrer">View on
+            GitHub</a>
         </div>
       </div>
-    </div>
 
-    <p class="note" style="margin-top:14px">
-      For each project card, add links in a button row once you paste your GitHub or demo URLs.
-    </p>
+      <!-- Project 2 -->
+      <div class="card">
+        <img class="projImg" src="assets/images/img2.jpg" alt="Smart Agriculture System preview" loading="lazy" />
+
+        <div class="sep"></div>
+
+        <div class="itemTop">
+          <div>
+            <b>Smart Agriculture System</b>
+            <div class="meta">Hydroponics | ESP32 | Sensors | ML | Firebase</div>
+          </div>
+        </div>
+
+        <div class="sep"></div>
+
+        <div class="note">
+          Automatic hydroponics system with monitoring using ESP32, sensors, ML, and Firebase integration.
+          GitHub:
+          <a href="https://github.com/yashgolani28" target="_blank" rel="noreferrer"><b>github.com/yashgolani28</b></a>
+        </div>
+
+        <div class="sep"></div>
+
+        <div class="tagRow">
+          <span class="tag">ESP32</span>
+          <span class="tag">Sensors</span>
+          <span class="tag">IoT</span>
+          <span class="tag">Firebase</span>
+        </div>
+
+        <div class="links" style="margin-top:14px">
+          <a class="btn btnPrimary" href="https://github.com/yashgolani28" target="_blank" rel="noreferrer">View on
+            GitHub</a>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="card">
+        <img class="projImg" src="assets/images/img3.png" alt="Spider Mimic Quadruped preview" loading="lazy" />
+
+        <div class="sep"></div>
+
+        <div class="itemTop">
+          <div>
+            <b>Spider Mimic Quadruped</b>
+            <div class="meta">Arduino | IoT | AutoCAD | Mechanical modeling</div>
+          </div>
+        </div>
+
+        <div class="sep"></div>
+
+        <div class="note">
+          Developed a four legged bio inspired robot with mechanical modeling using Arduino, IoT, and AutoCAD.
+          GitHub:
+          <a href="https://github.com/yashgolani28" target="_blank" rel="noreferrer"><b>github.com/yashgolani28</b></a>
+        </div>
+
+        <div class="sep"></div>
+
+        <div class="tagRow">
+          <span class="tag">Arduino</span>
+          <span class="tag">AutoCAD</span>
+          <span class="tag">Mechanical</span>
+          <span class="tag">Robotics</span>
+        </div>
+
+        <div class="links" style="margin-top:14px">
+          <a class="btn btnPrimary" href="https://github.com/yashgolani28" target="_blank" rel="noreferrer">View on
+            GitHub</a>
+        </div>
+      </div>
+
+    </div>
   </main>
 
   <footer class="footer">
@@ -140,4 +191,5 @@
 
   <script src="assets/js/app.js"></script>
 </body>
+
 </html>

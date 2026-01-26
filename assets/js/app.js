@@ -1,14 +1,15 @@
-(function(){
+(function () {
   const root = document.documentElement;
   const toggle = document.getElementById("themeToggle");
   const label = document.getElementById("themeLabel");
   const year = document.getElementById("year");
   const copyEmail = document.getElementById("copyEmailBtn");
 
+  // Theme
   const saved = localStorage.getItem("theme") || "dark";
   root.setAttribute("data-theme", saved);
 
-  if (toggle){
+  if (toggle) {
     toggle.checked = saved === "light";
     if (label) label.textContent = toggle.checked ? "Light" : "Dark";
 
@@ -20,14 +21,16 @@
     });
   }
 
+  // Footer year
   if (year) year.textContent = new Date().getFullYear();
 
-  if (copyEmail){
+  // Copy email
+  if (copyEmail) {
     copyEmail.addEventListener("click", async () => {
-      try{
+      try {
         await navigator.clipboard.writeText("yashgolani287@gmail.com");
         alert("Email copied");
-      }catch(e){
+      } catch (e) {
         alert("Copy failed");
       }
     });
@@ -37,4 +40,60 @@
   const path = location.pathname.split("/").pop() || "index.html";
   const current = document.querySelector(`.navLinks a[href="${path}"]`);
   if (current) current.setAttribute("aria-current", "page");
+
+  // Plausible analytics (only on the real domain)
+  (function initPlausible() {
+    const PLAUSIBLE_DOMAIN = "yashgolani28.github.io";
+    if (location.hostname !== PLAUSIBLE_DOMAIN) return;
+
+    const existing = document.querySelector('script[src="https://plausible.io/js/script.js"]');
+    if (existing) return;
+
+    const s = document.createElement("script");
+    s.defer = true;
+    s.dataset.domain = PLAUSIBLE_DOMAIN;
+    s.src = "https://plausible.io/js/script.js";
+    document.head.appendChild(s);
+  })();
+
+  // Contact form AJAX submit (Formspree)
+  (function initContactForm() {
+    const form = document.getElementById("contactForm");
+    if (!form) return;
+
+    const statusEl = document.getElementById("formStatus");
+    const submitBtn = form.querySelector('button[type="submit"]');
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      if (statusEl) statusEl.textContent = "";
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Sending...";
+      }
+
+      try {
+        const res = await fetch(form.action, {
+          method: "POST",
+          body: new FormData(form),
+          headers: { Accept: "application/json" },
+        });
+
+        if (res.ok) {
+          form.reset();
+          if (statusEl) statusEl.textContent = "Message sent. I will get back to you soon.";
+        } else {
+          if (statusEl) statusEl.textContent = "Could not send right now. Please email me directly.";
+        }
+      } catch (err) {
+        if (statusEl) statusEl.textContent = "Network error. Please try again or email me directly.";
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Send message";
+        }
+      }
+    });
+  })();
 })();
