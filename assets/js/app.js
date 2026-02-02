@@ -139,4 +139,38 @@
       }
     });
   })();
+
+  // Reveal UI on Scroll
+  (function initReveal() {
+    const reveals = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+        }
+      });
+    }, { threshold: 0.1 });
+
+    reveals.forEach(el => observer.observe(el));
+  })();
+
+  // Magnetic Buttons
+  (function initMagnetic() {
+    const wrappers = document.querySelectorAll(".magnetic-wrap");
+    wrappers.forEach(wrap => {
+      const btn = wrap.querySelector(".btn");
+      if (!btn) return;
+
+      wrap.addEventListener("mousemove", (e) => {
+        const { left, top, width, height } = wrap.getBoundingClientRect();
+        const x = (e.clientX - (left + width / 2)) * 0.35;
+        const y = (e.clientY - (top + height / 2)) * 0.35;
+        btn.style.transform = `translate(${x}px, ${y}px)`;
+      });
+
+      wrap.addEventListener("mouseleave", () => {
+        btn.style.transform = "";
+      });
+    });
+  })();
 })();
