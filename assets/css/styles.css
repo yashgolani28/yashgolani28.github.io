@@ -70,7 +70,8 @@ body::before {
 h1,
 h2,
 h3,
-.brand {
+.brand,
+.footer {
   font-family: 'Outfit', sans-serif;
   letter-spacing: -0.02em;
 }
