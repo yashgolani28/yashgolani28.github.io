@@ -142,16 +142,30 @@
 
   // Reveal UI on Scroll
   (function initReveal() {
-    const reveals = document.querySelectorAll(".reveal");
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
+    const els = document.querySelectorAll('.reveal');
+
+    if (!('IntersectionObserver' in window)) {
+      els.forEach((e) => {
+        const delay = parseFloat(e.dataset.revealDelay || '0');
+        if (!Number.isNaN(delay) && delay > 0) e.style.transitionDelay = `${delay}s`;
+        e.classList.add('show');
+      });
+      return;
+    }
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add("active");
+          const el = entry.target;
+          const delay = parseFloat(el.dataset.revealDelay || '0');
+          if (!Number.isNaN(delay) && delay > 0) el.style.transitionDelay = `${delay}s`;
+          el.classList.add('show');
+          io.unobserve(el);
         }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.12 });
 
-    reveals.forEach(el => observer.observe(el));
+    els.forEach((el) => io.observe(el));
   })();
 
   // Magnetic Buttons
