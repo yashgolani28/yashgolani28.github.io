@@ -1263,7 +1263,8 @@ h1 {
 
 .skillTag i,
 .skillTag svg,
-.skillTag img {
+.skillTag img,
+.skillEmoji {
   font-size: 16px;
   display: flex;
   align-items: center;
@@ -1276,11 +1277,22 @@ h1 {
   min-width: 16px;
 }
 
+[data-theme="dark"] .skillTag img,
+[data-theme="dark"] .skillEmoji {
+  filter: grayscale(100%) invert(1) brightness(1.8);
+}
+
 .skillCard:hover .skillTag i,
 .skillCard:hover .skillTag svg,
-.skillCard:hover .skillTag img {
+.skillCard:hover .skillTag img,
+.skillCard:hover .skillEmoji {
   color: var(--accent);
   filter: grayscale(0%);
+}
+
+[data-theme="dark"] .skillCard:hover .skillTag img,
+[data-theme="dark"] .skillCard:hover .skillEmoji {
+  filter: grayscale(0%) invert(0) brightness(1);
 }
 
 .skillTag span {
