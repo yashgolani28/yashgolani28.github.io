@@ -331,11 +331,12 @@ a {
     padding: 32px 0 12px;
   }
 }
-  /* Magnetic Button Utility */
-  .magnetic-wrap {
-    display: inline-block;
-    transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-  }
+
+/* Magnetic Button Utility */
+.magnetic-wrap {
+  display: inline-block;
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
 
 .heroGrid {
   display: grid;
@@ -1262,13 +1263,24 @@ h1 {
 }
 
 .skillTag i,
-.skillTag svg {
+.skillTag svg,
+.skillTag img {
   font-size: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: color-mix(in srgb, var(--accent) 85%, transparent);
-  transition: color 180ms ease;
+  transition: all 180ms ease;
+  filter: grayscale(100%);
+  max-height: 16px;
+  width: auto;
+}
+
+.skillCard:hover .skillTag i,
+.skillCard:hover .skillTag svg,
+.skillCard:hover .skillTag img {
+  color: var(--accent);
+  filter: grayscale(0%);
 }
 
 .skillTag span {
