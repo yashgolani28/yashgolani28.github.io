@@ -1,3 +1,22 @@
+// Project grid layout logic
+window.addEventListener("load", function() {
+  var grid = document.querySelector('.grid2');
+  if (grid) {
+    function setGridColumns() {
+      if (window.innerWidth > 900) {
+        grid.style.display = 'grid';
+        grid.style.gridTemplateColumns = 'repeat(2, 1fr)';
+        grid.style.gap = '32px 24px';
+      } else {
+        grid.style.display = 'grid';
+        grid.style.gridTemplateColumns = '1fr';
+        grid.style.gap = '32px 24px';
+      }
+    }
+    setGridColumns();
+    window.addEventListener('resize', setGridColumns);
+  }
+});
 (function () {
   const root = document.documentElement;
   const toggle = document.getElementById("themeToggle");

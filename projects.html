@@ -15,7 +15,6 @@
   <link rel="stylesheet" href="assets/css/styles.css" />
 
   <style>
-    /* Page-only styling for aesthetic images */
     .projImg {
       width: 100%;
       height: 190px;
@@ -27,9 +26,19 @@
       filter: grayscale(0.25) contrast(1.05);
     }
 
+    .grid2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px 24px;
+    }
+
     @media (max-width: 900px) {
       .projImg {
         height: 200px;
+      }
+
+      .grid2 {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -107,10 +116,8 @@
         </div>
 
         <div class="links" style="margin-top:14px">
-          <a class="btn btnPrimary"
-              href="https://github.com/yashgolani28/turtlebot4-object-detection" target="_blank" rel="noreferrer">View
-              on
-              GitHub</a></div>
+          <a class="btn btnPrimary" href="https://github.com/yashgolani28/turtlebot4-object-detection" target="_blank"
+            rel="noreferrer">View on GitHub</a>
         </div>
       </div>
 
@@ -143,9 +150,8 @@
         </div>
 
         <div class="links" style="margin-top:14px">
-          <a class="btn btnPrimary"
-              href="https://github.com/yashgolani28/smart-agriculture-system" target="_blank" rel="noreferrer">View on
-              GitHub</a></div>
+          <a class="btn btnPrimary" href="https://github.com/yashgolani28/smart-agriculture-system" target="_blank"
+            rel="noreferrer">View on GitHub</a>
         </div>
       </div>
 
@@ -178,9 +184,8 @@
         </div>
 
         <div class="links" style="margin-top:14px">
-          <a class="btn btnPrimary"
-              href="https://github.com/yashgolani28/Spider-mimic-quadruped" target="_blank" rel="noreferrer">View on
-              GitHub</a></div>
+          <a class="btn btnPrimary" href="https://github.com/yashgolani28/Spider-mimic-quadruped" target="_blank"
+            rel="noreferrer">View on GitHub</a>
         </div>
       </div>
 
@@ -214,9 +219,8 @@
         </div>
 
         <div class="links" style="margin-top:14px">
-          <a class="btn btnPrimary"
-              href="https://github.com/yashgolani28/loan-approval-ml-model" target="_blank" rel="noreferrer">View on
-              GitHub</a></div>
+          <a class="btn btnPrimary" href="https://github.com/yashgolani28/loan-approval-ml-model" target="_blank"
+            rel="noreferrer">View on GitHub</a>
         </div>
       </div>
 
@@ -249,9 +253,8 @@
         </div>
 
         <div class="links" style="margin-top:14px">
-          <a class="btn btnPrimary" href="https://github.com/yashgolani28/ai-fitness-trainer"
-              target="_blank" rel="noreferrer">View on
-              GitHub</a></div>
+          <a class="btn btnPrimary" href="https://github.com/yashgolani28/ai-fitness-trainer" target="_blank"
+            rel="noreferrer">View on GitHub</a>
         </div>
       </div>
 
@@ -284,9 +287,8 @@
         </div>
 
         <div class="links" style="margin-top:14px">
-          <a class="btn btnPrimary" href="https://github.com/yashgolani28/vlm-local"
-              target="_blank" rel="noreferrer">View on
-              GitHub</a></div>
+          <a class="btn btnPrimary" href="https://github.com/yashgolani28/vlm-local" target="_blank"
+            rel="noreferrer">View on GitHub</a>
         </div>
       </div>
 
@@ -321,12 +323,10 @@
 
         <div class="links" style="margin-top:14px">
           <a class="btn btnPrimary"
-              href="https://github.com/yashgolani28/Stock-Price-Direction-Predictor-with-Sentiment-Analysis"
-              target="_blank" rel="noreferrer">View on
-              GitHub</a></div>
+            href="https://github.com/yashgolani28/Stock-Price-Direction-Predictor-with-Sentiment-Analysis"
+            target="_blank" rel="noreferrer">View on GitHub</a>
         </div>
       </div>
-    </div>
 
     </div>
   </main>
@@ -335,34 +335,13 @@
     <div class="container">
       <div class="footerRow">
         <div>© <span id="year"></span> Yash Golani</div>
-        <div><a href="resume.html">Resume</a></div>
+        <div><a href="contact.html">Contact</a></div>
       </div>
     </div>
-  <style>
-    /* Page-only styling for aesthetic images */
-    .projImg {
-      width: 100%;
-      height: 190px;
-      object-fit: cover;
-      border-radius: 14px;
-      border: 1px solid var(--line);
-      background: color-mix(in srgb, var(--surface) 90%, transparent);
-      box-shadow: var(--shadow-soft);
-      filter: grayscale(0.25) contrast(1.05);
-    }
+  </footer>
 
-    .grid2 {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 32px 24px;
-    }
+  <script src="assets/js/app.js"></script>
+</body>
 
-    @media (max-width: 900px) {
-      .projImg {
-        height: 200px;
-      }
-      .grid2 {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+</html>
+```
