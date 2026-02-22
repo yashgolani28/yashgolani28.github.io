@@ -54,80 +54,212 @@
   <main id="main" class="container">
     <div class="pageTitle reveal">
       <h1>Experience</h1>
-      <p>Timeline of work and impact</p>
+      <p>Engineering Brief & System Architectures</p>
     </div>
 
-    <div class="timeline">
-      <div class="tlItem reveal">
-        <div class="tlBody">
-          <div class="tlHeaderRow" style="display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;">
-            <div class="tlCompany">
-              <b><i class="fa-solid fa-building" style="margin-right: 8px; opacity: 0.9;"></i>ESSI Integrated Technologies</b>
-              <div class="meta">PLC Programming - Systems Engineering Intern | New Delhi</div>
-            </div>
-            <div class="tlWhen" style="white-space: nowrap; min-width: 160px; text-align: right; font-weight: 500;">Jun 2025 to May 2026</div>
-          </div>
-
-          <div class="sep"></div>
-
-          <b><i class="fa-solid fa-tower-broadcast" style="margin-right: 8px; opacity: 0.9;"></i>Radar based speed detection and evidence system</b>
-          <ul class="list">
-            <li>Built a production radar and camera enforcement pipeline with stable tracking and field hardening.</li>
-            <li>Worked on calibration alignment and review ready evidence workflows for real deployments.</li>
-            <li>Improved operational stability with health checks, watchdogs, and recovery paths to support high uptime.</li>
-          </ul>
-
-          <div class="sep"></div>
-
-          <b><i class="fa-solid fa-camera" style="margin-right: 8px; opacity: 0.9;"></i>ANPR and retraining workflows</b>
-          <ul class="list">
-            <li>Contributed to scalable camera analytics and alert pipelines using Kafka, Redis, and containerized services.</li>
-            <li>Built retraining workflows including ingest, assisted annotation, training, benchmarking, and exports.</li>
-          </ul>
-
-          <div class="sep"></div>
-          <div class="skillTagRow">
-            <div class="skillTag">
-              <i class="devicon-python-plain"></i>
-              <span>Python</span>
-            </div>
-            <div class="skillTag">
-              <i class="devicon-fastapi-plain"></i>
-              <span>FastAPI</span>
-            </div>
-            <div class="skillTag">
-              <i class="devicon-flask-original"></i>
-              <span>Flask</span>
-            </div>
-            <div class="skillTag">
-              <i class="devicon-apachekafka-plain"></i>
-              <span>Kafka</span>
-            </div>
-            <div class="skillTag">
-              <i class="devicon-redis-plain"></i>
-              <span>Redis</span>
-            </div>
-            <div class="skillTag">
-              <i class="devicon-docker-plain"></i>
-              <span>Docker</span>
-            </div>
-            <div class="skillTag">
-              <i class="devicon-postgresql-plain"></i>
-              <span>PostgreSQL</span>
-            </div>
-            <div class="skillTag">
-              <i class="devicon-opencv-plain"></i>
-              <span>OpenCV</span>
-            </div>
-            <div class="skillTag">
-              <i class="devicon-git-plain"></i>
-              <span>Git</span>
+    <!-- Role Card -->
+    <section class="section reveal">
+      <div class="xpRoleCard">
+        <div class="xpRoleHeader">
+          <div class="xpCompany">
+            <i class="fa-solid fa-building"></i>
+            <div>
+              <div class="companyName">ESSI Integrated Technologies</div>
+              <div class="jobTitle">PLC Programming - Systems Engineering Intern</div>
             </div>
           </div>
+          <div class="xpLocation">
+            <span>New Delhi</span>
+            <span class="sep">|</span>
+            <span>June 2025 to May 2026</span>
+          </div>
+        </div>
+        <p class="xpSummary">
+          Built deployable perception and analytics systems across radar, cameras, ANPR, and production hardening.
+        </p>
+        <div class="xpStatsRow">
+          <div class="xpStatChip">Deployability</div>
+          <div class="xpStatChip">Reliability</div>
+          <div class="xpStatChip">Perception Systems</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Workstreams -->
+    <div class="section reveal">
+      <div class="sectionHead">
+        <h2>Workstreams</h2>
+      </div>
+
+      <div class="xpWorkstreamsGrid">
+        <!-- Radar -->
+        <div class="xpWorkstream" id="ws-radar">
+          <div class="wsHeader">
+            <i class="fa-solid fa-tower-broadcast"></i>
+            <div>
+              <h3>Radar & evidence systems</h3>
+            </div>
+          </div>
+          <ul class="wsBullets">
+            <li>Built radar-triggered capture and enforcement loop with stable tracking and evidence packaging.</li>
+            <li>Improved calibration alignment workflows and metadata consistency for deployments.</li>
+            <li>Added reliability guardrails: watchdogs, health checks, recovery paths.</li>
+          </ul>
+        </div>
+
+        <!-- ANPR -->
+        <div class="xpWorkstream" id="ws-anpr">
+          <div class="wsHeader">
+            <i class="fa-solid fa-camera"></i>
+            <div>
+              <h3>Automatic Number Plate Recognition</h3>
+            </div>
+          </div>
+          <ul class="wsBullets">
+            <li>Hardened multi-camera ingest and restreaming: RTSP handling, fallback behavior, predictable frame
+              access.</li>
+            <li>Improved ANPR and OCR correctness and dataset readiness: plate crops, character ordering logic,
+              verification flow, export quality.</li>
+            <li>Delivered PTZ operational behavior: stable tracking controls, safe stop behavior, calibration alignment
+              per camera.</li>
+          </ul>
+        </div>
+
+        <!-- MLOps -->
+        <div class="xpWorkstream" id="ws-mlops">
+          <div class="wsHeader">
+            <i class="fa-solid fa-arrows-rotate"></i>
+            <div>
+              <h3>MLOps & Platform</h3>
+            </div>
+          </div>
+          <ul class="wsBullets">
+            <li>Built and maintained Kafka-based service pipelines with debuggability and isolation.</li>
+            <li>Implemented training lifecycle controls: pause, resume, cancel plus job state visibility.</li>
+            <li>Improved dataset aggregation, annotation UX, and operational hygiene: cleanup and retention.</li>
+          </ul>
+        </div>
+
+        <!-- VLM -->
+        <div class="xpWorkstream" id="ws-vlm">
+          <div class="wsHeader">
+            <i class="fa-solid fa-brain"></i>
+            <div>
+              <h3>VLM & Retrieval</h3>
+            </div>
+          </div>
+          <ul class="wsBullets">
+            <li>Migrated CCTV VLM pipeline and instrumented per-stage latency.</li>
+            <li>Implemented retrieval upgrade: semantic embeddings plus plate-aware search.</li>
+            <li>Added prompt and token controls to keep latency bounded and predictable.</li>
+          </ul>
         </div>
       </div>
     </div>
 
+    <!-- Constellation Block -->
+    <section class="section reveal">
+      <div class="sectionHead">
+        <h2>Tech Stack Constellation</h2>
+        <p>Select a project to reveal the system flow.</p>
+      </div>
+
+      <div id="xpConstellation" class="xpConstellation mode-overview" data-mode="overview">
+        <div class="xpConstellationTop">
+          <div class="xpProjectPills" role="tablist" aria-label="Project selector">
+            <button class="xpPill is-active" data-project="overview" role="tab" aria-selected="true">Overview</button>
+            <button class="xpPill" data-project="radar" role="tab" aria-selected="false">Radar</button>
+            <button class="xpPill" data-project="anpr" role="tab" aria-selected="false">ANPR</button>
+            <button class="xpPill" data-project="mlops" role="tab" aria-selected="false">MLOps</button>
+            <button class="xpPill" data-project="vlm" role="tab" aria-selected="false">VLM</button>
+          </div>
+
+          <div id="xpProjectCard" class="xpProjectCard" aria-live="polite">
+            <h3 id="xpProjectTitle">Overview</h3>
+            <p id="xpProjectBlurb">Pick a project to reveal its tool flow.</p>
+          </div>
+        </div>
+
+        <div class="xpConstellationStage" id="xpConstellationStage">
+          <div class="xpBackgroundPolish"></div>
+          <svg class="xpEdges" id="xpEdges" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <defs>
+              <marker id="xpArrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                <path d="M0,0 L6,3 L0,6 Z" fill="currentColor"></path>
+              </marker>
+            </defs>
+            <!-- edges inserted by JS -->
+          </svg>
+          <div class="xpNodes" id="xpNodes">
+            <button class="xpNode" type="button" data-node="python" data-cluster="radar anpr mlops vlm"
+              aria-label="Python tool node">
+              <span class="xpNodeIcon"><i class="devicon-python-plain"></i></span>
+              <span class="xpNodeLabel">Python</span>
+            </button>
+            <button class="xpNode" type="button" data-node="flask" data-cluster="radar" aria-label="Flask tool node">
+              <span class="xpNodeIcon"><i class="devicon-flask-original"></i></span>
+              <span class="xpNodeLabel">Flask</span>
+            </button>
+            <button class="xpNode" type="button" data-node="fastapi" data-cluster="mlops vlm"
+              aria-label="FastAPI tool node">
+              <span class="xpNodeIcon"><i class="devicon-fastapi-plain"></i></span>
+              <span class="xpNodeLabel">FastAPI</span>
+            </button>
+            <button class="xpNode" type="button" data-node="opencv" data-cluster="radar anpr"
+              aria-label="OpenCV tool node">
+              <span class="xpNodeIcon"><i class="devicon-opencv-plain"></i></span>
+              <span class="xpNodeLabel">OpenCV</span>
+            </button>
+            <button class="xpNode" type="button" data-node="postgres" data-cluster="radar anpr mlops vlm"
+              aria-label="PostgreSQL tool node">
+              <span class="xpNodeIcon"><i class="devicon-postgresql-plain"></i></span>
+              <span class="xpNodeLabel">PostgreSQL</span>
+            </button>
+            <button class="xpNode" type="button" data-node="docker" data-cluster="mlops vlm"
+              aria-label="Docker tool node">
+              <span class="xpNodeIcon"><i class="devicon-docker-plain"></i></span>
+              <span class="xpNodeLabel">Docker</span>
+            </button>
+            <button class="xpNode" type="button" data-node="kafka" data-cluster="anpr mlops"
+              aria-label="Kafka tool node">
+              <span class="xpNodeIcon"><i class="devicon-apachekafka-original"></i></span>
+              <span class="xpNodeLabel">Kafka</span>
+            </button>
+            <button class="xpNode" type="button" data-node="redis" data-cluster="anpr mlops"
+              aria-label="Redis tool node">
+              <span class="xpNodeIcon"><i class="devicon-redis-plain"></i></span>
+              <span class="xpNodeLabel">Redis</span>
+            </button>
+            <button class="xpNode" type="button" data-node="linux" data-cluster="mlops" aria-label="Linux tool node">
+              <span class="xpNodeIcon"><i class="fa-brands fa-linux"></i></span>
+              <span class="xpNodeLabel">Linux</span>
+            </button>
+            <button class="xpNode" type="button" data-node="ffmpeg" data-cluster="radar anpr"
+              aria-label="FFmpeg tool node">
+              <span class="xpNodeIcon"><i class="fa-solid fa-film"></i></span>
+              <span class="xpNodeLabel">FFmpeg</span>
+            </button>
+            <button class="xpNode" type="button" data-node="yolo" data-cluster="radar" aria-label="YOLO tool node">
+              <span class="xpNodeIcon"><i class="fa-solid fa-crosshairs"></i></span>
+              <span class="xpNodeLabel">YOLO</span>
+            </button>
+            <button class="xpNode" type="button" data-node="vlm" data-cluster="vlm"
+              aria-label="Qwen2.5-VL / LLaVA tool node">
+              <span class="xpNodeIcon"><i class="fa-solid fa-brain"></i></span>
+              <span class="xpNodeLabel">Qwen2.5-VL / LLaVA</span>
+            </button>
+            <button class="xpNode" type="button" data-node="git" data-cluster="mlops" aria-label="Git tool node">
+              <span class="xpNodeIcon"><i class="devicon-git-plain"></i></span>
+              <span class="xpNodeLabel">Git</span>
+            </button>
+          </div>
+        </div>
+    </section>
+
+    <div class="xpCTA reveal">
+      <a href="projects.html" class="btn btnPrimary">View all projects</a>
+      <a href="resume.html" class="btn">View Resume</a>
+    </div>
   </main>
 
   <footer class="footer">
