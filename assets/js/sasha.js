@@ -23,13 +23,13 @@
 
     const FAQ_DATA = [
         {
-            keywords: ["who", "you", "about", "yash", "bio"],
+            keywords: ["who", "you", "yash", "bio"],
             reply: "I'm SASHA, Yash's Semantic Assistant. Yash is a Robotics & AI Engineer specializing in perception systems, MLOps, and Agentic AI. He builds complex pipelines for radar and camera vision.",
             actions: [{ label: "About Yash", href: "index.html" }]
         },
         {
-            keywords: ["radar", "mmwave", "speed", "detection", "tracking", "77ghz"],
-            reply: "Yash has extensive experience with 77GHz radar systems, building high-uptime tracking and evidence bundling for roadside enforcement. His systems achieved 50ms decision latency and 20 simultaneous target tracking.",
+            keywords: ["radar", "mmwave", "speed", "detection", "tracking", "60+ghz"],
+            reply: "Yash has extensive experience with 60+GHz radar systems, building high-uptime tracking and evidence bundling for roadside enforcement. His systems achieved 50ms decision latency and 20 simultaneous target tracking.",
             actions: [{ label: "See Radar Work", href: "experience.html#sasha-radar-evidence-systems" }]
         },
         {
