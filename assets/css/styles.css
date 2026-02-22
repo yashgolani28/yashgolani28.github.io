@@ -1853,20 +1853,18 @@ h1 {
   z-index: 10;
 }
 
-.xpNode[data-cluster*="radar"] {
-  border-left: 3px solid #f43f5e;
-}
-
-.xpNode[data-cluster*="anpr"] {
-  border-left: 3px solid #3b82f6;
-}
-
-.xpNode[data-cluster*="mlops"] {
-  border-left: 3px solid #f59e0b;
-}
-
+.xpNode[data-cluster*="radar"],
+.xpNode[data-cluster*="anpr"],
+.xpNode[data-cluster*="mlops"],
 .xpNode[data-cluster*="vlm"] {
-  border-left: 3px solid #a855f7;
+  border-left: 3px solid #ffffff;
+}
+
+[data-theme="light"] .xpNode[data-cluster*="radar"],
+[data-theme="light"] .xpNode[data-cluster*="anpr"],
+[data-theme="light"] .xpNode[data-cluster*="mlops"],
+[data-theme="light"] .xpNode[data-cluster*="vlm"] {
+  border-left: 3px solid #000000;
 }
 
 .xpNode:focus-visible {
