@@ -11,6 +11,16 @@
     const STORAGE_KEY = "sasha_data";
     const MAX_HISTORY = 30;
 
+    const PAGE_DESCRIPTIONS = {
+        'index.html': "the Home page – an overview of Yash's Robotics & AI work and production impact.",
+        'skills.html': "the Skills page – a deep dive into Yash's technical stack and tools.",
+        'experience.html': "the Experience page – details on Yash's professional journey and workstreams.",
+        'projects.html': "the Projects gallery – a showcase of Yash's key builds and research.",
+        'education.html': "the Education page – Yash's academic background and Robotics degree details.",
+        'contact.html': "the Contact page – ways to reach Yash via email, LinkedIn, or the form.",
+        'resume.html': "the Resume page – a quick-glance version of Yash's professional CV."
+    };
+
     const FAQ_DATA = [
         {
             keywords: ["who", "you", "about", "yash", "bio"],
@@ -92,6 +102,11 @@
             keywords: ["experience", "work", "history", "career", "job", "internship"],
             reply: "Yash has worked on perception systems, MLOps, and automation, including a Systems Engineering internship at ESSI and production radar deployments.",
             actions: [{ label: "Work Experience", href: "experience.html" }]
+        },
+        {
+            keywords: ["where", "page", "current", "explain", "what", "this"],
+            reply: "GENERIC_PAGE_DESCRIPTION", // Placeholder handled in routeQuery
+            actions: []
         }
     ];
 
@@ -109,6 +124,7 @@
     let isOpen = false;
     let history = [];
     let isTyping = false;
+    let lastPage = "";
 
     // --- UI ELEMENTS ---
     let fab, panel, messagesContainer, input, sendBtn;
@@ -129,11 +145,12 @@
             const parsed = JSON.parse(saved);
             isOpen = parsed.isOpen || false;
             history = parsed.history || [];
+            lastPage = parsed.lastPage || "";
         }
     }
 
     function saveState() {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify({ isOpen, history }));
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({ isOpen, history, lastPage }));
     }
 
     function ensureHeadingIds() {
@@ -181,7 +198,6 @@
       </div>
       <div class="sasha-messages" id="sasha-messages"></div>
       <div class="sasha-typing" id="sasha-typing">Sasha is thinking...</div>
-      <div class="sasha-chips" id="sasha-chips"></div>
       <form class="sasha-input-area" id="sasha-form">
         <input type="text" class="sasha-input" id="sasha-input" placeholder="Ask about Yash or site sections..." autocomplete="off">
         <button type="submit" class="sasha-send" id="sasha-send" disabled aria-label="Send">
@@ -224,14 +240,17 @@
     }
 
     function checkInitialState() {
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+
         if (isOpen) {
             panel.classList.add('active');
             input.focus();
         }
-        if (history.length === 0) {
+
+        if (history.length === 0 || lastPage !== currentPage) {
             greet();
-        } else {
-            updateChips();
+            lastPage = currentPage;
+            saveState();
         }
     }
 
@@ -254,26 +273,25 @@
 
     function greet() {
         const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-        let greeting = "Hi! I'm Sasha, Yash's AI assistant. I can help find specific projects, tech stack details, or navigate you to the right page.";
-        let actions = [...QUICK_ACTIONS];
+        const pageDesc = PAGE_DESCRIPTIONS[currentPage];
 
-        if (currentPage === 'projects.html') {
-            greeting = "Hi! You're viewing Yash's projects. Want to see something specific like 'Robotics', 'Computer Vision', or 'ML'?";
-            actions = [
-                { label: "Robotics Projects", href: "projects.html#sasha-object-detection-using-turtlebot-4" },
-                { label: "Vision Projects", href: "projects.html#sasha-traffic-vlm" },
-                { label: "Agri-Tech", href: "projects.html#sasha-smart-agriculture-system" },
-                ...QUICK_ACTIONS.slice(5)
-            ];
-        } else if (currentPage === 'experience.html') {
-            greeting = "Hi! Exploring Yash's work experience? I can jump you to specific workstreams like Radar, ANPR, or MLOps.";
-            actions = [
-                { label: "Radar Workstream", href: "experience.html#sasha-radar-evidence-systems" },
-                { label: "ANPR Workstream", href: "experience.html#sasha-automatic-number-plate-recognition" },
-                { label: "MLOps / Platform", href: "experience.html#sasha-mlops-platform" },
-                ...QUICK_ACTIONS.slice(5)
-            ];
+        let greetingText = `Hi! I'm Sasha, Yash's AI assistant. I can help find specific projects, tech stack details, or navigate the site.`;
+
+        if (pageDesc) {
+            greetingText += `<br><br>You're currently on <strong>${pageDesc}</strong>`;
         }
+
+        const greeting = `
+            <div class="sasha-welcome">
+                <img src="assets/images/img8.png" alt="Waving Bot" class="sasha-bot-wave">
+                <div>${greetingText}<br><br>Quick Links:</div>
+            </div>
+        `;
+        const actions = [
+            { label: "Skills", href: "skills.html" },
+            { label: "Experience", href: "experience.html" },
+            { label: "Contact", href: "contact.html" }
+        ];
 
         renderMessage('assistant', greeting, actions);
     }
@@ -292,7 +310,6 @@
             const response = routeQuery(text);
             showTyping(false);
             renderMessage('assistant', response.reply, response.actions);
-            updateChips(text);
         }, 600);
     }
 
@@ -316,6 +333,14 @@
         }
 
         if (bestMatch && maxScore >= 4) {
+            if (bestMatch.reply === "GENERIC_PAGE_DESCRIPTION") {
+                const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+                const pageDesc = PAGE_DESCRIPTIONS[currentPage];
+                return {
+                    reply: pageDesc ? `You are looking at <strong>${pageDesc}</strong>` : "You're exploring Yash Golani's portfolio. I can help you find specific details about his work in Robotics and AI.",
+                    actions: QUICK_ACTIONS
+                };
+            }
             return bestMatch;
         }
 
@@ -323,26 +348,6 @@
             reply: "I'm not quite sure about that. Try asking about 'radar', 'ANPR', 'projects', or Yash's 'tech stack'.",
             actions: QUICK_ACTIONS
         };
-    }
-
-    function updateChips(lastQuery = "") {
-        const chipsContainer = panel.querySelector('#sasha-chips');
-        chipsContainer.innerHTML = '';
-
-        const suggestions = ["Skills", "Resume", "Contact"];
-        if (lastQuery.includes("project") || window.location.pathname.includes("projects")) {
-            suggestions.unshift("Robotics", "ML Projects");
-        } else if (lastQuery.includes("work") || window.location.pathname.includes("experience")) {
-            suggestions.unshift("Radar", "ANPR");
-        }
-
-        suggestions.forEach(s => {
-            const chip = document.createElement('button');
-            chip.className = 'sasha-chip';
-            chip.innerText = s;
-            chip.onclick = () => handleUserInput(s);
-            chipsContainer.appendChild(chip);
-        });
     }
 
     function renderMessage(role, text, actions = []) {

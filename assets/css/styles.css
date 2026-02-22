@@ -2337,3 +2337,38 @@ h1 {
   opacity: 0.8;
   letter-spacing: 0.3px;
 }
+
+/* Waving Bot Styling */
+.sasha-welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+  padding: 8px 0;
+}
+
+.sasha-bot-wave {
+  width: 100px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  object-fit: contain;
+  animation: sasha-wave 2s infinite ease-in-out;
+}
+
+@keyframes sasha-wave {
+
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(8deg);
+  }
+
+  75% {
+    transform: rotate(-8deg);
+  }
+}
