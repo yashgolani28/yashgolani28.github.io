@@ -1809,6 +1809,17 @@ h1 {
   margin-left: 0;
 }
 
+.mode-overview .xpNode {
+  padding: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.mode-overview .xpNodeIcon {
+  width: 32px;
+  height: 32px;
+  font-size: 24px;
+}
+
 .mode-project .xpNodeLabel {
   opacity: 1;
   width: auto;
