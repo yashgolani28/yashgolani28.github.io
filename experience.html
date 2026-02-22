@@ -43,7 +43,10 @@
             <span id="themeLabel" class="note">Dark</span>
             <label class="switch" aria-label="Toggle light mode">
               <input id="themeToggle" class="switchInput" type="checkbox" />
-              <span class="switchKnob"></span>
+              <span class="switchKnob" aria-hidden="true">
+                <i class="fa-solid fa-moon"></i>
+                <i class="fa-solid fa-sun"></i>
+              </span>
             </label>
           </div>
         </div>
@@ -258,7 +261,7 @@
 
     <div class="xpCTA reveal">
       <a href="projects.html" class="btn btnPrimary">View all projects</a>
-      <a href="resume.html" class="btn">View Resume</a>
+      <a href="resume.html" class="btn btnPrimary">View Resume</a>
     </div>
   </main>
 
@@ -272,6 +275,7 @@
   </footer>
 
   <script src="assets/js/app.js"></script>
+  <script src="assets/js/sasha.js"></script>
 </body>
 
 </html>
