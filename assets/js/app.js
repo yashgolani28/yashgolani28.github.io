@@ -144,7 +144,7 @@ window.addEventListener("load", function () {
 
         if (res.ok) {
           form.reset();
-          if (statusEl) statusEl.textContent = "Message sent. I will get back to you soon.";
+          if (statusEl) statusEl.textContent = "✓ Message sent. I will get back to you soon.";
         } else {
           if (statusEl) statusEl.textContent = "Could not send right now. Please email me directly.";
         }
@@ -156,6 +156,23 @@ window.addEventListener("load", function () {
           submitBtn.textContent = "Send message";
         }
       }
+    });
+  })();
+
+  // Scroll-to-top button
+  (function initScrollTop() {
+    const btn = document.createElement('button');
+    btn.className = 'scrollTopBtn';
+    btn.setAttribute('aria-label', 'Scroll to top');
+    btn.innerHTML = '<i class="fa-solid fa-chevron-up"></i>';
+    document.body.appendChild(btn);
+
+    window.addEventListener('scroll', () => {
+      btn.classList.toggle('visible', window.scrollY > 300);
+    }, { passive: true });
+
+    btn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   })();
 

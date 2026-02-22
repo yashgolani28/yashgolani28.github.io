@@ -67,9 +67,6 @@
         <div class="item">
           <b>Email</b>
           <div class="meta"><a href="mailto:yashgolani287@gmail.com">yashgolani287@gmail.com</a></div>
-          <div style="margin-top:10px">
-            <button id="copyEmailBtn" class="btn" type="button">Copy email</button>
-          </div>
         </div>
 
         <div class="item" style="margin-top:12px">
@@ -92,7 +89,7 @@
         <b>Message</b>
         <div class="sep"></div>
 
-        <form action="https://formspree.io/f/mpqdpnjk" method="POST">
+        <form id="contactForm" action="https://formspree.io/f/mpqdpnjk" method="POST">
           <div class="formGrid">
             <div>
               <label class="note" for="name">Name</label>
@@ -123,11 +120,9 @@
               href="mailto:yashgolani287@gmail.com?subject=Portfolio%20Inquiry&body=Hi%20Yash%2C%0A%0A">Use
               email instead</a>
           </div>
+          <p id="formStatus" style="margin:12px 0 0; font-size:14px; color:var(--muted); min-height:20px;"></p>
+        </form>
       </div>
-
-
-      </form>
-    </div>
     </div>
   </main>
 

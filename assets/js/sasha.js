@@ -65,7 +65,15 @@
         {
             keywords: ["finance", "loan", "stock", "sentiment", "trading", "fintech", "market"],
             reply: "Yash has applied ML to finance, building loan approval classifiers with XGBoost and stock predictors combining sentiment analysis with technical indicators.",
-            actions: [{ label: "FinTech Work", href: "projects.html#sasha-bank-loan-modelling" }]
+            actions: [
+                { label: "Bank Loan Modelling", href: "projects.html#sasha-bank-loan-modelling" },
+                { label: "Stock Predictor", href: "projects.html#sasha-stock-price-direction-predictor" }
+            ]
+        },
+        {
+            keywords: ["fitness", "openpose", "pose", "workout", "exercise", "coach"],
+            reply: "Yash built an AI Fitness Trainer using OpenPose for computer vision-based pose estimation, providing personalized workout recommendations and real-time progress guidance.",
+            actions: [{ label: "AI Fitness Trainer", href: "projects.html#sasha-ai-fitness-trainer" }]
         },
         {
             keywords: ["skills", "tech", "stack", "languages", "python", "c++", "docker", "fastapi"],
