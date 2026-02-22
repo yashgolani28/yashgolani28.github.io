@@ -20,7 +20,7 @@
         {
             keywords: ["radar", "mmwave", "speed", "detection", "tracking"],
             reply: "Yash has extensive experience with radar systems, specifically building high-uptime tracking and evidence bundling for roadside enforcement. His systems achieved 50ms decision latency.",
-            actions: [{ label: "See Radar Work", href: "experience.html#sasha-radar-and-evidence-systems" }]
+            actions: [{ label: "See Radar Work", href: "experience.html#sasha-radar-evidence-systems" }]
         },
         {
             keywords: ["anpr", "license", "plate", "ocr", "camera"],
@@ -30,11 +30,36 @@
         {
             keywords: ["vlm", "llm", "ai", "search", "qwen", "llava"],
             reply: "Yash integrates VLMs like Qwen2.5-VL for semantic CCTV search and scene understanding, focusing on bounded latency and retrieval accuracy.",
-            actions: [{ label: "Explore VLM", href: "experience.html#sasha-vlm-and-retrieval" }]
+            actions: [{ label: "Explore VLM", href: "experience.html#sasha-vlm-retrieval" }]
         },
         {
-            keywords: ["skills", "tech", "stack", "languages", "python"],
-            reply: "Core tech: Python, FastAPI, Docker, ROS2, ML (PyTorch/TF), and Agentic AI (LangChain/RAG).",
+            keywords: ["plc", "scada", "automation", "industrial", "essi", "internship"],
+            reply: "During his internship at ESSI Integrated Technologies, Yash worked on industrial automation including PLC programming and systems engineering for large-scale deployments.",
+            actions: [{ label: "Industrial Experience", href: "experience.html#sasha-essi-integrated-technologies" }]
+        },
+        {
+            keywords: ["ros", "ros2", "turtlebot", "perception", "gazebo", "rviz", "simulation"],
+            reply: "Yash specializes in ROS/ROS2, notably for real-time object detection on Turtlebot 4 and system simulation using Gazebo and Rviz.",
+            actions: [{ label: "Robotics Projects", href: "projects.html#sasha-object-detection-using-turtlebot-4" }]
+        },
+        {
+            keywords: ["arduino", "esp32", "microcontroller", "embedded", "iot", "sensor"],
+            reply: "Yash builds embedded systems using ESP32 and Arduino, like his Smart Agriculture System and bio-inspired Spider Quadruped.",
+            actions: [{ label: "Embedded Projects", href: "projects.html#sasha-smart-agriculture-system" }]
+        },
+        {
+            keywords: ["agri", "agriculture", "hydroponics", "farm"],
+            reply: "He developed an automated hydroponics system using ESP32 and Firebase, focusing on sensor-driven climate control and monitoring.",
+            actions: [{ label: "Agri-Tech Project", href: "projects.html#sasha-smart-agriculture-system" }]
+        },
+        {
+            keywords: ["finance", "loan", "stock", "sentiment", "trading", "fintech"],
+            reply: "Yash has applied ML to finance, building loan approval classifiers with XGBoost and stock predictors combining sentiment analysis with technical indicators.",
+            actions: [{ label: "FinTech Work", href: "projects.html#sasha-bank-loan-modelling" }]
+        },
+        {
+            keywords: ["skills", "tech", "stack", "languages", "python", "c++"],
+            reply: "Core tech: Python, FastAPI, Docker, ROS2, ML (PyTorch/TF), and Agentic AI (LangChain/RAG). He also works with C++ and Embedded C.",
             actions: [{ label: "Full Skill Set", href: "skills.html" }]
         },
         {
@@ -64,7 +89,7 @@
             actions: [{ label: "Education Details", href: "education.html" }]
         },
         {
-            keywords: ["experience", "work", "history", "career", "job", "essi", "essi integrated technologies", "internship"],
+            keywords: ["experience", "work", "history", "career", "job"],
             reply: "Yash has worked on perception systems, MLOps, and automation, including a Systems Engineering internship at ESSI Integrated Technologies.",
             actions: [{ label: "Work Experience", href: "experience.html" }]
         }
@@ -73,10 +98,10 @@
     const QUICK_ACTIONS = [
         { label: "Experience", href: "experience.html" },
         { label: "Education", href: "education.html" },
-        { label: "Best projects", href: "projects.html" },
-        { label: "Show radar work", href: "experience.html#sasha-radar-and-evidence-systems" },
-        { label: "Show ANPR", href: "experience.html#sasha-automatic-number-plate-recognition" },
-        { label: "Download resume", href: "resume.pdf" },
+        { label: "Robotics Work", href: "projects.html#sasha-object-detection-using-turtlebot-4" },
+        { label: "Radar Systems", href: "experience.html#sasha-radar-evidence-systems" },
+        { label: "ANPR & Vision", href: "experience.html#sasha-automatic-number-plate-recognition" },
+        { label: "MLOps & Platform", href: "experience.html#sasha-mlops-platform" },
         { label: "Contact Yash", href: "contact.html" }
     ];
 
@@ -221,14 +246,16 @@
             actions = [
                 { label: "Robotics Projects", href: "projects.html#sasha-object-detection-using-turtlebot-4" },
                 { label: "Vision Projects", href: "projects.html#sasha-traffic-vlm" },
-                ...QUICK_ACTIONS.slice(2)
+                { label: "Agri-Tech", href: "projects.html#sasha-smart-agriculture-system" },
+                ...QUICK_ACTIONS.slice(5)
             ];
         } else if (currentPage === 'experience.html') {
             greeting = "Hi! Exploring Yash's work experience? I can jump you to specific workstreams like Radar, ANPR, or MLOps.";
             actions = [
-                { label: "Radar Workstream", href: "experience.html#sasha-radar-and-evidence-systems" },
+                { label: "Radar Workstream", href: "experience.html#sasha-radar-evidence-systems" },
                 { label: "ANPR Workstream", href: "experience.html#sasha-automatic-number-plate-recognition" },
-                ...QUICK_ACTIONS.slice(2)
+                { label: "MLOps / Platform", href: "experience.html#sasha-mlops-platform" },
+                ...QUICK_ACTIONS.slice(5)
             ];
         }
 
