@@ -13,84 +13,84 @@
 
     const FAQ_DATA = [
         {
-            keywords: ["who", "you", "about"],
-            reply: "I'm SASHA, Yash's Semantic Assistant. Yash is a Robotics & AI Engineer specializing in perception systems, MLOps, and Agentic AI.",
+            keywords: ["who", "you", "about", "yash", "bio"],
+            reply: "I'm SASHA, Yash's Semantic Assistant. Yash is a Robotics & AI Engineer specializing in perception systems, MLOps, and Agentic AI. He builds complex pipelines for radar and camera vision.",
             actions: [{ label: "About Yash", href: "index.html" }]
         },
         {
-            keywords: ["radar", "mmwave", "speed", "detection", "tracking"],
-            reply: "Yash has extensive experience with radar systems, specifically building high-uptime tracking and evidence bundling for roadside enforcement. His systems achieved 50ms decision latency.",
+            keywords: ["radar", "mmwave", "speed", "detection", "tracking", "77ghz"],
+            reply: "Yash has extensive experience with 77GHz radar systems, building high-uptime tracking and evidence bundling for roadside enforcement. His systems achieved 50ms decision latency and 20 simultaneous target tracking.",
             actions: [{ label: "See Radar Work", href: "experience.html#sasha-radar-evidence-systems" }]
         },
         {
-            keywords: ["anpr", "license", "plate", "ocr", "camera"],
-            reply: "The ANPR pipeline Yash built manages 1600+ cameras with a 10s end-to-end alert latency. It includes PTZ control and high OCR correctness.",
+            keywords: ["anpr", "license", "plate", "ocr", "camera", "lpr", "vision"],
+            reply: "The ANPR pipeline Yash built manages 1600+ cameras with a 10s end-to-end alert latency. It features multi-stream ingest and high OCR correctness in real-world conditions.",
             actions: [{ label: "View ANPR Projects", href: "experience.html#sasha-automatic-number-plate-recognition" }]
         },
         {
-            keywords: ["vlm", "llm", "ai", "search", "qwen", "llava"],
-            reply: "Yash integrates VLMs like Qwen2.5-VL for semantic CCTV search and scene understanding, focusing on bounded latency and retrieval accuracy.",
+            keywords: ["vlm", "llm", "ai", "search", "qwen", "llava", "rag", "agent"],
+            reply: "Yash integrates VLMs like Qwen2.5-VL for semantic CCTV search and scene understanding. He also builds RAG pipelines for technical documentation and technical decision support.",
             actions: [{ label: "Explore VLM", href: "experience.html#sasha-vlm-retrieval" }]
         },
         {
-            keywords: ["plc", "scada", "automation", "industrial", "essi", "internship"],
-            reply: "During his internship at ESSI Integrated Technologies, Yash worked on industrial automation including PLC programming and systems engineering for large-scale deployments.",
+            keywords: ["plc", "scada", "automation", "industrial", "essi", "internship", "systems"],
+            reply: "During his internship at ESSI Integrated Technologies, Yash worked on industrial automation including PLC programming and systems engineering for large-scale security deployments.",
             actions: [{ label: "Industrial Experience", href: "experience.html#sasha-essi-integrated-technologies" }]
         },
         {
-            keywords: ["ros", "ros2", "turtlebot", "perception", "gazebo", "rviz", "simulation"],
-            reply: "Yash specializes in ROS/ROS2, notably for real-time object detection on Turtlebot 4 and system simulation using Gazebo and Rviz.",
+            keywords: ["ros", "ros2", "turtlebot", "perception", "gazebo", "rviz", "simulation", "robotics"],
+            reply: "Yash specializes in ROS/ROS2, notably for real-time object detection on Turtlebot 4 and building robust simulation environments using Gazebo and Rviz.",
             actions: [{ label: "Robotics Projects", href: "projects.html#sasha-object-detection-using-turtlebot-4" }]
         },
         {
-            keywords: ["arduino", "esp32", "microcontroller", "embedded", "iot", "sensor"],
-            reply: "Yash builds embedded systems using ESP32 and Arduino, like his Smart Agriculture System and bio-inspired Spider Quadruped.",
+            keywords: ["arduino", "esp32", "microcontroller", "embedded", "iot", "sensor", "firmware"],
+            reply: "Yash builds embedded systems using ESP32 and Arduino, like his Smart Agriculture System and bio-inspired Spider Quadruped. He is fluent in Embedded C and Python-based IoT.",
             actions: [{ label: "Embedded Projects", href: "projects.html#sasha-smart-agriculture-system" }]
         },
         {
-            keywords: ["agri", "agriculture", "hydroponics", "farm"],
-            reply: "He developed an automated hydroponics system using ESP32 and Firebase, focusing on sensor-driven climate control and monitoring.",
+            keywords: ["agri", "agriculture", "hydroponics", "farm", "automated"],
+            reply: "He developed an automated hydroponics system using ESP32 and Firebase, focusing on sensor-driven climate control and real-time data monitoring.",
             actions: [{ label: "Agri-Tech Project", href: "projects.html#sasha-smart-agriculture-system" }]
         },
         {
-            keywords: ["finance", "loan", "stock", "sentiment", "trading", "fintech"],
+            keywords: ["finance", "loan", "stock", "sentiment", "trading", "fintech", "market"],
             reply: "Yash has applied ML to finance, building loan approval classifiers with XGBoost and stock predictors combining sentiment analysis with technical indicators.",
             actions: [{ label: "FinTech Work", href: "projects.html#sasha-bank-loan-modelling" }]
         },
         {
-            keywords: ["skills", "tech", "stack", "languages", "python", "c++"],
-            reply: "Core tech: Python, FastAPI, Docker, ROS2, ML (PyTorch/TF), and Agentic AI (LangChain/RAG). He also works with C++ and Embedded C.",
+            keywords: ["skills", "tech", "stack", "languages", "python", "c++", "docker", "fastapi"],
+            reply: "Core tech: Python (FastAPI), Docker, ROS2, ML (PyTorch/TF), and Agentic AI (LangChain/RAG). He also works with C++ and Raspberry Pi/Jetson hardware.",
             actions: [{ label: "Full Skill Set", href: "skills.html" }]
         },
         {
-            keywords: ["resume", "cv", "download", "hiring"],
-            reply: "You can view Yash's resume online or download the PDF version.",
+            keywords: ["resume", "cv", "download", "hiring", "pdf", "job"],
+            reply: "You can view Yash's resume online or download the official PDF version for his full work history and contact details.",
             actions: [
                 { label: "View Resume", href: "resume.html" },
                 { label: "Download PDF", href: "resume.pdf" }
             ]
         },
         {
-            keywords: ["contact", "email", "linkedin", "reach", "message"],
-            reply: "You can reach Yash via the contact form, LinkedIn, or email (yashgolani287@gmail.com).",
+            keywords: ["contact", "email", "linkedin", "reach", "message", "hire", "phone"],
+            reply: "You can reach Yash via the contact form, LinkedIn (highly active), or email (yashgolani287@gmail.com). He's currently open to discussing Robotics & AI roles.",
             actions: [
                 { label: "Contact Form", href: "contact.html" },
                 { label: "LinkedIn", href: "https://www.linkedin.com/in/yash-golani-5556a424a" }
             ]
         },
         {
-            keywords: ["projects", "portfolio", "project"],
-            reply: "Yash has worked on diverse projects: Turtlebot object detection, Spider Mimic Quadruped, Smart Agriculture, and more.",
+            keywords: ["projects", "portfolio", "project", "work", "build"],
+            reply: "Yash has worked on diverse projects: Turtlebot object detection, Spider Mimic Quadruped, Smart Agriculture, and ML systems for Finance.",
             actions: [{ label: "View All Projects", href: "projects.html" }]
         },
         {
-            keywords: ["education", "college", "degree", "university", "btech", "symbiosis", "study", "cgpa"],
-            reply: "Yash is pursuing a B.Tech in Robotics and Automation at Symbiosis Institute of Technology, Pune (2022-2026). He has a CGPA of 7.51.",
+            keywords: ["education", "college", "degree", "university", "btech", "symbiosis", "study", "cgpa", "pune"],
+            reply: "Yash is pursuing a B.Tech in Robotics and Automation at Symbiosis Institute of Technology, Pune (2022-2026) with a 7.51 CGPA.",
             actions: [{ label: "Education Details", href: "education.html" }]
         },
         {
-            keywords: ["experience", "work", "history", "career", "job"],
-            reply: "Yash has worked on perception systems, MLOps, and automation, including a Systems Engineering internship at ESSI Integrated Technologies.",
+            keywords: ["experience", "work", "history", "career", "job", "internship"],
+            reply: "Yash has worked on perception systems, MLOps, and automation, including a Systems Engineering internship at ESSI and production radar deployments.",
             actions: [{ label: "Work Experience", href: "experience.html" }]
         }
     ];
@@ -171,6 +171,9 @@
           <span class="sasha-acronym" title="${FULL_NAME}">${TAGLINE}</span>
         </div>
         <div class="sasha-header-actions">
+          <button class="sasha-header-btn" id="sasha-clear" title="Clear Chat" aria-label="Clear Chat">
+            <svg viewBox="0 0 24 24" width="20" height="20"><path d="M19 4h-3.5l-1-1h-5l-1 1H5v2h14V4zM6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12z" fill="currentColor"/></svg>
+          </button>
           <button class="sasha-header-btn" id="sasha-close" aria-label="Close">
             <svg viewBox="0 0 24 24" width="20" height="20"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z" fill="currentColor"/></svg>
           </button>
@@ -178,6 +181,7 @@
       </div>
       <div class="sasha-messages" id="sasha-messages"></div>
       <div class="sasha-typing" id="sasha-typing">Sasha is thinking...</div>
+      <div class="sasha-chips" id="sasha-chips"></div>
       <form class="sasha-input-area" id="sasha-form">
         <input type="text" class="sasha-input" id="sasha-input" placeholder="Ask about Yash or site sections..." autocomplete="off">
         <button type="submit" class="sasha-send" id="sasha-send" disabled aria-label="Send">
@@ -196,6 +200,7 @@
         const form = panel.querySelector('#sasha-form');
 
         panel.querySelector('#sasha-close').onclick = close;
+        panel.querySelector('#sasha-clear').onclick = clearChat;
 
         input.oninput = () => { sendBtn.disabled = !input.value.trim(); };
         form.onsubmit = (e) => {
@@ -209,6 +214,15 @@
         });
     }
 
+    function clearChat() {
+        if (confirm("Reset conversation history?")) {
+            history = [];
+            saveState();
+            renderHistory();
+            greet();
+        }
+    }
+
     function checkInitialState() {
         if (isOpen) {
             panel.classList.add('active');
@@ -216,6 +230,8 @@
         }
         if (history.length === 0) {
             greet();
+        } else {
+            updateChips();
         }
     }
 
@@ -262,11 +278,11 @@
         renderMessage('assistant', greeting, actions);
     }
 
-    function handleUserInput() {
-        const text = input.value.trim();
+    function handleUserInput(manualText) {
+        const text = manualText || input.value.trim();
         if (!text) return;
 
-        input.value = '';
+        if (!manualText) input.value = '';
         sendBtn.disabled = true;
         renderMessage('user', text);
 
@@ -276,23 +292,57 @@
             const response = routeQuery(text);
             showTyping(false);
             renderMessage('assistant', response.reply, response.actions);
+            updateChips(text);
         }, 600);
     }
 
     function routeQuery(text) {
-        text = text.toLowerCase();
+        const query = text.toLowerCase();
+        let bestMatch = null;
+        let maxScore = 0;
 
-        // Simple keyword matching
         for (const item of FAQ_DATA) {
-            if (item.keywords.some(k => text.includes(k))) {
-                return item;
+            let score = 0;
+            item.keywords.forEach(k => {
+                if (query === k) score += 10; // Exact match
+                else if (query.includes(k)) score += 5; // Multi-word match
+                else if (k.includes(query) && query.length > 3) score += 2; // Partial overlap
+            });
+
+            if (score > maxScore) {
+                maxScore = score;
+                bestMatch = item;
             }
+        }
+
+        if (bestMatch && maxScore >= 4) {
+            return bestMatch;
         }
 
         return {
             reply: "I'm not quite sure about that. Try asking about 'radar', 'ANPR', 'projects', or Yash's 'tech stack'.",
             actions: QUICK_ACTIONS
         };
+    }
+
+    function updateChips(lastQuery = "") {
+        const chipsContainer = panel.querySelector('#sasha-chips');
+        chipsContainer.innerHTML = '';
+
+        const suggestions = ["Skills", "Resume", "Contact"];
+        if (lastQuery.includes("project") || window.location.pathname.includes("projects")) {
+            suggestions.unshift("Robotics", "ML Projects");
+        } else if (lastQuery.includes("work") || window.location.pathname.includes("experience")) {
+            suggestions.unshift("Radar", "ANPR");
+        }
+
+        suggestions.forEach(s => {
+            const chip = document.createElement('button');
+            chip.className = 'sasha-chip';
+            chip.innerText = s;
+            chip.onclick = () => handleUserInput(s);
+            chipsContainer.appendChild(chip);
+        });
     }
 
     function renderMessage(role, text, actions = []) {
