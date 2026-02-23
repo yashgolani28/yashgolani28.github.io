@@ -133,6 +133,7 @@
     let history = [];
     let isTyping = false;
     let lastPage = "";
+    let hasBeenOpened = false;
 
     // --- UI ELEMENTS ---
     let fab, panel, messagesContainer, input, sendBtn;
@@ -154,11 +155,12 @@
             isOpen = parsed.isOpen || false;
             history = parsed.history || [];
             lastPage = parsed.lastPage || "";
+            hasBeenOpened = parsed.hasBeenOpened || false;
         }
     }
 
     function saveState() {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify({ isOpen, history, lastPage }));
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({ isOpen, history, lastPage, hasBeenOpened }));
     }
 
     function ensureHeadingIds() {
@@ -255,7 +257,7 @@
             input.focus();
         }
 
-        if (history.length === 0 || lastPage !== currentPage) {
+        if (hasBeenOpened && (history.length === 0 || lastPage !== currentPage)) {
             greet();
             lastPage = currentPage;
             saveState();
@@ -270,6 +272,14 @@
         isOpen = true;
         panel.classList.add('active');
         input.focus();
+        if (!hasBeenOpened) {
+            hasBeenOpened = true;
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            if (history.length === 0 || lastPage !== currentPage) {
+                greet();
+                lastPage = currentPage;
+            }
+        }
         saveState();
     }
 
