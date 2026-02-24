@@ -363,7 +363,7 @@
         }
 
         return {
-            reply: "I'm not quite sure about that. Try asking about 'radar', 'ANPR', 'projects', or Yash's 'tech stack'.",
+            reply: "I'm not quite sure about that. Try asking about FAQs.",
             actions: QUICK_ACTIONS
         };
     }
