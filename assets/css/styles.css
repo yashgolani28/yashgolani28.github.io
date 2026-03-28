@@ -323,7 +323,20 @@ a {
 }
 
 .hero {
+  position: relative;
+  overflow: hidden;
   padding: 52px 0 16px;
+}
+
+#bg-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.7;
 }
 
 @media (max-width: 480px) {
@@ -1726,6 +1739,32 @@ h1 {
   background-image: radial-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px);
 }
 
+#spline-floating-box spline-viewer {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+#enter-btn-wrap {
+  position: absolute;
+  bottom: 12%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  pointer-events: auto;
+}
+
 /* Edges */
 .xpEdges {
   position: absolute;
@@ -2429,4 +2468,93 @@ h1 {
     width: 40px;
     height: 40px;
   }
+}
+
+/* =========================================================================
+   Spline Intro & Footer Target Animation Styles
+   ========================================================================= */
+
+#footer-spline-target {
+  width: 100%;
+  height: 600px;
+  position: relative;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  #footer-spline-target {
+    height: 400px;
+  }
+}
+
+#spline-floating-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 99999;
+  background: var(--bg);
+  transition: top 1.5s cubic-bezier(0.8, 0, 0.2, 1),
+              height 1.5s cubic-bezier(0.8, 0, 0.2, 1),
+              background-color 1.5s ease;
+  overflow: hidden;
+  box-shadow: 0 0 50px rgba(0,0,0,0);
+}
+
+/* State when it has transitioned to the footer */
+#spline-floating-box.in-footer {
+  background-color: transparent;
+  pointer-events: none; /* Let scroll pass through */
+}
+
+#spline-floating-box.in-footer spline-viewer {
+  pointer-events: auto !important; /* Allow interaction with robot at bottom */
+}
+
+#spline-floating-box.in-footer #enter-btn-wrap {
+  opacity: 0;
+  pointer-events: none !important;
+}
+
+#spline-floating-box.in-footer #spline-greeting {
+  opacity: 0;
+  pointer-events: none !important;
+}
+
+/* --- Authentic Dino Loader --- */
+#dino-svg {
+  /* Simple vertical jitter to mimic the game's sprite alignment */
+  animation: dino-jitter 0.15s steps(2) infinite;
+}
+
+@keyframes dino-jitter {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-1px); }
+}
+
+.dino-leg-1 {
+  animation: leg-toggle 0.2s steps(2) infinite;
+}
+
+.dino-leg-2 {
+  animation: leg-toggle 0.2s steps(2) infinite reverse;
+}
+
+@keyframes leg-toggle {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+#dino-ground {
+  animation: ground-scroll 0.8s linear infinite;
+}
+
+@keyframes ground-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+#loader-fact.fade {
+  opacity: 0;
 }

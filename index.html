@@ -66,6 +66,7 @@
   </div>
 
   <header class="hero reveal">
+    <canvas id="bg-canvas"></canvas>
     <div class="container">
       <div class="heroGrid">
         <div class="card" style="text-align: justify;">
@@ -267,6 +268,8 @@
     </section>
   </main>
 
+  <div id="footer-spline-target"></div>
+
   <footer class="footer">
     <div class="container">
       <div class="footerRow">
@@ -276,6 +279,68 @@
     </div>
   </footer>
 
+  <div id="spline-floating-box">
+    <div id="spline-loader"
+      style="position: absolute; inset: 0; background: var(--bg); z-index: 100000000; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.6s ease;">
+      <div class="dino-container"
+        style="position: relative; width: 200px; height: 100px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; overflow: hidden; margin-bottom: 30px;">
+        <svg id="dino-svg" viewBox="0 0 88 94" width="44" height="47"
+          style="color: var(--accent); position: relative; z-index: 2; margin-bottom: 2px;">
+          <!-- T-Rex Body -->
+          <path fill="currentColor"
+            d="M72 16h-8V8h-8V0H32v8h-8v8h-8v8h-8v8H0v32h8v8h8v8h8V72h8V64h8V56h24v8h8v8h8V48h8V24h-8V16z" />
+          <!-- T-Rex Eye -->
+          <path fill="var(--bg)" d="M48 8h8v8h-8z" />
+          <!-- Leg 1 -->
+          <path class="dino-leg dino-leg-1" fill="currentColor" d="M24 72h8v8h8v8h-16V72z" />
+          <!-- Leg 2 -->
+          <path class="dino-leg dino-leg-2" fill="currentColor" d="M48 72h8v8h8v8h-16V72z" />
+        </svg>
+        <div id="dino-ground"
+          style="width: 200%; height: 2px; background: repeating-linear-gradient(90deg, var(--accent) 0, var(--accent) 4px, transparent 4px, transparent 24px); position: absolute; bottom: 0; left: 0; opacity: 0.25;">
+          <!-- Pixel Debris -->
+          <div
+            style="position: absolute; top: 4px; left: 20px; width: 4px; height: 2px; background: var(--accent); opacity: 0.3;">
+          </div>
+          <div
+            style="position: absolute; top: 8px; left: 150px; width: 6px; height: 2px; background: var(--accent); opacity: 0.3;">
+          </div>
+          <div
+            style="position: absolute; top: 12px; left: 300px; width: 4px; height: 2px; background: var(--accent); opacity: 0.3;">
+          </div>
+        </div>
+      </div>
+      <div id="loader-info"
+        style="text-align: center; height: 80px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 20px;">
+        <p id="loader-fact"
+          style="margin: 0; color: var(--accent); font-size: 18px; font-weight: 500; font-family: 'Outfit', sans-serif; opacity: 1; transition: opacity 0.4s ease;">
+          Robotics & AI Engineer</p>
+        <p
+          style="margin: 8px 0 0; color: var(--muted); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; font-family: 'Inter', sans-serif;">
+          System Initializing</p>
+      </div>
+    </div>
+    <div id="spline-greeting"
+      style="position: absolute; top: 8%; left: 50%; transform: translateX(-50%); z-index: 9999999; text-align: center; pointer-events: none; transition: opacity 0.4s ease; width: 90%;">
+      <h1 style="margin: 0; font-size: clamp(32px, 5vw, 48px); letter-spacing: -1px; margin-bottom: 12px;">Hi, Welcome
+        to
+        my
+        portfolio</h1>
+    </div>
+    <spline-viewer
+      style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none;"
+      url="https://prod.spline.design/Xn4ie99UWMRRP8KO/scene.splinecode"></spline-viewer>
+    <div id="enter-btn-wrap"
+      style="position: absolute; bottom: 12%; left: 50%; transform: translateX(-50%); z-index: 9999999; pointer-events: auto; transition: opacity 0.4s ease, transform 0.4s ease;">
+      <button id="enter-site-btn" class="btn btnPrimary"
+        onclick="if(window.dismissSplineIntro) window.dismissSplineIntro();">Explore Portfolio <i
+          class="fa-solid fa-arrow-right"></i></button>
+    </div>
+  </div>
+
+  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.73/build/spline-viewer.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="assets/js/app.js"></script>
   <script src="assets/js/sasha.js"></script>
 </body>

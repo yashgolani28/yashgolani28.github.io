@@ -428,4 +428,118 @@ window.addEventListener("load", function () {
 
     handleResize();
   })();
+
+  // Spline Intro Animation Logic
+  (function initSplineIntro() {
+    const splineBox = document.getElementById('spline-floating-box');
+    const targetBox = document.getElementById('footer-spline-target');
+    const enterBtn = document.getElementById('enter-site-btn');
+    const loader = document.getElementById('spline-loader');
+    const viewer = document.querySelector('spline-viewer');
+
+    const STORAGE_KEY = 'has_seen_spline_intro';
+
+    // Helper to position spline box correctly in the footer
+    const positionInFooter = (animate = true) => {
+      const r = targetBox.getBoundingClientRect();
+      const scrollTop = window.scrollY;
+
+      if (!animate) splineBox.style.transition = 'none';
+
+      splineBox.classList.add('in-footer');
+      splineBox.style.top = (scrollTop + r.top) + 'px';
+      splineBox.style.height = r.height + 'px';
+
+      if (!animate) {
+        // Force reflow and restore transition for future resizes
+        splineBox.offsetHeight;
+        splineBox.style.transition = '';
+      }
+      document.body.style.overflow = '';
+    };
+
+    // Global dismissal function called from index.html button
+    window.dismissSplineIntro = function () {
+      if (!splineBox || !targetBox) return;
+
+      localStorage.setItem(STORAGE_KEY, 'true');
+      positionInFooter(true);
+
+      // Slight scroll to encourage viewing if they were at the top
+      setTimeout(() => {
+        window.scrollBy({ top: 100, behavior: 'smooth' });
+      }, 1500);
+    };
+
+    if (splineBox && targetBox) {
+      // Check if user has already seen the intro
+      if (localStorage.getItem(STORAGE_KEY)) {
+        // Instant skip
+        splineBox.style.transition = 'none';
+        splineBox.classList.add('in-footer');
+        if (loader) loader.style.display = 'none';
+
+        // Wait for initial layout to settle then snap to footer
+        setTimeout(() => {
+          positionInFooter(false);
+        }, 50);
+
+        return;
+      }
+
+      // --- FIRST VISIT LOGIC ---
+      document.body.style.overflow = 'hidden';
+      window.scrollTo(0, 0);
+
+      if (viewer && loader) {
+        // Biography facts to cycle through
+        const bioFacts = [
+          "Robotics & AI Engineer",
+          "Expert in Multi-Camera Analytics",
+          "Applied AI Developer (Python, ROS2, ML)",
+          "Specialist in High-Uptime Systems"
+        ];
+        let factIndex = 0;
+        const factElement = document.getElementById('loader-fact');
+
+        const factInterval = setInterval(() => {
+          if (!factElement || loader.style.display === 'none') {
+            clearInterval(factInterval);
+            return;
+          }
+          factElement.classList.add('fade');
+          setTimeout(() => {
+            factIndex = (factIndex + 1) % bioFacts.length;
+            factElement.textContent = bioFacts[factIndex];
+            factElement.classList.remove('fade');
+          }, 400);
+        }, 2500);
+
+        viewer.addEventListener('load', () => {
+          setTimeout(() => {
+            clearInterval(factInterval);
+            loader.style.opacity = '0';
+            setTimeout(() => loader.style.display = 'none', 600);
+          }, 1000); // Small extra buffer to read last fact
+        });
+        // Safety fallback
+        setTimeout(() => {
+          if (loader.style.display !== 'none') {
+            clearInterval(factInterval);
+            loader.style.opacity = '0';
+            setTimeout(() => loader.style.display = 'none', 600);
+          }
+        }, 10000);
+      }
+
+      // Handle resize even when in footer
+      window.addEventListener('resize', () => {
+        if (splineBox.classList.contains('in-footer')) {
+          const r = targetBox.getBoundingClientRect();
+          splineBox.style.top = (window.scrollY + r.top) + 'px';
+          splineBox.style.height = r.height + 'px';
+        }
+      });
+    }
+  })();
 })();
