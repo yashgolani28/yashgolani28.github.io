@@ -329,11 +329,11 @@ a {
 }
 
 #bg-canvas {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   z-index: -1;
   pointer-events: none;
   opacity: 0.7;
@@ -1745,15 +1745,20 @@ h1 {
   border: none;
   background: transparent;
   position: absolute;
-  top: 0;
+  top: 10vh; /* Pushed down to clear the top-aligned greeting */
   left: 0;
   z-index: 1;
   pointer-events: none;
+  transition: top 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+#spline-floating-box.in-footer spline-viewer {
+  top: 16% !important; /* Maintained for hero alignment */
 }
 
 #enter-btn-wrap {
   position: absolute;
-  bottom: 12%;
+  bottom: 6vh; /* Pushed to bottom edge to avoid overlap */
   left: 50%;
   transform: translateX(-50%);
   z-index: 999999;
@@ -1761,7 +1766,7 @@ h1 {
   justify-content: center;
   align-items: center;
   opacity: 1;
-  transition: opacity 0.4s ease, transform 0.4s ease;
+  transition: bottom 1.2s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease, transform 0.4s ease;
   pointer-events: auto;
 }
 
@@ -2427,7 +2432,7 @@ h1 {
   /* sits above SASHA FAB, centered on FAB's horizontal axis */
   right: 30px;
   /* FAB: right:24px + width:56px/2=28 - btn:44px/2=22 → 30px */
-  z-index: 90;
+  z-index: 10040;
   width: 44px;
   height: 44px;
   border-radius: 14px;
@@ -2496,29 +2501,53 @@ h1 {
   z-index: 99999;
   background: var(--bg);
   transition: top 1.5s cubic-bezier(0.8, 0, 0.2, 1),
-              height 1.5s cubic-bezier(0.8, 0, 0.2, 1),
-              background-color 1.5s ease;
+    height 1.5s cubic-bezier(0.8, 0, 0.2, 1),
+    background-color 1.5s ease;
   overflow: hidden;
-  box-shadow: 0 0 50px rgba(0,0,0,0);
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0);
 }
 
 /* State when it has transitioned to the footer */
 #spline-floating-box.in-footer {
   background-color: transparent;
-  pointer-events: none; /* Let scroll pass through */
+  pointer-events: none;
+  /* Let scroll pass through */
+  z-index: 5;
 }
 
 #spline-floating-box.in-footer spline-viewer {
-  pointer-events: auto !important; /* Allow interaction with robot at bottom */
+  pointer-events: auto !important;
+  /* Allow interaction with robot at bottom */
+}
+
+/* Smooth transition styles */
+#spline-loader {
+  transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 #spline-floating-box.in-footer #enter-btn-wrap {
   opacity: 0;
   pointer-events: none !important;
+  bottom: 4%;
+}
+
+#spline-greeting {
+  position: absolute;
+  top: 6vh; /* Pushed to top edge to avoid overlap */
+  left: 50%;
+  transform: translateX(-50%) translateY(30px);
+  z-index: 9999999;
+  text-align: center;
+  pointer-events: none;
+  width: 95%;
+  opacity: 0;
+  transition: top 1.2s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.2s ease, transform 1.2s ease;
 }
 
 #spline-floating-box.in-footer #spline-greeting {
-  opacity: 0;
+  top: 8%; /* Maintained for approved Hero content layout */
+  opacity: 1; /* Keeping visible in hero for consistency */
+  transform: translateX(-50%) translateY(0);
   pointer-events: none !important;
 }
 
@@ -2529,8 +2558,13 @@ h1 {
 }
 
 @keyframes dino-jitter {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-1px); }
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-1px);
+  }
 }
 
 .dino-leg-1 {
@@ -2542,8 +2576,13 @@ h1 {
 }
 
 @keyframes leg-toggle {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
 #dino-ground {
@@ -2551,8 +2590,13 @@ h1 {
 }
 
 @keyframes ground-scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 #loader-fact.fade {

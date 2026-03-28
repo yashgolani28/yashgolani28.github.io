@@ -432,21 +432,22 @@ window.addEventListener("load", function () {
   // Spline Intro Animation Logic
   (function initSplineIntro() {
     const splineBox = document.getElementById('spline-floating-box');
-    const targetBox = document.getElementById('footer-spline-target');
+    const targetBox = document.getElementById('hero-spline-target');
     const enterBtn = document.getElementById('enter-site-btn');
     const loader = document.getElementById('spline-loader');
     const viewer = document.querySelector('spline-viewer');
 
     const STORAGE_KEY = 'has_seen_spline_intro';
 
-    // Helper to position spline box correctly in the footer
-    const positionInFooter = (animate = true) => {
+    // Helper to position spline box correctly in its hero target
+    const positionInHero = (animate = true) => {
+      if (!targetBox) return;
       const r = targetBox.getBoundingClientRect();
       const scrollTop = window.scrollY;
 
       if (!animate) splineBox.style.transition = 'none';
 
-      splineBox.classList.add('in-footer');
+      splineBox.classList.add('in-footer'); // Keeping the class name as it likely has styles associated
       splineBox.style.top = (scrollTop + r.top) + 'px';
       splineBox.style.height = r.height + 'px';
 
@@ -458,18 +459,37 @@ window.addEventListener("load", function () {
       document.body.style.overflow = '';
     };
 
-    // Global dismissal function called from index.html button
+    // Global dismissal function called from index.html button or scroll
     window.dismissSplineIntro = function () {
       if (!splineBox || !targetBox) return;
 
       localStorage.setItem(STORAGE_KEY, 'true');
-      positionInFooter(true);
+      
+      // Ensure the greeting is visible and positioned correctly
+      const greeting = document.getElementById('spline-greeting');
+      if (greeting) {
+        greeting.style.opacity = '1';
+        greeting.style.transform = 'translateX(-50%) translateY(0)';
+      }
+      
+      // Hide the loader immediately if it's still there
+      if (loader) {
+        loader.style.opacity = '0';
+        setTimeout(() => loader.style.display = 'none', 600);
+      }
 
-      // Slight scroll to encourage viewing if they were at the top
-      setTimeout(() => {
-        window.scrollBy({ top: 100, behavior: 'smooth' });
-      }, 1500);
+      positionInHero(true);
+
+      // Clean up scroll/wheel listeners
+      window.removeEventListener('wheel', handleScrollDismiss);
+      window.removeEventListener('touchmove', handleScrollDismiss);
     };
+
+    function handleScrollDismiss(e) {
+      if (e.deltaY > 5 || (e.touches && e.touches[0])) {
+          window.dismissSplineIntro();
+      }
+    }
 
     if (splineBox && targetBox) {
       // Check if user has already seen the intro
@@ -479,9 +499,15 @@ window.addEventListener("load", function () {
         splineBox.classList.add('in-footer');
         if (loader) loader.style.display = 'none';
 
-        // Wait for initial layout to settle then snap to footer
+        // Wait for initial layout to settle then snap to target with the greeting visible
         setTimeout(() => {
-          positionInFooter(false);
+          const greeting = document.getElementById('spline-greeting');
+          if (greeting) {
+            greeting.style.transition = 'none';
+            greeting.style.opacity = '1';
+            greeting.style.transform = 'translateX(-50%) translateY(0)';
+          }
+          positionInHero(false);
         }, 50);
 
         return;
@@ -490,6 +516,10 @@ window.addEventListener("load", function () {
       // --- FIRST VISIT LOGIC ---
       document.body.style.overflow = 'hidden';
       window.scrollTo(0, 0);
+
+      // Add scroll/wheel listeners to dismiss intro
+      window.addEventListener('wheel', handleScrollDismiss, { passive: true });
+      window.addEventListener('touchmove', handleScrollDismiss, { passive: true });
 
       if (viewer && loader) {
         // Biography facts to cycle through
@@ -516,12 +546,47 @@ window.addEventListener("load", function () {
         }, 2500);
 
         viewer.addEventListener('load', () => {
+          // Trigger transition once loaded
+          startDismissal();
+        });
+
+        // Safety fallback: Dismiss loader after 4 seconds even if load event missed
+        setTimeout(startDismissal, 4000);
+
+        function startDismissal() {
+          if (loader.dataset.dismissed) return;
+          loader.dataset.dismissed = 'true';
+
+          // 1. Start fading out loader elements
+          const loaderInfo = document.getElementById('loader-info');
+          const dino = document.querySelector('.dino-container');
+          
+          if (loaderInfo) {
+            loaderInfo.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            loaderInfo.style.opacity = '0';
+            loaderInfo.style.transform = 'translateY(-20px)';
+          }
+          if (dino) {
+            dino.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            dino.style.opacity = '0';
+            dino.style.transform = 'translateY(-20px)';
+          }
+
+          // 2. Bridge to greeting quickly (150ms overlap)
           setTimeout(() => {
             clearInterval(factInterval);
+            
+            const greeting = document.getElementById('spline-greeting');
+            if (greeting) {
+              greeting.style.opacity = '1';
+              greeting.style.transform = 'translateX(-50%) translateY(0)';
+            }
+            
+            // 3. Final fade of the dark overlay
             loader.style.opacity = '0';
-            setTimeout(() => loader.style.display = 'none', 600);
-          }, 1000); // Small extra buffer to read last fact
-        });
+            setTimeout(() => loader.style.display = 'none', 1200);
+          }, 150); 
+        }
         // Safety fallback
         setTimeout(() => {
           if (loader.style.display !== 'none') {
@@ -532,7 +597,7 @@ window.addEventListener("load", function () {
         }, 10000);
       }
 
-      // Handle resize even when in footer
+      // Handle resize even when in hero
       window.addEventListener('resize', () => {
         if (splineBox.classList.contains('in-footer')) {
           const r = targetBox.getBoundingClientRect();

@@ -149,6 +149,10 @@
     </div>
   </header>
 
+  <div id="hero-spline-target"
+    style="width: 100%; height: 500px; position: relative; overflow: hidden; margin-top: 10px; margin-bottom: 60px;">
+  </div>
+
   <main id="main" class="container reveal">
     <section class="section">
       <div class="sectionHead">
@@ -254,7 +258,7 @@
               rel="noreferrer">LinkedIn</a>
           </div>
         </div>
-        <div class="card reveal">
+        <div class="card">
           <b>Resume</b>
           <div class="sep"></div>
           <div class="tagRow">
@@ -264,11 +268,10 @@
           </div>
         </div>
       </div>
-      </div>
     </section>
   </main>
 
-  <div id="footer-spline-target"></div>
+
 
   <footer class="footer">
     <div class="container">
@@ -281,7 +284,7 @@
 
   <div id="spline-floating-box">
     <div id="spline-loader"
-      style="position: absolute; inset: 0; background: var(--bg); z-index: 100000000; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.6s ease;">
+      style="position: absolute; inset: 0; background: var(--bg); z-index: 100000000; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.8s ease;">
       <div class="dino-container"
         style="position: relative; width: 200px; height: 100px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; overflow: hidden; margin-bottom: 30px;">
         <svg id="dino-svg" viewBox="0 0 88 94" width="44" height="47"
@@ -311,7 +314,7 @@
         </div>
       </div>
       <div id="loader-info"
-        style="text-align: center; height: 80px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 20px;">
+        style="text-align: center; height: 80px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 20px; transition: opacity 0.6s ease;">
         <p id="loader-fact"
           style="margin: 0; color: var(--accent); font-size: 18px; font-weight: 500; font-family: 'Outfit', sans-serif; opacity: 1; transition: opacity 0.4s ease;">
           Robotics & AI Engineer</p>
@@ -320,27 +323,27 @@
           System Initializing</p>
       </div>
     </div>
-    <div id="spline-greeting"
-      style="position: absolute; top: 8%; left: 50%; transform: translateX(-50%); z-index: 9999999; text-align: center; pointer-events: none; transition: opacity 0.4s ease; width: 90%;">
-      <h1 style="margin: 0; font-size: clamp(32px, 5vw, 48px); letter-spacing: -1px; margin-bottom: 12px;">Hi, Welcome
-        to
-        my
-        portfolio</h1>
+    <div id="spline-greeting">
+      <h1
+        style="margin: 0; font-size: clamp(34px, 6vw, 64px); line-height: 1; letter-spacing: -2px; margin-bottom: 16px; font-weight: 800; color: var(--text);">
+        Hi! Welcome to my portfolio</h1>
+      <p
+        style="margin: 0; font-size: clamp(16px, 2.5vw, 24px); color: var(--muted); font-weight: 400; font-family: 'Inter', sans-serif; opacity: 0.9; letter-spacing: 0.5px; transition: opacity 0.8s ease 0.3s;">
+        Building the future of perception & robotics</p>
     </div>
     <spline-viewer
-      style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none;"
       url="https://prod.spline.design/Xn4ie99UWMRRP8KO/scene.splinecode"></spline-viewer>
-    <div id="enter-btn-wrap"
-      style="position: absolute; bottom: 12%; left: 50%; transform: translateX(-50%); z-index: 9999999; pointer-events: auto; transition: opacity 0.4s ease, transform 0.4s ease;">
+    <div id="enter-btn-wrap">
       <button id="enter-site-btn" class="btn btnPrimary"
         onclick="if(window.dismissSplineIntro) window.dismissSplineIntro();">Explore Portfolio <i
-          class="fa-solid fa-arrow-right"></i></button>
+          class="fa-solid fa-arrow-up"></i></button>
     </div>
   </div>
 
   <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.73/build/spline-viewer.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="assets/js/neural-network.js"></script>
   <script src="assets/js/app.js"></script>
   <script src="assets/js/sasha.js"></script>
 </body>
