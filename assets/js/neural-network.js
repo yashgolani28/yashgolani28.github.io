@@ -12,14 +12,22 @@
     const maxConnectionDistance = 6.5; 
     const particleSize = 0.08;
     
-    // Theme-based colors
-    const getColors = () => {
-        const rootStyle = getComputedStyle(document.documentElement);
-        let accent = rootStyle.getPropertyValue('--accent').trim() || '#e0e4eb';
-        return new THREE.Color(accent);
+    // Theme-based parameters
+    const getThemeParams = () => {
+        const root = document.documentElement;
+        const isDark = root.getAttribute('data-theme') !== 'light';
+        const rootStyle = getComputedStyle(root);
+        let accent = rootStyle.getPropertyValue('--accent').trim() || (isDark ? '#e0e4eb' : '#20242c');
+        
+        return {
+            color: new THREE.Color(accent),
+            lineBlending: isDark ? THREE.AdditiveBlending : THREE.NormalBlending,
+            lineOpacity: isDark ? 0.12 : 0.08,
+            particleOpacity: isDark ? 0.8 : 0.6
+        };
     };
 
-    let accentColor = getColors();
+    let theme = getThemeParams();
 
     // --- SETUP ---
     const scene = new THREE.Scene();
@@ -55,20 +63,20 @@
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
     
     const material = new THREE.PointsMaterial({
-        color: accentColor,
+        color: theme.color,
         size: particleSize,
         transparent: true,
-        opacity: 0.8
+        opacity: theme.particleOpacity
     });
 
     const particles = new THREE.Points(geometry, material);
     scene.add(particles);
 
     const lineMaterial = new THREE.LineBasicMaterial({
-        color: accentColor,
+        color: theme.color,
         transparent: true,
-        opacity: 0.12,
-        blending: THREE.AdditiveBlending
+        opacity: theme.lineOpacity,
+        blending: theme.lineBlending
     });
     
     const linesGroup = new THREE.Group();
@@ -93,10 +101,17 @@
     const themeToggle = document.getElementById('themeToggle');
     if (themeToggle) {
         themeToggle.addEventListener('change', () => {
+            // Tiny delay to ensure CSS variables have updated
             setTimeout(() => {
-                accentColor = getColors();
-                material.color.set(accentColor);
-                lineMaterial.color.set(accentColor);
+                theme = getThemeParams();
+                
+                material.color.set(theme.color);
+                material.opacity = theme.particleOpacity;
+                
+                lineMaterial.color.set(theme.color);
+                lineMaterial.blending = theme.lineBlending;
+                lineMaterial.opacity = theme.lineOpacity;
+                lineMaterial.needsUpdate = true;
             }, 50);
         });
     }

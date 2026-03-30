@@ -79,7 +79,9 @@
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 10px;
       margin-top: 14px;
+      width: 100%;
     }
+
 
     @media (max-width: 1000px) {
       .statGrid {
@@ -143,11 +145,100 @@
       position: relative;
       border: 1px solid var(--line);
       border-radius: 16px;
-      padding: 14px;
-      background: color-mix(in srgb, var(--surface) 94%, transparent);
+      padding: 24px;
+      background: linear-gradient(135deg,
+          color-mix(in srgb, var(--surface) 96%, transparent),
+          color-mix(in srgb, var(--surface) 92%, transparent));
       box-shadow: var(--shadow-soft);
       overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
+
+    .phaseCard:hover {
+      transform: translateY(-4px);
+      border-color: color-mix(in srgb, var(--accent) 30%, var(--line));
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+    }
+
+    .phaseCard::after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at center, color-mix(in srgb, var(--accent) 5%, transparent), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+    }
+
+    .phaseCard:hover::after {
+      opacity: 1;
+    }
+
+    .eduHero {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid color-mix(in srgb, var(--accent) 20%, var(--line));
+      background: linear-gradient(135deg,
+          color-mix(in srgb, var(--surface) 98%, transparent),
+          color-mix(in srgb, var(--surface) 94%, transparent));
+    }
+
+    .eduStatus {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: color-mix(in srgb, var(--accent) 8%, transparent);
+      border: 1px solid color-mix(in srgb, var(--accent) 15%, var(--line));
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .eduStatus .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        opacity: 0.4;
+      }
+
+      50% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0.4;
+      }
+    }
+
+    .robotWorkspace {
+      position: relative;
+      width: 100%;
+      height: 420px;
+      margin: 20px 0 40px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: transparent;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
 
     .phaseTop {
       display: flex;
@@ -267,90 +358,91 @@
   </div>
 
   <main id="main" class="container">
-    <div class="pageTitle">
+    <div class="pageTitle reveal">
       <h1>Education</h1>
       <p>Academic foundation and the coursework that shaped my build style</p>
     </div>
 
-    <div class="card eduHero">
+    <div class="card eduHero reveal">
       <div class="eduHeroInner">
-        <div>
-          <b style="font-size:1.15rem">B.Tech, Robotics and Automation</b>
-          <div class="meta">Symbiosis Institute of Technology, Pune</div>
-        </div>
-
-        <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end">
-          <div class="iconBadge" title="Robotics">
-            <span class="ico" aria-hidden="true">
-              <svg viewBox="0 0 24 24">
-                <path d="M7 14h10"></path>
-                <path d="M9 18h6"></path>
-                <path d="M10 2v3"></path>
-                <path d="M14 2v3"></path>
-                <path d="M5 9a7 7 0 0 1 14 0v5a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4V9Z"></path>
-              </svg>
-            </span>
-            <span class="note">Robotics</span>
+        <div
+          style="display:flex; justify-content:space-between; align-items:flex-start; width:100%; flex-wrap:wrap; gap:16px;">
+          <div>
+            <b style="font-size:1.15rem">B.Tech, Robotics and Automation</b>
+            <div class="meta">Symbiosis Institute of Technology, Pune</div>
           </div>
 
-          <div class="iconBadge" title="Automation">
-            <span class="ico" aria-hidden="true">
-              <svg viewBox="0 0 24 24">
-                <path d="M14 7l-5 5"></path>
-                <path d="M9 7h5v5"></path>
-                <path d="M7 17h10"></path>
-                <path d="M5 21h14"></path>
-              </svg>
-            </span>
-            <span class="note">Automation</span>
+
+          <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end">
+            <div class="iconBadge" title="Robotics">
+              <span class="ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M7 14h10"></path>
+                  <path d="M9 18h6"></path>
+                  <path d="M10 2v3"></path>
+                  <path d="M14 2v3"></path>
+                  <path d="M5 9a7 7 0 0 1 14 0v5a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4V9Z"></path>
+                </svg>
+              </span>
+              <span class="note">Robotics</span>
+            </div>
+
+            <div class="iconBadge" title="Automation">
+              <span class="ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14 7l-5 5"></path>
+                  <path d="M9 7h5v5"></path>
+                  <path d="M7 17h10"></path>
+                  <path d="M5 21h14"></path>
+                </svg>
+              </span>
+              <span class="note">Automation</span>
+            </div>
+
+            <div class="iconBadge" title="Applied AI">
+              <span class="ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 3v18"></path>
+                  <path d="M3 12h18"></path>
+                  <path d="M7 7l10 10"></path>
+                  <path d="M17 7L7 17"></path>
+                </svg>
+              </span>
+              <span class="note">Applied AI</span>
+            </div>
           </div>
+        </div>
 
-          <div class="iconBadge" title="Applied AI">
-            <span class="ico" aria-hidden="true">
-              <svg viewBox="0 0 24 24">
-                <path d="M12 3v18"></path>
-                <path d="M3 12h18"></path>
-                <path d="M7 7l10 10"></path>
-                <path d="M17 7L7 17"></path>
-              </svg>
-            </span>
-            <span class="note">Applied AI</span>
+        <div class="statGrid">
+          <div class="stat">
+            <div class="k">Batch</div>
+            <div class="v note">2022 to 2026</div>
+          </div>
+          <div class="stat">
+            <div class="k">CGPA</div>
+            <div class="v note">7.51</div>
+          </div>
+          <div class="stat">
+            <div class="k">Focus</div>
+            <div class="v note">Embedded, perception, reliability</div>
+          </div>
+          <div class="stat">
+            <div class="k">Location</div>
+            <div class="v note">Pune, Maharashtra, India</div>
           </div>
         </div>
-      </div>
-
-      <div class="statGrid">
-        <div class="stat">
-          <div class="k">Batch</div>
-          <div class="v note">2022 to 2026</div>
-        </div>
-        <div class="stat">
-          <div class="k">CGPA</div>
-          <div class="v note">7.51</div>
-        </div>
-        <div class="stat">
-          <div class="k">Focus</div>
-          <div class="v note">Embedded, perception, reliability</div>
-        </div>
-        <div class="stat">
-          <div class="k">Location</div>
-          <div class="v note">Pune, Maharashtra, India</div>
-        </div>
-      </div>
-
-      <div class="softLine"></div>
-
-      <div class="tagRow">
-        <span class="tag">ROS</span>
-        <span class="tag">Embedded systems</span>
-        <span class="tag">Computer vision</span>
-        <span class="tag">Control systems</span>
-        <span class="tag">Industrial automation</span>
-        <span class="tag">AI in robotics</span>
       </div>
     </div>
 
-    <div class="sectionHeadRow">
+    <div class="robotWorkspace reveal">
+      <div id="hero-robotic-arm" style="width: 100%; height: 100%; position: absolute; inset: 0; z-index: 2;"></div>
+      <div class="note"
+        style="position: absolute; bottom: 20px; left: 24px; z-index: 3; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; opacity: 0.6;">
+        Industrial AI Simulation / Kinematic Core
+      </div>
+    </div>
+
+    <div class="sectionHeadRow reveal">
       <div class="left">
         <div class="iconBadge">
           <span class="ico" aria-hidden="true">
@@ -370,7 +462,7 @@
       <a class="btn" href="projects.html">See projects that used this</a>
     </div>
 
-    <div class="timeline">
+    <div class="timeline reveal">
       <div class="phaseCard">
         <div class="phaseTop">
           <div class="phaseTitle">
@@ -504,7 +596,7 @@
 
     <div class="softLine"></div>
 
-    <details class="eduDetails">
+    <details class="eduDetails reveal">
       <summary>
         <span>Why this coursework matters to my work</span>
         <span class="chev" aria-hidden="true">
@@ -553,8 +645,10 @@
   <canvas id="bg-canvas"></canvas>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="assets/js/neural-network.js"></script>
+  <script src="assets/js/robotic-arm.js"></script>
   <script src="assets/js/app.js"></script>
   <script src="assets/js/sasha.js"></script>
 </body>
+
 
 </html>
