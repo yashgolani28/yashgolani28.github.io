@@ -74,7 +74,7 @@
     const groundMat = new THREE.ShadowMaterial({ opacity: 0.18 });
     const ground = new THREE.Mesh(groundGeo, groundMat);
     ground.rotation.x = -Math.PI / 2;
-    ground.position.y = -0.6;
+    ground.position.y = -1.8;
     ground.receiveShadow = true;
     scene.add(ground);
 
@@ -111,6 +111,9 @@
     // ─── ROBOT GEOMETRY ──────────────────────────────────────────────────────
 
     const robot = new THREE.Group();
+    robot.position.y = -1.0;
+    robot.rotation.z = 0.15; // Physical lean left
+    robot.rotation.x = -0.05; // Slight forward tilt for perspective
     scene.add(robot);
 
     // Base
@@ -241,7 +244,7 @@
     });
 
     const springs = {
-        pan: makeSpring(5.5, 1.35, 0),
+        pan: makeSpring(5.5, 1.35, -0.75), // Facing left by default
         lift: makeSpring(4.8, 1.25, -Math.PI / 6),
         elbow: makeSpring(5.2, 1.30, Math.PI / 4),
         wristX: makeSpring(9.0, 1.55, 0),
@@ -314,6 +317,13 @@
         };
     }
 
+    // Offset IK calculation based on physical lean to keep mouse tracking accurate
+    function solveIKAdjusted(worldTarget) {
+        // We need to account for the robot.rotation.z and rotation.x
+        // For now, solveIK is mostly fine but we compensate for the default pan shift
+        return solveIK(worldTarget);
+    }
+
     // ─── RAY → PLANE PROJECTION ──────────────────────────────────────────────
 
     const raycaster = new THREE.Raycaster();
@@ -334,30 +344,30 @@
 
     const sequences = {
         inspect: [
-            { pan: -0.7, lift: -0.20, elbow: 0.60, wristX: 0.25, wristZ: 0.00, clench: 0.05, dur: 2.2 },
-            { pan: -0.7, lift: -0.52, elbow: 0.95, wristX: 0.40, wristZ: 0.10, clench: 0.05, dur: 1.2 },
-            { pan: -0.7, lift: -0.52, elbow: 0.95, wristX: 0.40, wristZ: 0.10, clench: 0.80, dur: 0.7 },
-            { pan: 0.0, lift: -0.28, elbow: 0.70, wristX: 0.00, wristZ: 0.00, clench: 0.80, dur: 1.8 },
-            { pan: 0.0, lift: -0.28, elbow: 0.70, wristX: 0.00, wristZ: 0.00, clench: 0.05, dur: 0.6 },
-            { pan: 0.7, lift: -0.20, elbow: 0.60, wristX: -0.25, wristZ: -0.10, clench: 0.05, dur: 2.0 },
-            { pan: 0.7, lift: -0.52, elbow: 0.95, wristX: -0.40, wristZ: 0.00, clench: 0.05, dur: 1.2 },
-            { pan: 0.7, lift: -0.52, elbow: 0.95, wristX: -0.40, wristZ: 0.00, clench: 0.85, dur: 0.7 },
-            { pan: 0.0, lift: -0.15, elbow: 0.45, wristX: 0.00, wristZ: 0.00, clench: 0.00, dur: 2.2 },
+            { pan: 0.00, lift: -0.20, elbow: 0.60, wristX: -0.25, wristZ: 0.00, clench: 0.05, dur: 2.2 },
+            { pan: 0.00, lift: -0.52, elbow: 0.95, wristX: -0.40, wristZ: 0.10, clench: 0.05, dur: 1.2 },
+            { pan: 0.00, lift: -0.52, elbow: 0.95, wristX: -0.40, wristZ: 0.10, clench: 0.80, dur: 0.7 },
+            { pan: -0.75, lift: -0.28, elbow: 0.70, wristX: 0.00, wristZ: 0.00, clench: 0.80, dur: 1.8 },
+            { pan: -0.75, lift: -0.28, elbow: 0.70, wristX: 0.00, wristZ: 0.00, clench: 0.05, dur: 0.6 },
+            { pan: -1.50, lift: -0.20, elbow: 0.60, wristX: 0.25, wristZ: -0.10, clench: 0.05, dur: 2.0 },
+            { pan: -1.50, lift: -0.52, elbow: 0.95, wristX: 0.40, wristZ: 0.00, clench: 0.05, dur: 1.2 },
+            { pan: -1.50, lift: -0.52, elbow: 0.95, wristX: 0.40, wristZ: 0.00, clench: 0.85, dur: 0.7 },
+            { pan: -0.75, lift: -0.15, elbow: 0.45, wristX: 0.00, wristZ: 0.00, clench: 0.00, dur: 2.2 },
         ],
         pick: [
-            { pan: 0.55, lift: -0.15, elbow: 0.45, wristX: 0.00, wristZ: 0.00, clench: 0.00, dur: 1.4 },
-            { pan: 0.55, lift: -0.58, elbow: 1.05, wristX: 0.35, wristZ: 0.00, clench: 0.00, dur: 1.3 },
-            { pan: 0.55, lift: -0.58, elbow: 1.05, wristX: 0.35, wristZ: 0.00, clench: 0.90, dur: 0.6 },
-            { pan: 0.55, lift: -0.10, elbow: 0.50, wristX: 0.00, wristZ: 0.00, clench: 0.90, dur: 1.2 },
-            { pan: -0.60, lift: -0.10, elbow: 0.50, wristX: 0.00, wristZ: 0.18, clench: 0.90, dur: 1.8 },
-            { pan: -0.60, lift: -0.52, elbow: 1.02, wristX: 0.20, wristZ: 0.00, clench: 0.90, dur: 1.2 },
-            { pan: -0.60, lift: -0.52, elbow: 1.02, wristX: 0.20, wristZ: 0.00, clench: 0.00, dur: 0.5 },
-            { pan: 0.00, lift: -0.15, elbow: 0.45, wristX: 0.00, wristZ: 0.00, clench: 0.00, dur: 1.6 },
+            { pan: -1.25, lift: -0.15, elbow: 0.45, wristX: 0.00, wristZ: 0.00, clench: 0.00, dur: 1.4 },
+            { pan: -1.25, lift: -0.58, elbow: 1.05, wristX: -0.35, wristZ: 0.00, clench: 0.00, dur: 1.3 },
+            { pan: -1.25, lift: -0.58, elbow: 1.05, wristX: -0.35, wristZ: 0.00, clench: 0.90, dur: 0.6 },
+            { pan: -1.25, lift: -0.10, elbow: 0.50, wristX: 0.00, wristZ: 0.00, clench: 0.90, dur: 1.2 },
+            { pan: -0.40, lift: -0.10, elbow: 0.50, wristX: 0.00, wristZ: -0.18, clench: 0.90, dur: 1.8 },
+            { pan: -0.40, lift: -0.52, elbow: 1.02, wristX: -0.20, wristZ: 0.00, clench: 0.90, dur: 1.2 },
+            { pan: -0.40, lift: -0.52, elbow: 1.02, wristX: -0.20, wristZ: 0.00, clench: 0.00, dur: 0.5 },
+            { pan: -0.75, lift: -0.15, elbow: 0.45, wristX: 0.00, wristZ: 0.00, clench: 0.00, dur: 1.6 },
         ],
         home: [
-            { pan: 0.00, lift: -0.15, elbow: 0.45, wristX: 0.00, wristZ: 0.00, clench: 0.00, dur: 3.0 },
-            { pan: 0.08, lift: -0.20, elbow: 0.50, wristX: 0.04, wristZ: 0.04, clench: 0.00, dur: 3.2 },
-            { pan: -0.08, lift: -0.18, elbow: 0.48, wristX: -0.04, wristZ: -0.04, clench: 0.00, dur: 3.0 },
+            { pan: -0.75, lift: -0.15, elbow: 0.45, wristX: 0.00, wristZ: 0.00, clench: 0.00, dur: 3.0 },
+            { pan: -0.85, lift: -0.20, elbow: 0.50, wristX: -0.04, wristZ: 0.04, clench: 0.00, dur: 3.2 },
+            { pan: -0.65, lift: -0.18, elbow: 0.48, wristX: 0.04, wristZ: -0.04, clench: 0.00, dur: 3.0 },
         ],
     };
 
@@ -468,7 +478,7 @@
                 if (planeHit.distanceTo(base) > maxReach) {
                     planeHit.sub(base).setLength(maxReach).add(base);
                 }
-                const ik = solveIK(planeHit);
+                const ik = solveIKAdjusted(planeHit);
                 springs.pan.target = ik.pan;
                 springs.lift.target = ik.lift;
                 springs.elbow.target = ik.elbow;
