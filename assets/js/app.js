@@ -202,111 +202,155 @@ window.addEventListener("load", function () {
     const legendPills = container.querySelectorAll('.xpLegendPill');
     const projectTitle = document.getElementById('xpProjectTitle');
     const projectBlurb = document.getElementById('xpProjectBlurb');
-
     const PROJECTS = {
       overview: {
         title: "Overview",
         blurb: "Pick a project to reveal its tool flow.",
-        nodes: ["python", "flask", "fastapi", "opencv", "postgres", "docker", "kafka", "redis", "linux", "ffmpeg", "yolo", "vlm", "git"],
+        nodes: ["python", "flask", "fastapi", "react", "opencv", "postgres", "docker", "kafka", "redis", "linux", "ffmpeg", "yolo", "vlm", "git", "pytorch", "celery", "sqlalchemy", "qdrant", "langchain", "leaflet", "gitlab"],
         layout: {
-          python: { x: 50, y: 50 },
-          linux: { x: 50, y: 15 },
-          vlm: { x: 80, y: 25 },
-          kafka: { x: 88, y: 50 },
-          postgres: { x: 80, y: 75 },
-          fastapi: { x: 50, y: 85 },
-          flask: { x: 20, y: 75 },
-          ffmpeg: { x: 12, y: 50 },
-          yolo: { x: 20, y: 25 },
-          docker: { x: 70, y: 40 },
-          redis: { x: 70, y: 60 },
-          opencv: { x: 30, y: 60 },
-          git: { x: 30, y: 40 }
+          // Central Vertical Spine (5 nodes)
+          linux: { x: 50, y: 15, z: 10 },
+          python: { x: 50, y: 32, z: 5 },
+          docker: { x: 50, y: 50, z: 0 },
+          react: { x: 50, y: 68, z: 5 },
+          fastapi: { x: 50, y: 85, z: 10 },
+          // Left Wing (8 nodes)
+          gitlab: { x: 25, y: 20, z: -10 },
+          git: { x: 35, y: 30, z: -5 },
+          yolo: { x: 20, y: 40, z: -15 },
+          ffmpeg: { x: 30, y: 50, z: -8 },
+          opencv: { x: 20, y: 60, z: -12 },
+          flask: { x: 35, y: 70, z: -5 },
+          pytorch: { x: 25, y: 80, z: -10 },
+          vlm: { x: 15, y: 50, z: -20 },
+          // Right Wing (8 nodes)
+          leaflet: { x: 75, y: 20, z: -10 },
+          sqlalchemy: { x: 65, y: 30, z: -5 },
+          kafka: { x: 80, y: 40, z: -15 },
+          celery: { x: 70, y: 50, z: -8 },
+          redis: { x: 80, y: 60, z: -12 },
+          postgres: { x: 65, y: 70, z: -5 },
+          langchain: { x: 75, y: 80, z: -10 },
+          qdrant: { x: 85, y: 50, z: -20 }
         },
         edges: [
           ["python", "flask"], ["python", "fastapi"], ["python", "opencv"], ["python", "postgres"],
-          ["fastapi", "docker"], ["docker", "linux"], ["kafka", "redis"], ["ffmpeg", "opencv"]
+          ["fastapi", "docker"], ["docker", "linux"], ["kafka", "redis"], ["ffmpeg", "opencv"],
+          ["celery", "redis"], ["langchain", "qdrant"], ["react", "leaflet"], ["python", "pytorch"]
         ]
       },
       radar: {
         title: "Radar and evidence",
         blurb: "Tracking stability, calibration alignment, evidence bundling.",
-        nodes: ["ffmpeg", "opencv", "python", "flask", "postgres", "yolo"],
+        nodes: ["ffmpeg", "opencv", "python", "flask", "postgres", "yolo", "kafka", "linux"],
         layout: {
-          ffmpeg: { x: 18, y: 40 },
-          opencv: { x: 34, y: 40 },
-          yolo: { x: 34, y: 58 },
-          python: { x: 52, y: 48 },
-          flask: { x: 68, y: 40 },
-          postgres: { x: 80, y: 52 }
+          linux: { x: 12.5, y: 50, z: 0 },
+          ffmpeg: { x: 27.5, y: 35, z: 5 },
+          opencv: { x: 27.5, y: 65, z: -5 },
+          yolo: { x: 42.5, y: 50, z: 10 },
+          python: { x: 57.5, y: 50, z: 0 },
+          kafka: { x: 72.5, y: 35, z: 5 },
+          flask: { x: 72.5, y: 65, z: -5 },
+          postgres: { x: 87.5, y: 50, z: 0 }
         },
         edges: [
-          ["ffmpeg", "opencv"], ["opencv", "python"], ["yolo", "python"], ["python", "flask"], ["python", "postgres"]
+          ["linux", "ffmpeg"], ["linux", "opencv"], ["ffmpeg", "yolo"], ["opencv", "yolo"], ["yolo", "python"], ["python", "kafka"], ["python", "flask"], ["python", "postgres"]
         ],
         focusSection: "ws-radar"
       },
       anpr: {
-        title: "Multi-camera + PTZ + ANPR",
+        title: "ANPR System",
         blurb: "RTSP ingest, OCR correctness, PTZ operational control.",
-        nodes: ["ffmpeg", "opencv", "python", "postgres", "kafka", "redis"],
+        nodes: ["ffmpeg", "opencv", "python", "postgres", "kafka", "redis", "gitlab", "docker", "fastapi", "pytorch"],
         layout: {
-          ffmpeg: { x: 18, y: 44 },
-          opencv: { x: 34, y: 44 },
-          python: { x: 50, y: 44 },
-          postgres: { x: 72, y: 44 },
-          kafka: { x: 50, y: 64 },
-          redis: { x: 68, y: 64 }
+          gitlab: { x: 12.5, y: 30, z: -5 },
+          docker: { x: 12.5, y: 70, z: 5 },
+          ffmpeg: { x: 27.5, y: 50, z: 0 },
+          opencv: { x: 42.5, y: 35, z: -10 },
+          pytorch: { x: 42.5, y: 65, z: 10 },
+          python: { x: 57.5, y: 50, z: 0 },
+          fastapi: { x: 72.5, y: 30, z: 5 },
+          kafka: { x: 72.5, y: 50, z: 0 },
+          redis: { x: 72.5, y: 70, z: -5 },
+          postgres: { x: 87.5, y: 50, z: 0 }
         },
         edges: [
-          ["ffmpeg", "opencv"], ["opencv", "python"], ["python", "postgres"], ["python", "kafka"], ["kafka", "redis"]
+          ["gitlab", "docker"], ["docker", "ffmpeg"], ["ffmpeg", "opencv"], ["ffmpeg", "pytorch"], ["opencv", "python"], ["pytorch", "python"], ["python", "fastapi"], ["python", "kafka"], ["kafka", "redis"], ["python", "postgres"]
         ],
         focusSection: "ws-anpr"
       },
       mlops: {
-        title: "Platform + MLOps",
+        title: "MLOps Platform",
         blurb: "Pipelines, job controls, dataset and ops hygiene.",
-        nodes: ["kafka", "redis", "docker", "postgres", "git", "linux", "python", "fastapi"],
+        nodes: ["kafka", "redis", "docker", "postgres", "git", "linux", "python", "fastapi", "celery", "sqlalchemy", "yolo"],
         layout: {
-          git: { x: 18, y: 34 },
-          linux: { x: 18, y: 54 },
-          docker: { x: 34, y: 44 },
-          python: { x: 50, y: 44 },
-          fastapi: { x: 64, y: 44 },
-          kafka: { x: 64, y: 62 },
-          redis: { x: 80, y: 62 },
-          postgres: { x: 80, y: 44 }
+          git: { x: 12.5, y: 30, z: 0 },
+          linux: { x: 12.5, y: 70, z: 0 },
+          docker: { x: 27.5, y: 50, z: 5 },
+          python: { x: 42.5, y: 50, z: 0 },
+          yolo: { x: 42.5, y: 75, z: 10 },
+          fastapi: { x: 57.5, y: 35, z: -5 },
+          celery: { x: 57.5, y: 65, z: 5 },
+          kafka: { x: 72.5, y: 35, z: 0 },
+          redis: { x: 72.5, y: 65, z: 0 },
+          sqlalchemy: { x: 72.5, y: 85, z: -5 },
+          postgres: { x: 87.5, y: 60, z: 0 }
         },
         edges: [
-          ["python", "fastapi"], ["fastapi", "kafka"], ["kafka", "redis"], ["fastapi", "postgres"],
-          ["docker", "fastapi"], ["git", "docker"], ["linux", "docker"]
+          ["git", "docker"], ["linux", "docker"], ["docker", "python"], ["python", "fastapi"], ["python", "celery"], ["python", "yolo"], ["fastapi", "kafka"], ["fastapi", "sqlalchemy"], ["celery", "redis"], ["sqlalchemy", "postgres"]
         ],
         focusSection: "ws-mlops"
       },
       vlm: {
         title: "VLM CCTV search",
         blurb: "VLM pipeline, retrieval, latency control.",
-        nodes: ["vlm", "python", "docker", "postgres", "fastapi"],
+        nodes: ["vlm", "python", "docker", "postgres", "fastapi", "qdrant", "langchain", "celery", "redis", "pytorch", "sqlalchemy"],
         layout: {
-          vlm: { x: 22, y: 46 },
-          python: { x: 40, y: 46 },
-          docker: { x: 56, y: 32 },
-          fastapi: { x: 62, y: 46 },
-          postgres: { x: 80, y: 46 }
+          pytorch: { x: 12.5, y: 30, z: -10 },
+          vlm: { x: 12.5, y: 70, z: 10 },
+          python: { x: 27.5, y: 50, z: 0 },
+          langchain: { x: 42.5, y: 35, z: 5 },
+          celery: { x: 42.5, y: 65, z: -5 },
+          qdrant: { x: 57.5, y: 35, z: 15 },
+          redis: { x: 57.5, y: 65, z: -15 },
+          fastapi: { x: 72.5, y: 35, z: 5 },
+          sqlalchemy: { x: 72.5, y: 65, z: -5 },
+          postgres: { x: 87.5, y: 50, z: 0 },
+          docker: { x: 27.5, y: 80, z: -5 }
         },
         edges: [
-          ["vlm", "python"], ["python", "fastapi"], ["fastapi", "postgres"], ["docker", "fastapi"]
+          ["pytorch", "python"], ["vlm", "python"], ["python", "langchain"], ["python", "celery"], ["langchain", "qdrant"], ["celery", "redis"], ["qdrant", "fastapi"], ["redis", "fastapi"], ["fastapi", "sqlalchemy"], ["sqlalchemy", "postgres"], ["docker", "python"]
         ],
         focusSection: "ws-vlm"
+      },
+      'command-centre': {
+        title: "GIS & Command Centre",
+        blurb: "Emergency response system dispatcher with real-time radio device tracking and GIS mapping.",
+        nodes: ["python", "fastapi", "react", "postgres", "redis", "leaflet", "sqlalchemy"],
+        layout: {
+          react: { x: 14, y: 50, z: 10 },
+          leaflet: { x: 29, y: 30, z: 0 },
+          fastapi: { x: 44, y: 50, z: 0 },
+          python: { x: 59, y: 50, z: 0 },
+          sqlalchemy: { x: 74, y: 35, z: -5 },
+          redis: { x: 74, y: 65, z: 5 },
+          postgres: { x: 86, y: 50, z: 0 }
+        },
+        edges: [
+          ["react", "leaflet"], ["leaflet", "fastapi"], ["fastapi", "python"], ["python", "sqlalchemy"], ["sqlalchemy", "postgres"], ["python", "redis"]
+        ],
+        focusSection: "ws-command-centre"
       }
     };
+
 
     let currentProject = 'overview';
 
     function createEdges(edgeList, isProjectMode) {
       // Keep definitions but clear old paths
-      const defs = edgesSvg.querySelector('defs');
+      const markers = edgesSvg.querySelector('defs');
       edgesSvg.innerHTML = '';
-      if (defs) edgesSvg.appendChild(defs);
+      if (markers) edgesSvg.appendChild(markers);
 
       edgeList.forEach(([fromId, toId]) => {
         const fromNode = PROJECTS[currentProject].layout[fromId];
@@ -328,6 +372,7 @@ window.addEventListener("load", function () {
           path.classList.add('xpEdge');
           if (isProjectMode) {
             path.classList.add('is-flow');
+            path.setAttribute('marker-end', 'url(#xpArrow)');
             if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
               path.classList.add('is-animate');
             }
@@ -464,14 +509,14 @@ window.addEventListener("load", function () {
       if (!splineBox || !targetBox) return;
 
       localStorage.setItem(STORAGE_KEY, 'true');
-      
+
       // Ensure the greeting is visible and positioned correctly
       const greeting = document.getElementById('spline-greeting');
       if (greeting) {
         greeting.style.opacity = '1';
         greeting.style.transform = 'translateX(-50%) translateY(0)';
       }
-      
+
       // Hide the loader immediately if it's still there
       if (loader) {
         loader.style.opacity = '0';
@@ -487,7 +532,7 @@ window.addEventListener("load", function () {
 
     function handleScrollDismiss(e) {
       if (e.deltaY > 5 || (e.touches && e.touches[0])) {
-          window.dismissSplineIntro();
+        window.dismissSplineIntro();
       }
     }
 
@@ -560,7 +605,7 @@ window.addEventListener("load", function () {
           // 1. Start fading out loader elements
           const loaderInfo = document.getElementById('loader-info');
           const dino = document.querySelector('.dino-container');
-          
+
           if (loaderInfo) {
             loaderInfo.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             loaderInfo.style.opacity = '0';
@@ -575,17 +620,17 @@ window.addEventListener("load", function () {
           // 2. Bridge to greeting quickly (150ms overlap)
           setTimeout(() => {
             clearInterval(factInterval);
-            
+
             const greeting = document.getElementById('spline-greeting');
             if (greeting) {
               greeting.style.opacity = '1';
               greeting.style.transform = 'translateX(-50%) translateY(0)';
             }
-            
+
             // 3. Final fade of the dark overlay
             loader.style.opacity = '0';
             setTimeout(() => loader.style.display = 'none', 1200);
-          }, 150); 
+          }, 150);
         }
         // Safety fallback
         setTimeout(() => {

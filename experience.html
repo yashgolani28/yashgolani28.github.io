@@ -93,6 +93,7 @@
       </div>
 
       <div class="xpWorkstreamsGrid">
+
         <!-- Radar -->
         <div class="xpWorkstream" id="ws-radar">
           <div class="wsHeader">
@@ -155,112 +156,171 @@
             <li>Added prompt and token controls to keep latency bounded and predictable.</li>
           </ul>
         </div>
-      </div>
-    </div>
 
-    <!-- Constellation Block -->
-    <section class="section reveal">
-      <div class="sectionHead">
-        <h2>Tech Stack Constellation</h2>
-        <p>Select a project to reveal the system flow.</p>
-      </div>
-
-      <div id="xpConstellation" class="xpConstellation mode-overview" data-mode="overview">
-        <div class="xpConstellationTop">
-          <div class="xpProjectPills" role="tablist" aria-label="Project selector">
-            <button class="xpPill is-active" data-project="overview" role="tab" aria-selected="true">Overview</button>
-            <button class="xpPill" data-project="radar" role="tab" aria-selected="false">Radar</button>
-            <button class="xpPill" data-project="anpr" role="tab" aria-selected="false">ANPR</button>
-            <button class="xpPill" data-project="mlops" role="tab" aria-selected="false">MLOps</button>
-            <button class="xpPill" data-project="vlm" role="tab" aria-selected="false">VLM</button>
+        <!-- Command Centre -->
+        <div class="xpWorkstream" id="ws-command-centre">
+          <div class="wsHeader">
+            <i class="fa-solid fa-tower-observation"></i>
+            <div>
+              <h3>GIS & Command Centre</h3>
+            </div>
           </div>
+          <ul class="wsBullets">
+            <li>Unified platform for real-time emergency response systems and automated dispatch workflows.</li>
+            <li>Implemented high-precision radio device tracking and historical movement visualization.</li>
+            <li>Built an integrated GIS dashboard for situational awareness and geofence-based alerting.</li>
+            <li>Engineered a rule-based mission lifecycle engine for automated resource management.</li>
+          </ul>
+        </div>
+      </div>
 
-          <div id="xpProjectCard" class="xpProjectCard" aria-live="polite">
-            <h3 id="xpProjectTitle">Overview</h3>
-            <p id="xpProjectBlurb">Pick a project to reveal its tool flow.</p>
-          </div>
+      <!-- Constellation Block -->
+      <section class="section reveal">
+        <div class="sectionHead">
+          <h2>Tech Stack Constellation</h2>
+          <p>Select a project to reveal the system flow.</p>
         </div>
 
-        <div class="xpConstellationStage" id="xpConstellationStage">
-          <div class="xpBackgroundPolish"></div>
-          <svg class="xpEdges" id="xpEdges" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <defs>
-              <marker id="xpArrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
-                <path d="M0,0 L6,3 L0,6 Z" fill="currentColor"></path>
-              </marker>
-            </defs>
-            <!-- edges inserted by JS -->
-          </svg>
-          <div class="xpNodes" id="xpNodes">
-            <button class="xpNode" type="button" data-node="python" data-cluster="radar anpr mlops vlm"
-              aria-label="Python tool node">
-              <span class="xpNodeIcon"><i class="devicon-python-plain"></i></span>
-              <span class="xpNodeLabel">Python</span>
-            </button>
-            <button class="xpNode" type="button" data-node="flask" data-cluster="radar" aria-label="Flask tool node">
-              <span class="xpNodeIcon"><i class="devicon-flask-original"></i></span>
-              <span class="xpNodeLabel">Flask</span>
-            </button>
-            <button class="xpNode" type="button" data-node="fastapi" data-cluster="mlops vlm"
-              aria-label="FastAPI tool node">
-              <span class="xpNodeIcon"><i class="devicon-fastapi-plain"></i></span>
-              <span class="xpNodeLabel">FastAPI</span>
-            </button>
-            <button class="xpNode" type="button" data-node="opencv" data-cluster="radar anpr"
-              aria-label="OpenCV tool node">
-              <span class="xpNodeIcon"><i class="devicon-opencv-plain"></i></span>
-              <span class="xpNodeLabel">OpenCV</span>
-            </button>
-            <button class="xpNode" type="button" data-node="postgres" data-cluster="radar anpr mlops vlm"
-              aria-label="PostgreSQL tool node">
-              <span class="xpNodeIcon"><i class="devicon-postgresql-plain"></i></span>
-              <span class="xpNodeLabel">PostgreSQL</span>
-            </button>
-            <button class="xpNode" type="button" data-node="docker" data-cluster="mlops vlm"
-              aria-label="Docker tool node">
-              <span class="xpNodeIcon"><i class="devicon-docker-plain"></i></span>
-              <span class="xpNodeLabel">Docker</span>
-            </button>
-            <button class="xpNode" type="button" data-node="kafka" data-cluster="anpr mlops"
-              aria-label="Kafka tool node">
-              <span class="xpNodeIcon"><i class="devicon-apachekafka-original"></i></span>
-              <span class="xpNodeLabel">Kafka</span>
-            </button>
-            <button class="xpNode" type="button" data-node="redis" data-cluster="anpr mlops"
-              aria-label="Redis tool node">
-              <span class="xpNodeIcon"><i class="devicon-redis-plain"></i></span>
-              <span class="xpNodeLabel">Redis</span>
-            </button>
-            <button class="xpNode" type="button" data-node="linux" data-cluster="mlops" aria-label="Linux tool node">
-              <span class="xpNodeIcon"><i class="fa-brands fa-linux"></i></span>
-              <span class="xpNodeLabel">Linux</span>
-            </button>
-            <button class="xpNode" type="button" data-node="ffmpeg" data-cluster="radar anpr"
-              aria-label="FFmpeg tool node">
-              <span class="xpNodeIcon"><i class="fa-solid fa-film"></i></span>
-              <span class="xpNodeLabel">FFmpeg</span>
-            </button>
-            <button class="xpNode" type="button" data-node="yolo" data-cluster="radar" aria-label="YOLO tool node">
-              <span class="xpNodeIcon"><i class="fa-solid fa-crosshairs"></i></span>
-              <span class="xpNodeLabel">YOLO</span>
-            </button>
-            <button class="xpNode" type="button" data-node="vlm" data-cluster="vlm"
-              aria-label="Qwen2.5-VL / LLaVA tool node">
-              <span class="xpNodeIcon"><i class="fa-solid fa-brain"></i></span>
-              <span class="xpNodeLabel">Qwen2.5-VL / LLaVA</span>
-            </button>
-            <button class="xpNode" type="button" data-node="git" data-cluster="mlops" aria-label="Git tool node">
-              <span class="xpNodeIcon"><i class="devicon-git-plain"></i></span>
-              <span class="xpNodeLabel">Git</span>
-            </button>
-          </div>
-        </div>
-    </section>
+        <div id="xpConstellation" class="xpConstellation mode-overview" data-mode="overview">
+          <div class="xpConstellationTop">
+            <div class="xpProjectPills" role="tablist" aria-label="Project selector">
+              <button class="xpPill is-active" data-project="overview" role="tab" aria-selected="true">Overview</button>
+              <button class="xpPill" data-project="radar" role="tab" aria-selected="false">Radar</button>
+              <button class="xpPill" data-project="command-centre" role="tab" aria-selected="false">Command
+                Centre</button>
+              <button class="xpPill" data-project="anpr" role="tab" aria-selected="false">ANPR</button>
+              <button class="xpPill" data-project="mlops" role="tab" aria-selected="false">MLOps</button>
+              <button class="xpPill" data-project="vlm" role="tab" aria-selected="false">VLM</button>
+            </div>
 
-    <div class="xpCTA reveal">
-      <a href="projects.html" class="btn btnPrimary">View all projects</a>
-      <a href="resume.html" class="btn btnPrimary">View Resume</a>
-    </div>
+            <div id="xpProjectCard" class="xpProjectCard" aria-live="polite">
+              <h3 id="xpProjectTitle">Overview</h3>
+              <p id="xpProjectBlurb">Pick a project to reveal its tool flow.</p>
+            </div>
+          </div>
+
+          <div class="xpConstellationStage" id="xpConstellationStage">
+            <div class="xpBackgroundPolish"></div>
+            <svg class="xpEdges" id="xpEdges" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <defs>
+                <marker id="xpArrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                  <path d="M0,0 L6,3 L0,6 Z" fill="currentColor"></path>
+                </marker>
+              </defs>
+              <!-- edges inserted by JS -->
+            </svg>
+            <div class="xpNodes" id="xpNodes">
+              <button class="xpNode" type="button" data-node="flask" data-cluster="radar" aria-label="Flask tool node">
+                <span class="xpNodeIcon"><i class="devicon-flask-original"></i></span>
+                <span class="xpNodeLabel">Flask</span>
+              </button>
+              <button class="xpNode" type="button" data-node="python" data-cluster="radar command-centre anpr mlops vlm"
+                aria-label="Python tool node">
+                <span class="xpNodeIcon"><i class="devicon-python-plain"></i></span>
+                <span class="xpNodeLabel">Python</span>
+              </button>
+              <button class="xpNode" type="button" data-node="react" data-cluster="command-centre"
+                aria-label="React tool node">
+                <span class="xpNodeIcon"><i class="devicon-react-original"></i></span>
+                <span class="xpNodeLabel">React</span>
+              </button>
+              <button class="xpNode" type="button" data-node="fastapi" data-cluster="command-centre mlops vlm anpr"
+                aria-label="FastAPI tool node">
+                <span class="xpNodeIcon"><i class="devicon-fastapi-plain"></i></span>
+                <span class="xpNodeLabel">FastAPI</span>
+              </button>
+              <button class="xpNode" type="button" data-node="opencv" data-cluster="radar anpr mlops"
+                aria-label="OpenCV tool node">
+                <span class="xpNodeIcon"><i class="devicon-opencv-plain"></i></span>
+                <span class="xpNodeLabel">OpenCV</span>
+              </button>
+              <button class="xpNode" type="button" data-node="postgres"
+                data-cluster="radar command-centre anpr mlops vlm" aria-label="PostgreSQL tool node">
+                <span class="xpNodeIcon"><i class="devicon-postgresql-plain"></i></span>
+                <span class="xpNodeLabel">PostgreSQL</span>
+              </button>
+              <button class="xpNode" type="button" data-node="docker" data-cluster="mlops vlm anpr"
+                aria-label="Docker tool node">
+                <span class="xpNodeIcon"><i class="devicon-docker-plain"></i></span>
+                <span class="xpNodeLabel">Docker</span>
+              </button>
+              <button class="xpNode" type="button" data-node="kafka" data-cluster="anpr mlops radar vlm"
+                aria-label="Kafka tool node">
+                <span class="xpNodeIcon"><i class="devicon-apachekafka-original"></i></span>
+                <span class="xpNodeLabel">Kafka</span>
+              </button>
+              <button class="xpNode" type="button" data-node="redis" data-cluster="anpr mlops command-centre vlm"
+                aria-label="Redis tool node">
+                <span class="xpNodeIcon"><i class="devicon-redis-plain"></i></span>
+                <span class="xpNodeLabel">Redis</span>
+              </button>
+              <button class="xpNode" type="button" data-node="linux" data-cluster="mlops radar anpr"
+                aria-label="Linux tool node">
+                <span class="xpNodeIcon"><i class="fa-brands fa-linux"></i></span>
+                <span class="xpNodeLabel">Linux</span>
+              </button>
+              <button class="xpNode" type="button" data-node="ffmpeg" data-cluster="radar anpr vlm"
+                aria-label="FFmpeg tool node">
+                <span class="xpNodeIcon"><i class="fa-solid fa-film"></i></span>
+                <span class="xpNodeLabel">FFmpeg</span>
+              </button>
+              <button class="xpNode" type="button" data-node="yolo" data-cluster="radar anpr mlops"
+                aria-label="YOLO tool node">
+                <span class="xpNodeIcon"><i class="fa-solid fa-crosshairs"></i></span>
+                <span class="xpNodeLabel">YOLO</span>
+              </button>
+              <button class="xpNode" type="button" data-node="vlm" data-cluster="vlm"
+                aria-label="Qwen2.5-VL / LLaVA tool node">
+                <span class="xpNodeIcon"><i class="fa-solid fa-brain"></i></span>
+                <span class="xpNodeLabel">Qwen2.5-VL / LLaVA</span>
+              </button>
+              <button class="xpNode" type="button" data-node="git" data-cluster="mlops anpr command-centre radar"
+                aria-label="Git tool node">
+                <span class="xpNodeIcon"><i class="devicon-git-plain"></i></span>
+                <span class="xpNodeLabel">Git</span>
+              </button>
+              <button class="xpNode" type="button" data-node="pytorch" data-cluster="vlm anpr"
+                aria-label="PyTorch tool node">
+                <span class="xpNodeIcon"><i class="devicon-pytorch-plain"></i></span>
+                <span class="xpNodeLabel">PyTorch</span>
+              </button>
+              <button class="xpNode" type="button" data-node="celery" data-cluster="vlm mlops"
+                aria-label="Celery tool node">
+                <span class="xpNodeIcon"><i class="fa-solid fa-leaf"></i></span>
+                <span class="xpNodeLabel">Celery</span>
+              </button>
+              <button class="xpNode" type="button" data-node="sqlalchemy" data-cluster="vlm mlops command-centre"
+                aria-label="SQLAlchemy tool node">
+                <span class="xpNodeIcon"><i class="devicon-sqlalchemy-plain"></i></span>
+                <span class="xpNodeLabel">SQLAlchemy</span>
+              </button>
+              <button class="xpNode" type="button" data-node="qdrant" data-cluster="vlm"
+                aria-label="VectorDB tool node">
+                <span class="xpNodeIcon"><i class="fa-solid fa-database"></i></span>
+                <span class="xpNodeLabel">Vector DB</span>
+              </button>
+              <button class="xpNode" type="button" data-node="langchain" data-cluster="vlm"
+                aria-label="LangChain tool node">
+                <span class="xpNodeIcon"><i class="fa-solid fa-link"></i></span>
+                <span class="xpNodeLabel">LangChain</span>
+              </button>
+              <button class="xpNode" type="button" data-node="leaflet" data-cluster="command-centre"
+                aria-label="Leaflet tool node">
+                <span class="xpNodeIcon"><i class="fa-solid fa-map-location-dot"></i></span>
+                <span class="xpNodeLabel">Leaflet</span>
+              </button>
+              <button class="xpNode" type="button" data-node="gitlab" data-cluster="anpr" aria-label="GitLab tool node">
+                <span class="xpNodeIcon"><i class="devicon-gitlab-plain"></i></span>
+                <span class="xpNodeLabel">GitLab CI</span>
+              </button>
+            </div>
+          </div>
+      </section>
+
+      <div class="xpCTA reveal">
+        <a href="projects.html" class="btn btnPrimary">View all projects</a>
+        <a href="resume.html" class="btn btnPrimary">View Resume</a>
+      </div>
   </main>
 
   <footer class="footer">

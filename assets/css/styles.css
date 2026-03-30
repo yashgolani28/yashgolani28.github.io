@@ -1745,7 +1745,8 @@ h1 {
   border: none;
   background: transparent;
   position: absolute;
-  top: 10vh; /* Pushed down to clear the top-aligned greeting */
+  top: 10vh;
+  /* Pushed down to clear the top-aligned greeting */
   left: 0;
   z-index: 1;
   pointer-events: none;
@@ -1753,12 +1754,14 @@ h1 {
 }
 
 #spline-floating-box.in-footer spline-viewer {
-  top: 16% !important; /* Maintained for hero alignment */
+  top: 16% !important;
+  /* Maintained for hero alignment */
 }
 
 #enter-btn-wrap {
   position: absolute;
-  bottom: 6vh; /* Pushed to bottom edge to avoid overlap */
+  bottom: 6vh;
+  /* Pushed to bottom edge to avoid overlap */
   left: 50%;
   transform: translateX(-50%);
   z-index: 999999;
@@ -1797,19 +1800,23 @@ h1 {
 }
 
 /* Flow Animation */
-@keyframes xpEdgeFlow {
-  from {
-    stroke-dashoffset: 20;
+@keyframes xpEdgePulse {
+
+  0%,
+  100% {
+    opacity: 0.4;
+    stroke-width: 0.1;
   }
 
-  to {
-    stroke-dashoffset: 0;
+  50% {
+    opacity: 1;
+    stroke-width: 0.2;
   }
 }
 
 .mode-project .xpEdge.is-animate {
-  stroke-dasharray: 4 4;
-  animation: xpEdgeFlow 0.8s linear infinite;
+  stroke-dasharray: none;
+  animation: xpEdgePulse 1.5s ease-in-out infinite;
 }
 
 /* Nodes */
@@ -2533,7 +2540,8 @@ h1 {
 
 #spline-greeting {
   position: absolute;
-  top: 6vh; /* Pushed to top edge to avoid overlap */
+  top: 6vh;
+  /* Pushed to top edge to avoid overlap */
   left: 50%;
   transform: translateX(-50%) translateY(30px);
   z-index: 9999999;
@@ -2545,8 +2553,10 @@ h1 {
 }
 
 #spline-floating-box.in-footer #spline-greeting {
-  top: 8%; /* Maintained for approved Hero content layout */
-  opacity: 1; /* Keeping visible in hero for consistency */
+  top: 8%;
+  /* Maintained for approved Hero content layout */
+  opacity: 1;
+  /* Keeping visible in hero for consistency */
   transform: translateX(-50%) translateY(0);
   pointer-events: none !important;
 }
