@@ -301,7 +301,7 @@
 
         const greeting = `
             <div class="sasha-welcome">
-                <img src="assets/images/img8.png" alt="Waving Bot" class="sasha-bot-wave">
+                <img src="assets/images/img9.png" alt="Waving Bot" class="sasha-bot-wave">
                 <div>${greetingText}<br><br>Quick Links:</div>
             </div>
         `;
