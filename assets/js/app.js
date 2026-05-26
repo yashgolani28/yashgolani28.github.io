@@ -1,22 +1,3 @@
-// Project grid layout logic
-window.addEventListener("load", function () {
-  var grid = document.querySelector('.grid2');
-  if (grid) {
-    function setGridColumns() {
-      if (window.innerWidth > 900) {
-        grid.style.display = 'grid';
-        grid.style.gridTemplateColumns = 'repeat(2, 1fr)';
-        grid.style.gap = '32px 24px';
-      } else {
-        grid.style.display = 'grid';
-        grid.style.gridTemplateColumns = '1fr';
-        grid.style.gap = '32px 24px';
-      }
-    }
-    setGridColumns();
-    window.addEventListener('resize', setGridColumns);
-  }
-});
 (function () {
   const root = document.documentElement;
   const toggle = document.getElementById("themeToggle");
@@ -98,10 +79,47 @@ window.addEventListener("load", function () {
     });
   }
 
-  // Highlight current nav item
-  const path = location.pathname.split("/").pop() || "index.html";
-  const current = document.querySelector(`.navLinks a[href="${path}"]`);
-  if (current) current.setAttribute("aria-current", "page");
+  // Scrollspy: highlight the nav link for the section in view
+  (function initScrollSpy() {
+    const links = Array.from(document.querySelectorAll('.navLinks a[href^="#"]'));
+    if (!links.length) return;
+
+    const byId = new Map();
+    const sections = [];
+    links.forEach(link => {
+      const id = decodeURIComponent(link.getAttribute("href").slice(1));
+      const el = document.getElementById(id);
+      if (el) {
+        byId.set(id, link);
+        sections.push(el);
+      }
+    });
+    if (!sections.length) return;
+
+    let activeId = null;
+    function setActive(id) {
+      if (id === activeId) return;
+      activeId = id;
+      links.forEach(l => l.removeAttribute("aria-current"));
+      const link = byId.get(id);
+      if (link) link.setAttribute("aria-current", "page");
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      // Pick the visible section nearest the top of the viewport.
+      const visible = entries
+        .filter(e => e.isIntersecting)
+        .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+      if (visible.length) {
+        setActive(visible[0].target.id);
+      }
+    }, { rootMargin: "-45% 0px -50% 0px", threshold: 0 });
+
+    sections.forEach(s => observer.observe(s));
+
+    // Default to Home until something else wins.
+    setActive(sections[0].id);
+  })();
 
   // Plausible analytics (only on the real domain)
   (function initPlausible() {
@@ -179,299 +197,32 @@ window.addEventListener("load", function () {
   // Reveal UI on Scroll
   (function initReveal() {
     const reveals = document.querySelectorAll(".reveal");
+    // threshold 0 so sections taller than the viewport still trigger
+    // (10% of a full-page section can never be on screen at once).
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add("active");
+          observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0, rootMargin: "0px 0px -8% 0px" });
 
     reveals.forEach(el => observer.observe(el));
   })();
 
-  // Magnetic Buttons
-  (function initExperienceConstellation() {
-    const container = document.getElementById('xpConstellation');
-    if (!container) return;
-
-    const nodesStage = document.getElementById('xpNodes');
-    const edgesSvg = container.querySelector('.xpEdges');
-    const nodes = container.querySelectorAll('.xpNode');
-    const pills = container.querySelectorAll('.xpPill');
-    const legendPills = container.querySelectorAll('.xpLegendPill');
-    const projectTitle = document.getElementById('xpProjectTitle');
-    const projectBlurb = document.getElementById('xpProjectBlurb');
-    const PROJECTS = {
-      overview: {
-        title: "Overview",
-        blurb: "Pick a project to reveal its tool flow.",
-        nodes: ["python", "flask", "fastapi", "react", "opencv", "postgres", "docker", "kafka", "redis", "linux", "ffmpeg", "yolo", "vlm", "git", "pytorch", "celery", "sqlalchemy", "qdrant", "langchain", "leaflet", "gitlab"],
-        layout: {
-          // Central Vertical Spine (5 nodes)
-          linux: { x: 50, y: 15, z: 10 },
-          python: { x: 50, y: 32, z: 5 },
-          docker: { x: 50, y: 50, z: 0 },
-          react: { x: 50, y: 68, z: 5 },
-          fastapi: { x: 50, y: 85, z: 10 },
-          // Left Wing (8 nodes)
-          gitlab: { x: 25, y: 20, z: -10 },
-          git: { x: 35, y: 30, z: -5 },
-          yolo: { x: 20, y: 40, z: -15 },
-          ffmpeg: { x: 30, y: 50, z: -8 },
-          opencv: { x: 20, y: 60, z: -12 },
-          flask: { x: 35, y: 70, z: -5 },
-          pytorch: { x: 25, y: 80, z: -10 },
-          vlm: { x: 15, y: 50, z: -20 },
-          // Right Wing (8 nodes)
-          leaflet: { x: 75, y: 20, z: -10 },
-          sqlalchemy: { x: 65, y: 30, z: -5 },
-          kafka: { x: 80, y: 40, z: -15 },
-          celery: { x: 70, y: 50, z: -8 },
-          redis: { x: 80, y: 60, z: -12 },
-          postgres: { x: 65, y: 70, z: -5 },
-          langchain: { x: 75, y: 80, z: -10 },
-          qdrant: { x: 85, y: 50, z: -20 }
-        },
-        edges: [
-          ["python", "flask"], ["python", "fastapi"], ["python", "opencv"], ["python", "postgres"],
-          ["fastapi", "docker"], ["docker", "linux"], ["kafka", "redis"], ["ffmpeg", "opencv"],
-          ["celery", "redis"], ["langchain", "qdrant"], ["react", "leaflet"], ["python", "pytorch"]
-        ]
-      },
-      radar: {
-        title: "Radar and evidence",
-        blurb: "Tracking stability, calibration alignment, evidence bundling.",
-        nodes: ["ffmpeg", "opencv", "python", "flask", "postgres", "yolo", "kafka", "linux"],
-        layout: {
-          linux: { x: 12.5, y: 50, z: 0 },
-          ffmpeg: { x: 27.5, y: 35, z: 5 },
-          opencv: { x: 27.5, y: 65, z: -5 },
-          yolo: { x: 42.5, y: 50, z: 10 },
-          python: { x: 57.5, y: 50, z: 0 },
-          kafka: { x: 72.5, y: 35, z: 5 },
-          flask: { x: 72.5, y: 65, z: -5 },
-          postgres: { x: 87.5, y: 50, z: 0 }
-        },
-        edges: [
-          ["linux", "ffmpeg"], ["linux", "opencv"], ["ffmpeg", "yolo"], ["opencv", "yolo"], ["yolo", "python"], ["python", "kafka"], ["python", "flask"], ["python", "postgres"]
-        ],
-        focusSection: "ws-radar"
-      },
-      anpr: {
-        title: "ANPR System",
-        blurb: "RTSP ingest, OCR correctness, PTZ operational control.",
-        nodes: ["ffmpeg", "opencv", "python", "postgres", "kafka", "redis", "gitlab", "docker", "fastapi", "pytorch"],
-        layout: {
-          gitlab: { x: 12.5, y: 30, z: -5 },
-          docker: { x: 12.5, y: 70, z: 5 },
-          ffmpeg: { x: 27.5, y: 50, z: 0 },
-          opencv: { x: 42.5, y: 35, z: -10 },
-          pytorch: { x: 42.5, y: 65, z: 10 },
-          python: { x: 57.5, y: 50, z: 0 },
-          fastapi: { x: 72.5, y: 30, z: 5 },
-          kafka: { x: 72.5, y: 50, z: 0 },
-          redis: { x: 72.5, y: 70, z: -5 },
-          postgres: { x: 87.5, y: 50, z: 0 }
-        },
-        edges: [
-          ["gitlab", "docker"], ["docker", "ffmpeg"], ["ffmpeg", "opencv"], ["ffmpeg", "pytorch"], ["opencv", "python"], ["pytorch", "python"], ["python", "fastapi"], ["python", "kafka"], ["kafka", "redis"], ["python", "postgres"]
-        ],
-        focusSection: "ws-anpr"
-      },
-      mlops: {
-        title: "MLOps Platform",
-        blurb: "Pipelines, job controls, dataset and ops hygiene.",
-        nodes: ["kafka", "redis", "docker", "postgres", "git", "linux", "python", "fastapi", "celery", "sqlalchemy", "yolo"],
-        layout: {
-          git: { x: 12.5, y: 30, z: 0 },
-          linux: { x: 12.5, y: 70, z: 0 },
-          docker: { x: 27.5, y: 50, z: 5 },
-          python: { x: 42.5, y: 50, z: 0 },
-          yolo: { x: 42.5, y: 75, z: 10 },
-          fastapi: { x: 57.5, y: 35, z: -5 },
-          celery: { x: 57.5, y: 65, z: 5 },
-          kafka: { x: 72.5, y: 35, z: 0 },
-          redis: { x: 72.5, y: 65, z: 0 },
-          sqlalchemy: { x: 72.5, y: 85, z: -5 },
-          postgres: { x: 87.5, y: 60, z: 0 }
-        },
-        edges: [
-          ["git", "docker"], ["linux", "docker"], ["docker", "python"], ["python", "fastapi"], ["python", "celery"], ["python", "yolo"], ["fastapi", "kafka"], ["fastapi", "sqlalchemy"], ["celery", "redis"], ["sqlalchemy", "postgres"]
-        ],
-        focusSection: "ws-mlops"
-      },
-      vlm: {
-        title: "VLM CCTV search",
-        blurb: "VLM pipeline, retrieval, latency control.",
-        nodes: ["vlm", "python", "docker", "postgres", "fastapi", "qdrant", "langchain", "celery", "redis", "pytorch", "sqlalchemy"],
-        layout: {
-          pytorch: { x: 12.5, y: 30, z: -10 },
-          vlm: { x: 12.5, y: 70, z: 10 },
-          python: { x: 27.5, y: 50, z: 0 },
-          langchain: { x: 42.5, y: 35, z: 5 },
-          celery: { x: 42.5, y: 65, z: -5 },
-          qdrant: { x: 57.5, y: 35, z: 15 },
-          redis: { x: 57.5, y: 65, z: -15 },
-          fastapi: { x: 72.5, y: 35, z: 5 },
-          sqlalchemy: { x: 72.5, y: 65, z: -5 },
-          postgres: { x: 87.5, y: 50, z: 0 },
-          docker: { x: 27.5, y: 80, z: -5 }
-        },
-        edges: [
-          ["pytorch", "python"], ["vlm", "python"], ["python", "langchain"], ["python", "celery"], ["langchain", "qdrant"], ["celery", "redis"], ["qdrant", "fastapi"], ["redis", "fastapi"], ["fastapi", "sqlalchemy"], ["sqlalchemy", "postgres"], ["docker", "python"]
-        ],
-        focusSection: "ws-vlm"
-      },
-      'command-centre': {
-        title: "GIS & Command Centre",
-        blurb: "Emergency response system dispatcher with real-time radio device tracking and GIS mapping.",
-        nodes: ["python", "fastapi", "react", "postgres", "redis", "leaflet", "sqlalchemy"],
-        layout: {
-          react: { x: 14, y: 50, z: 10 },
-          leaflet: { x: 29, y: 30, z: 0 },
-          fastapi: { x: 44, y: 50, z: 0 },
-          python: { x: 59, y: 50, z: 0 },
-          sqlalchemy: { x: 74, y: 35, z: -5 },
-          redis: { x: 74, y: 65, z: 5 },
-          postgres: { x: 86, y: 50, z: 0 }
-        },
-        edges: [
-          ["react", "leaflet"], ["leaflet", "fastapi"], ["fastapi", "python"], ["python", "sqlalchemy"], ["sqlalchemy", "postgres"], ["python", "redis"]
-        ],
-        focusSection: "ws-command-centre"
-      }
-    };
-
-
-    let currentProject = 'overview';
-
-    function createEdges(edgeList, isProjectMode) {
-      // Keep definitions but clear old paths
-      const markers = edgesSvg.querySelector('defs');
-      edgesSvg.innerHTML = '';
-      if (markers) edgesSvg.appendChild(markers);
-
-      edgeList.forEach(([fromId, toId]) => {
-        const fromNode = PROJECTS[currentProject].layout[fromId];
-        const toNode = PROJECTS[currentProject].layout[toId];
-
-        if (fromNode && toNode) {
-          const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-
-          const midX = (fromNode.x + toNode.x) / 2;
-          const midY = (fromNode.y + toNode.y) / 2;
-          const dx = toNode.x - fromNode.x;
-          const dy = toNode.y - fromNode.y;
-
-          const offset = 4;
-          const qx = midX - (dy * offset / 100);
-          const qy = midY + (dx * offset / 100);
-
-          path.setAttribute('d', `M ${fromNode.x} ${fromNode.y} Q ${qx} ${qy} ${toNode.x} ${toNode.y}`);
-          path.classList.add('xpEdge');
-          if (isProjectMode) {
-            path.classList.add('is-flow');
-            path.setAttribute('marker-end', 'url(#xpArrow)');
-            if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-              path.classList.add('is-animate');
-            }
-          }
-          edgesSvg.appendChild(path);
-        }
-      });
-    }
-
-    function renderConstellation(projectId) {
-      currentProject = projectId;
-      const project = PROJECTS[projectId];
-      const isOverview = projectId === 'overview';
-
-      container.classList.remove('mode-overview', 'mode-project');
-      container.classList.add(isOverview ? 'mode-overview' : 'mode-project');
-      container.dataset.mode = isOverview ? 'overview' : 'project';
-
-      projectTitle.textContent = project.title;
-      projectBlurb.textContent = project.blurb;
-
-      pills.forEach(pill => {
-        const isActive = pill.dataset.project === projectId;
-        pill.classList.toggle('is-active', isActive);
-        pill.setAttribute('aria-selected', isActive);
-      });
-
-      nodes.forEach(node => {
-        const nodeId = node.dataset.node;
-        const pos = project.layout[nodeId] || PROJECTS.overview.layout[nodeId];
-
-        node.style.setProperty('--x', pos.x);
-        node.style.setProperty('--y', pos.y);
-
-        const isActive = project.nodes.includes(nodeId);
-        node.classList.toggle('is-active', isActive && !isOverview);
-        node.classList.toggle('is-dim', !isActive);
-
-        if (isOverview) {
-          node.style.display = 'flex';
-        }
-      });
-
-      createEdges(project.edges, !isOverview);
-    }
-
-    pills.forEach(pill => {
-      pill.addEventListener('click', () => {
-        renderConstellation(pill.dataset.project);
+  // Bento pointer spotlight (tracks the cursor across each tile)
+  (function initBentoSpotlight() {
+    const tiles = document.querySelectorAll('.bentoTile');
+    if (!tiles.length) return;
+    if (window.matchMedia('(pointer: coarse)').matches) return; // skip on touch
+    tiles.forEach(tile => {
+      tile.addEventListener('pointermove', (e) => {
+        const r = tile.getBoundingClientRect();
+        tile.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        tile.style.setProperty('--my', (e.clientY - r.top) + 'px');
       });
     });
-
-    nodes.forEach(node => {
-      node.addEventListener('click', () => {
-        const nodeProject = node.dataset.cluster.split(' ')[0];
-        if (currentProject === 'overview') {
-          renderConstellation(nodeProject);
-          const sectionId = PROJECTS[nodeProject].focusSection;
-          document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
-        } else {
-          const sectionId = PROJECTS[currentProject].focusSection;
-          document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
-        }
-      });
-
-      node.addEventListener('mouseenter', () => {
-        if (node.classList.contains('is-dim')) return;
-        node.style.zIndex = "20";
-      });
-      node.addEventListener('mouseleave', () => {
-        node.style.zIndex = "";
-      });
-    });
-
-    legendPills.forEach(pill => {
-      pill.addEventListener('click', () => {
-        const targetId = pill.dataset.target;
-        document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
-      });
-    });
-
-    function handleResize() {
-      const isMobile = window.innerWidth <= 820;
-      const stage = container.querySelector('.xpConstellationStage');
-
-      if (isMobile) {
-        stage.classList.add('is-mobile-grid');
-      } else {
-        stage.classList.remove('is-mobile-grid');
-      }
-
-      renderConstellation(currentProject);
-    }
-
-    window.addEventListener('resize', () => {
-      requestAnimationFrame(handleResize);
-    });
-
-    handleResize();
   })();
 
   // Spline Intro Animation Logic

@@ -11,80 +11,70 @@
     const STORAGE_KEY = "sasha_data";
     const MAX_HISTORY = 30;
 
-    const PAGE_DESCRIPTIONS = {
-        'index.html': "the Home page – an overview of Yash's Robotics & AI work and production impact.",
-        'skills.html': "the Skills page – a deep dive into Yash's technical stack and tools.",
-        'experience.html': "the Experience page – details on Yash's professional journey and workstreams.",
-        'projects.html': "the Projects gallery – a showcase of Yash's key builds and research.",
-        'education.html': "the Education page – Yash's academic background and Robotics degree details.",
-        'contact.html': "the Contact page – ways to reach Yash via email, LinkedIn, or the form.",
-        'resume.html': "the Resume page – a quick-glance version of Yash's professional CV."
-    };
-
     const FAQ_DATA = [
         {
             keywords: ["who", "you", "yash", "bio"],
             reply: "I'm SASHA, Yash's Semantic Assistant. Yash is a Robotics & AI Engineer specializing in perception systems, MLOps, and Agentic AI. He builds complex pipelines for radar and camera vision.",
-            actions: [{ label: "About Yash", href: "index.html" }]
+            actions: [{ label: "About Yash", href: "#home" }]
         },
         {
             keywords: ["radar", "mmwave", "speed", "detection", "tracking", "60+ghz"],
-            reply: "Yash has extensive experience with 60+GHz radar systems, building high-uptime tracking and evidence bundling for roadside enforcement. His systems achieved 50ms decision latency and 20 simultaneous target tracking.",
-            actions: [{ label: "See Radar Work", href: "experience.html#sasha-radar-evidence-systems" }]
+            reply: "Yash has extensive experience with mmWave radar systems, building high-uptime tracking and evidence bundling for roadside enforcement, with sub-100ms decision latency and real-time multi-target tracking.",
+            actions: [{ label: "See Radar Work", href: "#sasha-radar-evidence-systems" }]
         },
         {
             keywords: ["anpr", "license", "plate", "ocr", "camera", "lpr", "vision"],
-            reply: "The ANPR pipeline Yash built manages 1600+ cameras with a 10s end-to-end alert latency. It features multi-stream ingest and high OCR correctness in real-world conditions.",
-            actions: [{ label: "View ANPR Projects", href: "experience.html#sasha-automatic-number-plate-recognition" }]
+            reply: "The ANPR pipeline Yash built handles high-throughput, multi-camera ingest with seconds-level end-to-end alerting. It features multi-stream ingest and high OCR correctness in real-world conditions.",
+            actions: [{ label: "View ANPR Projects", href: "#sasha-automatic-number-plate-recognition" }]
         },
         {
             keywords: ["vlm", "llm", "ai", "search", "qwen", "llava", "rag", "agent"],
             reply: "Yash integrates VLMs like Qwen2.5-VL for semantic CCTV search and scene understanding. He also builds RAG pipelines for technical documentation and technical decision support.",
-            actions: [{ label: "Explore VLM", href: "experience.html#sasha-vlm-retrieval" }]
+            actions: [{ label: "Explore VLM", href: "#sasha-vlm-retrieval" }]
         },
         {
             keywords: ["plc", "scada", "automation", "industrial", "essi", "internship", "systems"],
-            reply: "During his internship at ESSI Integrated Technologies, Yash worked on industrial automation including PLC programming and systems engineering for large-scale security deployments.",
-            actions: [{ label: "Industrial Experience", href: "experience.html#sasha-essi-integrated-technologies" }]
+            reply: "During his internship at ESSI Integrated Technologies, Yash worked on industrial automation including PLC programming and systems engineering for production perception and analytics systems.",
+            actions: [{ label: "Industrial Experience", href: "#sasha-essi-integrated-technologies" }]
         },
         {
             keywords: ["ros", "ros2", "turtlebot", "perception", "gazebo", "rviz", "simulation", "robotics"],
             reply: "Yash specializes in ROS/ROS2, notably for real-time object detection on Turtlebot 4 and building robust simulation environments using Gazebo and Rviz.",
-            actions: [{ label: "Robotics Projects", href: "projects.html#sasha-object-detection-using-turtlebot-4" }]
+            actions: [{ label: "Robotics Projects", href: "#sasha-object-detection-using-turtlebot-4" }]
         },
         {
             keywords: ["arduino", "esp32", "microcontroller", "embedded", "iot", "sensor", "firmware"],
             reply: "Yash builds embedded systems using ESP32 and Arduino, like his Smart Agriculture System and bio-inspired Spider Quadruped. He is fluent in Embedded C and Python-based IoT.",
-            actions: [{ label: "Embedded Projects", href: "projects.html#sasha-smart-agriculture-system" }]
+            actions: [{ label: "Embedded Projects", href: "#sasha-smart-agriculture-system" }]
         },
         {
             keywords: ["agri", "agriculture", "hydroponics", "farm", "automated"],
             reply: "He developed an automated hydroponics system using ESP32 and Firebase, focusing on sensor-driven climate control and real-time data monitoring.",
-            actions: [{ label: "Agri-Tech Project", href: "projects.html#sasha-smart-agriculture-system" }]
+            actions: [{ label: "Agri-Tech Project", href: "#sasha-smart-agriculture-system" }]
         },
         {
             keywords: ["finance", "loan", "stock", "sentiment", "trading", "fintech", "market"],
             reply: "Yash has applied ML to finance, building loan approval classifiers with XGBoost and stock predictors combining sentiment analysis with technical indicators.",
             actions: [
-                { label: "Bank Loan Modelling", href: "projects.html#sasha-bank-loan-modelling" },
-                { label: "Stock Predictor", href: "projects.html#sasha-stock-price-direction-predictor" }
+                { label: "Bank Loan Modelling", href: "#sasha-bank-loan-modelling" },
+                { label: "Stock Predictor", href: "#sasha-stock-price-direction-predictor" }
             ]
         },
         {
             keywords: ["fitness", "openpose", "pose", "workout", "exercise", "coach"],
             reply: "Yash built an AI Fitness Trainer using OpenPose for computer vision-based pose estimation, providing personalized workout recommendations and real-time progress guidance.",
-            actions: [{ label: "AI Fitness Trainer", href: "projects.html#sasha-ai-fitness-trainer" }]
+            actions: [{ label: "AI Fitness Trainer", href: "#sasha-ai-fitness-trainer" }]
         },
         {
             keywords: ["skills", "tech", "stack", "languages", "python", "c++", "docker", "fastapi"],
             reply: "Core tech: Python (FastAPI), Docker, ROS2, ML (PyTorch/TF), and Agentic AI (LangChain/RAG). He also works with C++ and Raspberry Pi/Jetson hardware.",
-            actions: [{ label: "Full Skill Set", href: "skills.html" }]
+            actions: [{ label: "Full Skill Set", href: "#skills" }]
         },
         {
             keywords: ["resume", "cv", "download", "hiring", "pdf", "job"],
             reply: "You can view Yash's resume online or download the official PDF version for his full work history and contact details.",
             actions: [
-                { label: "View Resume", href: "resume.html" },
+                { label: "View Resume", href: "#resume" },
                 { label: "Download PDF", href: "resume.pdf" }
             ]
         },
@@ -92,24 +82,24 @@
             keywords: ["contact", "email", "linkedin", "reach", "message", "hire", "phone"],
             reply: "You can reach Yash via the contact form, LinkedIn (highly active), or email (yashgolani287@gmail.com). He's currently open to discussing Robotics & AI roles.",
             actions: [
-                { label: "Contact Form", href: "contact.html" },
+                { label: "Contact Form", href: "#contact" },
                 { label: "LinkedIn", href: "https://www.linkedin.com/in/yash-golani-5556a424a" }
             ]
         },
         {
             keywords: ["projects", "portfolio", "project", "work", "build"],
             reply: "Yash has worked on diverse projects: Turtlebot object detection, Spider Mimic Quadruped, Smart Agriculture, and ML systems for Finance.",
-            actions: [{ label: "View All Projects", href: "projects.html" }]
+            actions: [{ label: "View All Projects", href: "#projects" }]
         },
         {
             keywords: ["education", "college", "degree", "university", "btech", "symbiosis", "study", "cgpa", "pune"],
             reply: "Yash is pursuing a B.Tech in Robotics and Automation at Symbiosis Institute of Technology, Pune (2022-2026) with a 7.51 CGPA.",
-            actions: [{ label: "Education Details", href: "education.html" }]
+            actions: [{ label: "Education Details", href: "#education" }]
         },
         {
             keywords: ["experience", "work", "history", "career", "job", "internship"],
             reply: "Yash has worked on perception systems, MLOps, and automation, including a Systems Engineering internship at ESSI and production radar deployments.",
-            actions: [{ label: "Work Experience", href: "experience.html" }]
+            actions: [{ label: "Work Experience", href: "#experience" }]
         },
         {
             keywords: ["where", "page", "current", "explain", "what", "this"],
@@ -119,20 +109,19 @@
     ];
 
     const QUICK_ACTIONS = [
-        { label: "Experience", href: "experience.html" },
-        { label: "Education", href: "education.html" },
-        { label: "Robotics Work", href: "projects.html#sasha-object-detection-using-turtlebot-4" },
-        { label: "Radar Systems", href: "experience.html#sasha-radar-evidence-systems" },
-        { label: "ANPR & Vision", href: "experience.html#sasha-automatic-number-plate-recognition" },
-        { label: "MLOps & Platform", href: "experience.html#sasha-mlops-platform" },
-        { label: "Contact Yash", href: "contact.html" }
+        { label: "Experience", href: "#experience" },
+        { label: "Education", href: "#education" },
+        { label: "Robotics Work", href: "#sasha-object-detection-using-turtlebot-4" },
+        { label: "Radar Systems", href: "#sasha-radar-evidence-systems" },
+        { label: "ANPR & Vision", href: "#sasha-automatic-number-plate-recognition" },
+        { label: "MLOps & Platform", href: "#sasha-mlops-platform" },
+        { label: "Contact Yash", href: "#contact" }
     ];
 
     // --- STATE ---
     let isOpen = false;
     let history = [];
     let isTyping = false;
-    let lastPage = "";
     let hasBeenOpened = false;
 
     // --- UI ELEMENTS ---
@@ -154,13 +143,12 @@
             const parsed = JSON.parse(saved);
             isOpen = parsed.isOpen || false;
             history = parsed.history || [];
-            lastPage = parsed.lastPage || "";
             hasBeenOpened = parsed.hasBeenOpened || false;
         }
     }
 
     function saveState() {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify({ isOpen, history, lastPage, hasBeenOpened }));
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({ isOpen, history, hasBeenOpened }));
     }
 
     function ensureHeadingIds() {
@@ -250,16 +238,13 @@
     }
 
     function checkInitialState() {
-        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-
         if (isOpen) {
             panel.classList.add('active');
             input.focus();
         }
 
-        if (hasBeenOpened && (history.length === 0 || lastPage !== currentPage)) {
+        if (hasBeenOpened && history.length === 0) {
             greet();
-            lastPage = currentPage;
             saveState();
         }
     }
@@ -274,11 +259,7 @@
         input.focus();
         if (!hasBeenOpened) {
             hasBeenOpened = true;
-            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-            if (history.length === 0 || lastPage !== currentPage) {
-                greet();
-                lastPage = currentPage;
-            }
+            if (history.length === 0) greet();
         }
         saveState();
     }
@@ -290,14 +271,7 @@
     }
 
     function greet() {
-        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-        const pageDesc = PAGE_DESCRIPTIONS[currentPage];
-
-        let greetingText = `Hi! I'm Sasha, Yash's AI assistant. I can help find specific projects, tech stack details, or navigate the site.`;
-
-        if (pageDesc) {
-            greetingText += `<br><br>You're currently on <strong>${pageDesc}</strong>`;
-        }
+        const greetingText = `Hi! I'm Sasha, Yash's site guide. I can help find specific projects, tech stack details, or jump you anywhere on the site.`;
 
         const greeting = `
             <div class="sasha-welcome">
@@ -306,9 +280,9 @@
             </div>
         `;
         const actions = [
-            { label: "Skills", href: "skills.html" },
-            { label: "Experience", href: "experience.html" },
-            { label: "Contact", href: "contact.html" }
+            { label: "Skills", href: "#skills" },
+            { label: "Experience", href: "#experience" },
+            { label: "Contact", href: "#contact" }
         ];
 
         renderMessage('assistant', greeting, actions);
@@ -352,10 +326,8 @@
 
         if (bestMatch && maxScore >= 4) {
             if (bestMatch.reply === "GENERIC_PAGE_DESCRIPTION") {
-                const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-                const pageDesc = PAGE_DESCRIPTIONS[currentPage];
                 return {
-                    reply: pageDesc ? `You are looking at <strong>${pageDesc}</strong>` : "You're exploring Yash Golani's portfolio. I can help you find specific details about his work in Robotics and AI.",
+                    reply: "You're exploring Yash Golani's portfolio. I can help you find specific details about his work in Robotics and AI, or jump you to any section.",
                     actions: QUICK_ACTIONS
                 };
             }
@@ -417,15 +389,9 @@
             window.open(action.href, '_blank');
             return;
         }
-
-        const [page, hash] = action.href.split('#');
-        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-
-        if (page && page !== currentPage) {
-            window.location.href = action.href;
-        } else if (hash) {
-            navigateToHash(hash);
-        }
+        // Single-page: every action is an in-page anchor.
+        const hash = action.href.replace(/^#/, '');
+        if (hash) navigateToHash(hash);
     }
 
     function navigateToHash(hash) {
@@ -435,7 +401,7 @@
             target.classList.add('sasha-highlight');
             setTimeout(() => target.classList.remove('sasha-highlight'), 2000);
             if (!window.location.hash.includes(hash)) {
-                history.replaceState(null, null, `#${hash}`);
+                window.history.replaceState(null, null, `#${hash}`);
             }
         }
     }

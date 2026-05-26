@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="theme-color" content="#0b0c10" />
+  <meta name="theme-color" content="#030303" />
   <meta name="description"
     content="Yash Golani portfolio: Robotics & AI Engineer. Applied AI, radar perception, multi camera analytics, ANPR, and reliable production systems." />
   <title>Yash Golani | Robotics & AI Engineer</title>
@@ -23,6 +23,298 @@
   <!-- Critical CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
   <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+  <style>
+    /* ---- single-page layout ---- */
+    section[id],
+    header.hero[id],
+    [id^="sasha-"],
+    [id^="ws-"] {
+      scroll-margin-top: 90px;
+    }
+
+    /* ---- projects (scoped) ---- */
+    .projImg {
+          width: 100%;
+          height: 200px;
+          object-fit: cover;
+          border-radius: var(--radius-sm);
+          border: 1px solid var(--line);
+          background: var(--surface-2);
+          filter: grayscale(1) contrast(1.02);
+          transition: filter var(--dur-3) var(--ease),
+            transform var(--dur-3) var(--ease-out);
+        }
+
+        .card:hover .projImg {
+          filter: grayscale(1) contrast(1.06) brightness(1.08);
+          transform: scale(1.015);
+        }
+
+        .projectsGrid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 32px 24px;
+        }
+
+        @media (max-width: 900px) {
+          .projImg {
+            height: 200px;
+          }
+
+          .projectsGrid {
+            grid-template-columns: 1fr;
+          }
+        }
+
+    /* ---- education (scoped) ---- */
+    /* Page-only UI boost */
+        .eduHero {
+          position: relative;
+          overflow: hidden;
+        }
+
+        .eduHeroInner {
+          position: relative;
+          display: flex;
+          gap: 16px;
+          align-items: flex-start;
+          justify-content: space-between;
+          flex-wrap: wrap;
+        }
+
+        .iconBadge {
+          display: inline-flex;
+          gap: 10px;
+          align-items: center;
+          padding: 10px 12px;
+          border: 1px solid var(--line);
+          border-radius: 14px;
+          background: color-mix(in srgb, var(--surface) 92%, transparent);
+          box-shadow: var(--shadow-soft);
+          user-select: none;
+        }
+
+        .iconBadge .ico {
+          width: 18px;
+          height: 18px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          opacity: 0.9;
+        }
+
+        .iconBadge svg {
+          width: 18px;
+          height: 18px;
+          stroke: currentColor;
+          fill: none;
+          stroke-width: 2;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+          opacity: 0.9;
+        }
+
+        .statGrid {
+          display: grid;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          gap: 10px;
+          margin-top: 14px;
+          width: 100%;
+        }
+
+
+        @media (max-width: 1000px) {
+          .statGrid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
+        }
+
+        .stat {
+          border: 1px solid var(--line);
+          border-radius: 14px;
+          padding: 12px;
+          background: color-mix(in srgb, var(--surface) 95%, transparent);
+        }
+
+        .stat .k {
+          font-weight: 700;
+          letter-spacing: 0.2px;
+        }
+
+        .stat .v {
+          margin-top: 6px;
+          opacity: 0.9;
+        }
+
+        .sectionHeadRow {
+          display: flex;
+          gap: 10px;
+          align-items: center;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          margin-top: 22px;
+          margin-bottom: 10px;
+        }
+
+        .sectionHeadRow .left {
+          display: flex;
+          gap: 10px;
+          align-items: center;
+        }
+
+        .softLine {
+          height: 1px;
+          background: var(--line);
+          opacity: 0.8;
+          margin: 14px 0;
+        }
+
+        .eduTimeline {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 14px;
+        }
+
+        @media (max-width: 900px) {
+          .eduTimeline {
+            grid-template-columns: 1fr;
+          }
+        }
+
+        .phaseCard {
+          position: relative;
+          border: 1px solid var(--line);
+          border-radius: var(--radius);
+          padding: 24px;
+          background: var(--surface);
+          transition: border-color var(--dur-2) var(--ease);
+        }
+
+        .phaseCard:hover {
+          border-color: var(--line-strong);
+        }
+
+        .eduHero {
+          position: relative;
+          overflow: hidden;
+          border: 1px solid var(--line);
+          background: var(--surface);
+        }
+
+        .eduStatus {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 4px 10px;
+          border-radius: var(--radius-xs);
+          background: transparent;
+          border: 1px solid var(--line);
+          font-size: 11px;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          font-weight: 700;
+          color: var(--muted);
+          margin-bottom: 12px;
+        }
+
+        .eduStatus .dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: var(--accent-2);
+          animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+          0% {
+            opacity: 0.4;
+          }
+
+          50% {
+            opacity: 1;
+          }
+
+          100% {
+            opacity: 0.4;
+          }
+        }
+
+        .phaseTop {
+          display: flex;
+          gap: 10px;
+          align-items: center;
+          justify-content: space-between;
+          flex-wrap: wrap;
+        }
+
+        .phaseTitle {
+          display: flex;
+          gap: 10px;
+          align-items: center;
+        }
+
+        .phaseTitle b {
+          font-size: 1.02rem;
+        }
+
+        .phasePill {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 6px 10px;
+          border-radius: 999px;
+          border: 1px solid var(--line);
+          background: color-mix(in srgb, var(--surface) 92%, transparent);
+          font-size: 0.92rem;
+          opacity: 0.95;
+        }
+
+        .miniList {
+          margin: 12px 0 0 0;
+          padding-left: 18px;
+          line-height: 1.9;
+        }
+
+        .miniList li {
+          margin: 2px 0;
+        }
+
+        details.eduDetails {
+          border: 1px solid var(--line);
+          border-radius: 16px;
+          padding: 14px;
+          background: color-mix(in srgb, var(--surface) 96%, transparent);
+          box-shadow: var(--shadow-soft);
+        }
+
+        details.eduDetails summary {
+          cursor: pointer;
+          list-style: none;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 10px;
+          font-weight: 700;
+        }
+
+        details.eduDetails summary::-webkit-details-marker {
+          display: none;
+        }
+
+        .chev {
+          width: 18px;
+          height: 18px;
+          display: inline-flex;
+          opacity: 0.75;
+          transform: rotate(0deg);
+          transition: transform 160ms ease;
+        }
+
+        details[open] .chev {
+          transform: rotate(90deg);
+        }
+  </style>
 </head>
 
 <body>
@@ -42,16 +334,16 @@
         </button>
 
         <nav class="navLinks" id="navLinks" aria-label="Primary">
-          <a href="index.html">Home</a>
-          <a href="skills.html">Skills</a>
-          <a href="experience.html">Experience</a>
-          <a href="projects.html">Projects</a>
-          <a href="education.html">Education</a>
-          <a href="contact.html">Contact</a>
+          <a href="#home">Home</a>
+          <a href="#skills">Skills</a>
+          <a href="#experience">Experience</a>
+          <a href="#projects">Projects</a>
+          <a href="#education">Education</a>
+          <a href="#contact">Contact</a>
         </nav>
 
         <div class="actions">
-          <a class="btn btnPrimary" href="resume.html">Resume</a>
+          <a class="btn btnPrimary" href="#resume">Resume</a>
 
           <div class="themeSwitch" title="Theme">
             <span id="themeLabel" class="note">Dark</span>
@@ -68,85 +360,18 @@
     </div>
   </div>
 
-  <header class="hero reveal">
+    <header class="hero reveal" id="home">
     <canvas id="bg-canvas"></canvas>
     <div class="container">
-      <div class="heroGrid">
-        <div class="card" style="text-align: justify;">
-          <h1>Robotics & AI Engineer</h1>
-          <p class="lead">
-            A machine learning and embedded robotics engineer with expertise in Python, data analysis, and applied AI
-            solutions. I build and optimize intelligent systems with ownership of reliability, calibration, and evidence
-            workflows in real deployments. My work focuses on turning sensing and perception into predictable,
-            reviewable outputs by combining strong fundamentals in robotics and automation with practical engineering
-            discipline.
-          </p>
-          <p class="lead">
-            I build end to end systems across radar and camera based pipelines, computer vision workflows, and scalable
-            backend services. I care about the parts that make solutions production ready: stable ingest, clear data
-            contracts, observability, and failure recovery. I enjoy taking a system from prototype to field operation by
-            improving calibration, performance, and long run stability, while keeping the UX clean and the results easy
-            to verify and trust.
-          </p>
-          <p class="lead">
-            Beyond model accuracy, I focus on engineering rigor-designing systems that handle edge cases, degrade
-            gracefully, and provide clear evidence trails for critical decisions. I've deployed solutions across diverse
-            domains including traffic enforcement, surveillance networks, and autonomous systems, with emphasis on
-            reliability, regulatory compliance, and human-centered verification workflows.
-          </p>
-          <p class="lead">
-            I also specialize in integrating Agentic AI and Large Language Models (LLMs) into specialized technical
-            workflows, enabling more intuitive human-system interaction. By leveraging modern retrieval-augmented
-            generation (RAG) and vision-language models (VLMs), I build tools that help operators make sense of complex
-            sensor data and automate routine decision-making tasks. I believe that the future of robotics lies in the
-            seamless combination of robust low-level perception with high-level reasoning capabilities.
-          </p>
-
-          <div class="sep"></div>
-
-          <div class="tagRow">
-            <a class="btn btnPrimary" href="projects.html">Explore work</a>
-            <a class="btn btnPrimary" href="contact.html">Contact</a>
-          </div>
-        </div>
-
-        <div class="card kpis" aria-label="Highlights">
-          <div class="kpi">
-            <div class="kpiIcon">
-              <svg viewBox="0 0 24 24" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
-                  fill="currentColor" />
-              </svg>
-            </div>
-            <b>High uptime</b>
-            <span>Self-healing systems with watchdogs, health checks, and automated recovery mechanisms. Designed for
-              95%+ availability over extended deployment periods.</span>
-          </div>
-          <div class="kpi">
-            <div class="kpiIcon">
-              <svg viewBox="0 0 24 24" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
-                  fill="currentColor" />
-              </svg>
-            </div>
-            <b>Production focus</b>
-            <span>Every system prioritizes real-world readiness with calibration validation, evidence packaging, field
-              monitoring, and proven reliability in live deployments.</span>
-          </div>
-          <div class="kpi">
-            <div class="kpiIcon">
-              <svg viewBox="0 0 24 24" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M3 9h4V5H3v4zm0 5h4v-4H3v4zm5 0h4v-4H8v4zm5 0h4v-4h-4v4zm-5 5h4v-4H8v4zm-5 0h4v-4H3v4zm10 0h4v-4h-4v4zm5-14v4h4V5h-4zm0 9h4v-4h-4v4z"
-                  fill="currentColor" />
-              </svg>
-            </div>
-            <b>Systems mindset</b>
-            <span>Architecture-first approach to building scalable, observable, and maintainable services. Emphasis on
-              robust data ingest, repeatable deployments, and system observability.</span>
-          </div>
+      <div class="heroInner">
+        <p class="heroEyebrow">Robotics &middot; Applied AI &middot; Systems Engineering</p>
+        <h1 class="heroName">Yash Golani</h1>
+        <p class="heroRole">Robotics &amp; AI Engineer</p>
+        <p class="heroLead">I build production perception and analytics systems &mdash; radar, multi-camera ANPR, MLOps, and applied LLM/VLM tooling &mdash; and own them from prototype to field: reliability, calibration, and evidence workflows that hold up in real deployments.</p>
+        <div class="heroActions">
+          <a class="btn btnPrimary" href="#projects">View work</a>
+          <a class="btn" href="#experience">Experience</a>
+          <a class="btn" href="resume.pdf" target="_blank" rel="noreferrer">R&eacute;sum&eacute;</a>
         </div>
       </div>
     </div>
@@ -156,47 +381,47 @@
     style="width: 100%; height: 500px; position: relative; overflow: hidden; margin-top: 10px; margin-bottom: 60px;">
   </div>
 
-  <main id="main" class="container reveal">
-    <section class="section">
+  <main id="main" class="container">
+    <section class="section reveal">
       <div class="sectionHead">
         <h2>Impact in production</h2>
       </div>
 
       <div class="grid3">
         <div class="statBox">
-          <div class="statNumber">50 ms</div>
+          <div class="statNumber">Sub-100 ms</div>
           <div class="statLabel">Decision latency</div>
-          <div class="statDescription">Radar speed detection system in real-world roadside trials</div>
+          <div class="statDescription">Radar speed-detection pipeline in real-world roadside trials</div>
         </div>
 
         <div class="statBox">
-          <div class="statNumber">20</div>
+          <div class="statNumber">Real-time</div>
           <div class="statLabel">Multi-object tracking</div>
-          <div class="statDescription">Simultaneous radar targets with configurable business logic</div>
+          <div class="statDescription">Simultaneous radar target tracking with configurable enforcement logic</div>
         </div>
 
         <div class="statBox">
-          <div class="statNumber">95%</div>
-          <div class="statLabel">System uptime</div>
-          <div class="statDescription">Over 3 months with ~2 min avg recovery via watchdogs & health checks</div>
+          <div class="statNumber">High uptime</div>
+          <div class="statLabel">Self-healing services</div>
+          <div class="statDescription">Watchdogs, health checks, and automated recovery for long-running operation</div>
         </div>
 
         <div class="statBox">
-          <div class="statNumber">90%</div>
-          <div class="statLabel">Target lock success</div>
-          <div class="statDescription">Radar-camera calibration with 2 second lock time, weekly recalibration</div>
+          <div class="statNumber">2 s lock</div>
+          <div class="statLabel">Radar-camera calibration</div>
+          <div class="statDescription">Automated target lock with periodic recalibration</div>
         </div>
 
         <div class="statBox">
-          <div class="statNumber">1600</div>
-          <div class="statLabel">Cameras managed</div>
-          <div class="statDescription">Statewide ANPR pipeline with 10 second end-to-end processing for alerts</div>
+          <div class="statNumber">Multi-camera</div>
+          <div class="statLabel">ANPR at scale</div>
+          <div class="statDescription">High-throughput plate recognition with seconds-level end-to-end alerting</div>
         </div>
 
         <div class="statBox">
-          <div class="statNumber">25 FPS</div>
-          <div class="statLabel">Processing throughput</div>
-          <div class="statDescription">Multi-camera analytics with 4 independent core services for scaling</div>
+          <div class="statNumber">Scalable</div>
+          <div class="statLabel">Analytics throughput</div>
+          <div class="statDescription">Modular multi-camera analytics across independent core services</div>
         </div>
       </div>
     </section>
@@ -246,13 +471,1128 @@
       </div>
     </section>
 
-    <section class="section">
+        <section class="section">
       <div class="sectionHead">
-        <h2>Quick links</h2>
+        <h2>How I work</h2>
+        <p>Engineering for the field, not the demo</p>
       </div>
 
+      <div class="grid3">
+        <div class="item">
+          <div class="itemTop">
+            <div>
+              <b>High uptime</b>
+              <div class="meta">watchdogs &middot; health checks &middot; recovery</div>
+            </div>
+          </div>
+          <div class="sep"></div>
+          <div class="note">Self-healing services designed for high availability across long deployments.</div>
+        </div>
+
+        <div class="item">
+          <div class="itemTop">
+            <div>
+              <b>Production focus</b>
+              <div class="meta">calibration &middot; evidence &middot; monitoring</div>
+            </div>
+          </div>
+          <div class="sep"></div>
+          <div class="note">Built for real-world readiness with verifiable, reviewable outputs.</div>
+        </div>
+
+        <div class="item">
+          <div class="itemTop">
+            <div>
+              <b>Systems mindset</b>
+              <div class="meta">ingest &middot; observability &middot; scale</div>
+            </div>
+          </div>
+          <div class="sep"></div>
+          <div class="note">Architecture-first: robust data contracts, repeatable deploys, clear observability.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="section reveal">
+<div class="pageTitle reveal">
+      <h1>Skills</h1>
+      <p>Technologies and tools I specialize in</p>
+    </div>
+
+    <div class="skillsGrid reveal">
+      <div class="skillCard reveal">
+        <div class="skillIcon"><i class="devicon-python-plain"></i></div>
+        <div class="skillTitle">Programming Languages</div>
+        <div class="skillSubtitle">Core languages for development</div>
+        <div class="sep"></div>
+        <div class="skillTagRow">
+          <div class="skillTag">
+            <i class="devicon-python-plain"></i>
+            <span>Python</span>
+          </div>
+          <div class="skillTag">
+            <i class="devicon-c-plain"></i>
+            <span>C</span>
+          </div>
+          <div class="skillTag">
+            <i class="devicon-cplusplus-plain"></i>
+            <span>C++</span>
+          </div>
+          <div class="skillTag">
+            <i class="devicon-c-plain"></i>
+            <span>Embedded C</span>
+          </div>
+          <div class="skillTag">
+            <i class="devicon-javascript-plain"></i>
+            <span>JavaScript</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="skillCard">
+        <div class="skillIcon"><i class="devicon-fastapi-plain"></i></div>
+        <div class="skillTitle">Backend Frameworks</div>
+        <div class="skillSubtitle">Web and API development</div>
+        <div class="sep"></div>
+        <div class="skillTagRow">
+          <div class="skillTag">
+            <i class="devicon-fastapi-plain"></i>
+            <span>FastAPI</span>
+          </div>
+          <div class="skillTag">
+            <i class="devicon-flask-original"></i>
+            <span>Flask</span>
+          </div>
+          <div class="skillTag">
+            <i class="devicon-react-original"></i>
+            <span>React</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="skillCard">
+        <div class="skillIcon"><i class="devicon-postgresql-plain"></i></div>
+        <div class="skillTitle">Data & Messaging</div>
+        <div class="skillSubtitle">Databases and message queues</div>
+        <div class="sep"></div>
+        <div class="skillTagRow">
+          <div class="skillTag">
+            <i class="devicon-postgresql-plain"></i>
+            <span>PostgreSQL</span>
+          </div>
+          <div class="skillTag">
+            <i class="devicon-redis-plain"></i>
+            <span>Redis</span>
+          </div>
+          <div class="skillTag">
+            <i class="devicon-apachekafka-plain"></i>
+            <span>Kafka</span>
+          </div>
+          <div class="skillTag">
+            <i class="fa-solid fa-tasks"></i>
+            <span>Celery</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="skillCard">
+        <div class="skillIcon"><i class="devicon-docker-plain"></i></div>
+        <div class="skillTitle">DevOps & Tools</div>
+        <div class="skillSubtitle">Deployment and development tools</div>
+        <div class="sep"></div>
+        <div class="skillTagRow">
+          <div class="skillTag">
+            <i class="devicon-docker-plain"></i>
+            <span>Docker</span>
+          </div>
+          <div class="skillTag">
+            <i class="devicon-git-plain"></i>
+            <span>Git</span>
+          </div>
+          <div class="skillTag">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg" />
+            <span>Postman</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="skillCard">
+        <div class="skillIcon"><i class="devicon-tensorflow-original"></i></div>
+        <div class="skillTitle">Machine Learning</div>
+        <div class="skillSubtitle">Data science and ML frameworks</div>
+        <div class="sep"></div>
+        <div class="skillTagRow">
+          <div class="skillTag">
+            <i class="devicon-pandas-plain"></i>
+            <span>Pandas</span>
+          </div>
+          <div class="skillTag">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/numpy/numpy-original.svg" />
+            <span>NumPy</span>
+          </div>
+          <div class="skillTag">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/matplotlib/matplotlib-original.svg" />
+            <span>Matplotlib</span>
+          </div>
+          <div class="skillTag">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/scikitlearn/scikitlearn-line.svg" />
+            <span>Scikit Learn</span>
+          </div>
+          <div class="skillTag">
+            <i class="devicon-tensorflow-original"></i>
+            <span>TensorFlow</span>
+          </div>
+          <div class="skillTag">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pytorch/pytorch-original.svg" />
+            <span>PyTorch</span>
+          </div>
+          <div class="skillTag">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/keras/keras-line.svg" />
+            <span>Keras</span>
+          </div>
+          <div class="skillTag">
+            <i class="fa-solid fa-bolt-lightning"></i>
+            <span>XGBoost</span>
+          </div>
+          <div class="skillTag">
+            <i class="fa-solid fa-leaf"></i>
+            <span>LightGBM</span>
+          </div>
+          <div class="skillTag">
+            <i class="devicon-opencv-plain"></i>
+            <span>OpenCV</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="skillCard">
+        <div class="skillIcon">
+          <i class="fa-solid fa-gears"></i>
+        </div>
+        <div class="skillTitle">Robotics</div>
+        <div class="skillSubtitle">Tech tools and frameworks</div>
+        <div class="sep"></div>
+        <div class="skillTagRow">
+          <div class="skillTag">
+            <i class="fa-solid fa-compass-drafting"></i>
+            <span>AutoCAD</span>
+          </div>
+          <div class="skillTag">
+            <i class="devicon-ros-original"></i>
+            <span>ROS2</span>
+          </div>
+          <div class="skillTag">
+            <i class="devicon-gazebo-plain"></i>
+            <span>Gazebo</span>
+          </div>
+          <div class="skillTag">
+            <i class="fa-solid fa-eye"></i>
+            <span>Rviz</span>
+          </div>
+          <div class="skillTag">
+            <i class="fa-solid fa-industry"></i>
+            <span>PLC</span>
+          </div>
+          <div class="skillTag">
+            <i class="fa-solid fa-tower-broadcast"></i>
+            <span>IoT</span>
+          </div>
+          <div class="skillTag">
+            <i class="devicon-raspberrypi-plain"></i>
+            <span>Raspberry Pi</span>
+          </div>
+          <div class="skillTag">
+            <i class="devicon-arduino-plain"></i>
+            <span>Microcontrollers</span>
+          </div>
+          <div class="skillTag">
+            <i class="fa-solid fa-diagram-project"></i>
+            <span>KiCAD</span>
+          </div>
+          <div class="skillTag">
+            <i class="devicon-matlab-plain"></i>
+            <span>MATLAB</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="skillCard">
+        <div class="skillIcon">
+          <i class="fa-solid fa-robot"></i>
+        </div>
+        <div class="skillTitle">Agentic AI</div>
+        <div class="skillSubtitle">LLM and AI frameworks</div>
+        <div class="sep"></div>
+        <div class="skillTagRow">
+          <div class="skillTag">
+            <span class="skillEmoji">🤗</span>
+            <span>Hugging Face</span>
+          </div>
+          <div class="skillTag">
+            <i class="fa-solid fa-link"></i>
+            <span>LangChain</span>
+          </div>
+          <div class="skillTag">
+            <i class="fa-solid fa-magnifying-glass-chart"></i>
+            <span>RAG</span>
+          </div>
+          <div class="skillTag">
+            <i class="fa-solid fa-brain"></i>
+            <span>LLM</span>
+          </div>
+          <div class="skillTag">
+            <i class="fa-solid fa-eye"></i>
+            <span>VLM</span>
+          </div>
+          <div class="skillTag">
+            <i class="fa-solid fa-microchip"></i>
+            <span>Qwen-VL</span>
+          </div>
+          <div class="skillTag">
+            <i class="fa-solid fa-mountain-sun"></i>
+            <span>LLaVa</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="skillCard">
+        <div class="skillIcon"><i class="fa-solid fa-star"></i></div>
+        <div class="skillTitle">Professional Strengths</div>
+        <div class="skillSubtitle">Professional and interpersonal competencies</div>
+        <div class="sep"></div>
+        <div class="skillTagRow">
+          <div class="skillTag">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>Ownership</span>
+          </div>
+          <div class="skillTag">
+            <i class="fa-solid fa-users-gear"></i>
+            <span>Stakeholder Management</span>
+          </div>
+          <div class="skillTag">
+            <i class="fa-solid fa-diagram-project"></i>
+            <span>System Design</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    </section>
+
+    <section id="experience" class="reveal">
+<div class="pageTitle reveal">
+      <h1>Experience</h1>
+      <p>Engineering Brief & System Architectures</p>
+    </div>
+
+    <!-- Role Card -->
+    <section class="section reveal">
+      <div class="xpRoleCard">
+        <div class="xpRoleHeader">
+          <div class="xpCompany">
+            <i class="fa-solid fa-building"></i>
+            <div id="sasha-essi-integrated-technologies">
+              <div class="companyName">ESSI Integrated Technologies</div>
+              <div class="jobTitle">PLC Programming - Systems Engineering Intern</div>
+            </div>
+          </div>
+          <div class="xpLocation">
+            <span><strong>New Delhi</strong></span>
+            <span class="sep">|</span>
+            <span><em>June 2025 - May 2026</em></span>
+          </div>
+        </div>
+        <p class="xpSummary">
+          Built deployable perception and analytics systems across radar, cameras, ANPR, and production hardening.
+        </p>
+      </div>
+    </section>
+
+    <!-- Workstreams -->
+    <div class="section reveal">
+      <div class="sectionHead">
+        <h2>Workstreams</h2>
+      </div>
+
+      <div class="xpWorkstreamsGrid">
+
+        <!-- Radar + Camera-Radar Fusion -->
+        <div class="xpWorkstream" id="ws-radar">
+          <div class="wsHeader">
+            <i class="fa-solid fa-tower-broadcast"></i>
+            <div>
+              <h3 id="sasha-radar-evidence-systems">Radar, Evidence & Camera-Radar Fusion</h3>
+            </div>
+          </div>
+          <ul class="wsBullets">
+            <li>Built a radar-triggered capture and enforcement loop with stable multi-target tracking and review-ready
+              evidence packaging.</li>
+            <li>Fused radar tracks with camera detections, projecting radar targets into the image plane and driving PTZ
+              slew-to-target.</li>
+            <li>Calibrated between radar and camera coordinate frames, combining radar range and velocity with detection
+              for reliable target confirmation.</li>
+            <li>Hardened reliability with watchdogs, health checks, and automated recovery for long-running field
+              operation.</li>
+          </ul>
+        </div>
+
+        <!-- Multi-Camera Analytics: ANPR + Face Recognition + Edge Platform -->
+        <div class="xpWorkstream" id="ws-analytics">
+          <span id="sasha-automatic-number-plate-recognition" aria-hidden="true"></span>
+          <span id="sasha-face-recognition-identity-registry" aria-hidden="true"></span>
+          <div class="wsHeader">
+            <i class="fa-solid fa-layer-group"></i>
+            <div>
+              <h3 id="sasha-multi-analytic-edge-platform">Multi-Camera Analytics: ANPR, Recognition & Edge Platform</h3>
+            </div>
+          </div>
+          <ul class="wsBullets">
+            <li>Built a single-process, single-GPU edge runtime that fans each camera stream into per-analytic threads
+              over a shared model registry and inference client, with a REST control plane (start, stop, status,
+              restart, backfill).</li>
+            <li>Hardened multi-camera ingest and restreaming: RTSP handling, automatic reconnection, fallback behavior,
+              and predictable frame access, with Kafka topic partitioning and Redis state sync.</li>
+            <li>Delivered ANPR with high OCR correctness and dataset readiness (plate crops, character-ordering logic,
+              verification flow, export quality), plus PTZ operational control per camera.</li>
+            <li>Built a face-recognition and identity-registry service: operator enrollment (single and bulk), 1:N image
+              search with ranked top-K, and watch-list matching with a full alert lifecycle.</li>
+            <li>Ran concurrent analytics, crowd and safety (counting, pose, fall detection), abandoned-object detection,
+              and person-attribute extraction, with tiled inference for small or distant objects.</li>
+          </ul>
+        </div>
+
+        <!-- MLOps -->
+        <div class="xpWorkstream" id="ws-mlops">
+          <div class="wsHeader">
+            <i class="fa-solid fa-arrows-rotate"></i>
+            <div>
+              <h3 id="sasha-mlops-platform">MLOps & Platform</h3>
+            </div>
+          </div>
+          <ul class="wsBullets">
+            <li>Built and maintained Kafka-based service pipelines with debuggability and isolation.</li>
+            <li>Implemented training lifecycle controls: pause, resume, cancel plus job state visibility.</li>
+            <li>Improved dataset aggregation, annotation UX, and operational hygiene: cleanup and retention.</li>
+          </ul>
+        </div>
+
+        <!-- VLM -->
+        <div class="xpWorkstream" id="ws-vlm">
+          <div class="wsHeader">
+            <i class="fa-solid fa-brain"></i>
+            <div>
+              <h3 id="sasha-vlm-retrieval">VLM & Retrieval</h3>
+            </div>
+          </div>
+          <ul class="wsBullets">
+            <li>Migrated CCTV VLM pipeline and instrumented per-stage latency.</li>
+            <li>Implemented retrieval upgrade: semantic embeddings plus plate-aware search.</li>
+            <li>Added prompt and token controls to keep latency bounded and predictable.</li>
+          </ul>
+        </div>
+
+        <!-- Command Centre -->
+        <div class="xpWorkstream" id="ws-command-centre">
+          <div class="wsHeader">
+            <i class="fa-solid fa-tower-observation"></i>
+            <div>
+              <h3>GIS & Command Centre</h3>
+            </div>
+          </div>
+          <ul class="wsBullets">
+            <li>Unified platform for real-time emergency response systems and automated dispatch workflows.</li>
+            <li>Implemented high-precision radio device tracking and historical movement visualization.</li>
+            <li>Built an integrated GIS dashboard for situational awareness and geofence-based alerting.</li>
+            <li>Engineered a rule-based mission lifecycle engine for automated resource management.</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Systems bento -->
+      <section class="section reveal">
+        <div class="sectionHead">
+          <h2>Systems at a glance</h2>
+          <p>Each block is a system I built &mdash; open it for the full breakdown above.</p>
+        </div>
+
+        <div class="bento">
+          <div class="bentoTile bentoFeature">
+            <p class="bentoEyebrow">Systems, end to end</p>
+            <div class="bentoOrbit" aria-label="Core stack: Python, FastAPI, Kafka, Redis, PostgreSQL, Docker, PyTorch, OpenCV, YOLO">
+              <i class="devicon-python-plain" style="--a:0deg" aria-hidden="true"></i>
+              <i class="devicon-fastapi-plain" style="--a:40deg" aria-hidden="true"></i>
+              <i class="devicon-apachekafka-original" style="--a:80deg" aria-hidden="true"></i>
+              <i class="devicon-redis-plain" style="--a:120deg" aria-hidden="true"></i>
+              <i class="devicon-postgresql-plain" style="--a:160deg" aria-hidden="true"></i>
+              <i class="devicon-docker-plain" style="--a:200deg" aria-hidden="true"></i>
+              <i class="devicon-pytorch-original" style="--a:240deg" aria-hidden="true"></i>
+              <i class="devicon-opencv-plain" style="--a:280deg" aria-hidden="true"></i>
+              <i class="fa-solid fa-crosshairs" style="--a:320deg" aria-hidden="true"></i>
+            </div>
+            <h3>From sensor to dashboard &mdash; built to survive the field.</h3>
+          </div>
+
+          <a class="bentoTile bentoWide" href="#ws-radar">
+            <i class="fa-solid fa-arrow-up-right bentoArrow" aria-hidden="true"></i>
+            <span class="bentoIcon"><i class="fa-solid fa-tower-broadcast"></i></span>
+            <h3>Radar, Evidence &amp; Fusion</h3>
+            <p class="bentoLine">Radar-triggered enforcement with camera-radar fusion and PTZ slew-to-target.</p>
+            <div class="bentoStack"><span><i class="devicon-opencv-plain" aria-hidden="true"></i>OpenCV</span><span><i class="fa-solid fa-crosshairs" aria-hidden="true"></i>YOLO</span><span><i class="devicon-flask-original" aria-hidden="true"></i>Flask</span><span><i class="devicon-apachekafka-original" aria-hidden="true"></i>Kafka</span></div>
+          </a>
+
+          <a class="bentoTile" href="#ws-analytics">
+            <i class="fa-solid fa-arrow-up-right bentoArrow" aria-hidden="true"></i>
+            <span class="bentoIcon"><i class="fa-solid fa-layer-group"></i></span>
+            <h3>Multi-Camera Analytics</h3>
+            <p class="bentoLine">ANPR, face recognition, and a multi-analytic edge runtime.</p>
+            <div class="bentoStack"><span><i class="devicon-fastapi-plain" aria-hidden="true"></i>FastAPI</span><span><i class="devicon-pytorch-original" aria-hidden="true"></i>PyTorch</span><span><i class="devicon-redis-plain" aria-hidden="true"></i>Redis</span></div>
+          </a>
+
+          <a class="bentoTile" href="#ws-mlops">
+            <i class="fa-solid fa-arrow-up-right bentoArrow" aria-hidden="true"></i>
+            <span class="bentoIcon"><i class="fa-solid fa-arrows-rotate"></i></span>
+            <h3>MLOps &amp; Platform</h3>
+            <p class="bentoLine">Ingest &rarr; annotate &rarr; train &rarr; export, with job controls.</p>
+            <div class="bentoStack"><span><i class="fa-solid fa-leaf" aria-hidden="true"></i>Celery</span><span><i class="devicon-docker-plain" aria-hidden="true"></i>Docker</span><span><i class="devicon-apachekafka-original" aria-hidden="true"></i>Kafka</span></div>
+          </a>
+
+          <a class="bentoTile" href="#ws-vlm">
+            <i class="fa-solid fa-arrow-up-right bentoArrow" aria-hidden="true"></i>
+            <span class="bentoIcon"><i class="fa-solid fa-brain"></i></span>
+            <h3>VLM &amp; Retrieval</h3>
+            <p class="bentoLine">CCTV scene understanding with semantic, plate-aware search.</p>
+            <div class="bentoStack"><span><i class="fa-solid fa-brain" aria-hidden="true"></i>Qwen-VL</span><span><i class="fa-solid fa-link" aria-hidden="true"></i>LangChain</span><span><i class="fa-solid fa-database" aria-hidden="true"></i>Vector DB</span></div>
+          </a>
+
+          <a class="bentoTile" href="#ws-command-centre">
+            <i class="fa-solid fa-arrow-up-right bentoArrow" aria-hidden="true"></i>
+            <span class="bentoIcon"><i class="fa-solid fa-tower-observation"></i></span>
+            <h3>GIS &amp; Command Centre</h3>
+            <p class="bentoLine">Real-time tracking, GIS dashboards, and dispatch lifecycle.</p>
+            <div class="bentoStack"><span><i class="devicon-react-original" aria-hidden="true"></i>React</span><span><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i>Leaflet</span><span><i class="devicon-fastapi-plain" aria-hidden="true"></i>FastAPI</span></div>
+          </a>
+
+          <!-- Artistic radar sweep -->
+          <div class="bentoTile bentoWide bentoArt" aria-hidden="true">
+            <div class="radarViz"><span class="blip"></span></div>
+          </div>
+
+          <div class="bentoTile bentoWide">
+            <p class="bentoEyebrow">Domains</p>
+            <h3>Traffic enforcement, surveillance networks &amp; autonomy.</h3>
+            <p class="bentoLine">Field-deployed systems where reliability and evidence actually matter.</p>
+          </div>
+
+          <div class="bentoTile bentoWide">
+            <p class="bentoEyebrow">How I work</p>
+            <h3>Reliability-first</h3>
+            <div class="bentoStack">
+              <span>watchdogs</span><span>health checks</span><span>auto-recovery</span><span>calibration</span><span>evidence</span><span>observability</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="xpCTA reveal">
+        <a href="#projects" class="btn btnPrimary">View all projects</a>
+        <a href="#resume" class="btn">View resume</a>
+      </div>
+    </section>
+
+    <section id="projects" class="section reveal">
+<div class="pageTitle reveal">
+      <h1>Projects</h1>
+      <p>Projects from my resume, with quick links and visuals</p>
+    </div>
+
+    <div class="projectsGrid">
+
+      <!-- Project 1 -->
+      <div class="card reveal">
+        <img class="projImg" src="assets/images/img8.png" alt="Jarvis preview" loading="lazy" />
+
+        <div class="sep"></div>
+
+        <div class="itemTop">
+          <div>
+            <b id="sasha-jarvis">Jarvis</b>
+            <div class="meta">AI Assistant | Python | Task Automation | NLP</div>
+          </div>
+        </div>
+
+        <div class="sep"></div>
+
+        <div class="note">
+          An intelligent AI desktop assistant designed to automate daily tasks, provide voice-activated information
+          retrieval, and streamline workflows.
+        </div>
+
+        <div class="sep"></div>
+
+        <div class="tagRow">
+          <span class="tag">Python</span>
+          <span class="tag">AI</span>
+          <span class="tag">Voice UI</span>
+          <span class="tag">Automation</span>
+          <span class="tag">NLP</span>
+        </div>
+
+        <div class="links" style="margin-top:14px">
+          <a class="btn btnPrimary" href="https://github.com/yashgolani28/Jarvis" rel="noreferrer">View on GitHub</a>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="card reveal">
+        <img class="projImg" src="assets/images/img1.jpg" alt="Object detection using Turtlebot 4 preview"
+          loading="lazy" />
+
+        <div class="sep"></div>
+
+        <div class="itemTop">
+          <div>
+            <b id="sasha-object-detection-using-turtlebot-4">Object detection using Turtlebot 4</b>
+            <div class="meta">ROS | Real time perception | YOLOv8n</div>
+          </div>
+        </div>
+
+        <div class="sep"></div>
+
+        <div class="note">
+          Operating through ROS with real time perception and object classification using YOLOv8n.
+        </div>
+
+        <div class="sep"></div>
+
+        <div class="tagRow">
+          <span class="tag">ROS</span>
+          <span class="tag">YOLOv8n</span>
+          <span class="tag">Perception</span>
+          <span class="tag">Robotics</span>
+        </div>
+
+        <div class="links" style="margin-top:14px">
+          <a class="btn btnPrimary" href="https://github.com/yashgolani28/turtlebot4-object-detection" target="_blank"
+            rel="noreferrer">View on GitHub</a>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="card reveal">
+        <img class="projImg" src="assets/images/img2.jpg" alt="Smart Agriculture System preview" loading="lazy" />
+
+        <div class="sep"></div>
+
+        <div class="itemTop">
+          <div>
+            <b id="sasha-smart-agriculture-system">Smart Agriculture System</b>
+            <div class="meta">Hydroponics | ESP32 | Sensors | ML | Firebase</div>
+          </div>
+        </div>
+
+        <div class="sep"></div>
+
+        <div class="note">
+          Automatic hydroponics system with monitoring using ESP32, sensors, ML, and Firebase integration.
+        </div>
+
+        <div class="sep"></div>
+
+        <div class="tagRow">
+          <span class="tag">ESP32</span>
+          <span class="tag">Sensors</span>
+          <span class="tag">IoT</span>
+          <span class="tag">Firebase</span>
+        </div>
+
+        <div class="links" style="margin-top:14px">
+          <a class="btn btnPrimary" href="https://github.com/yashgolani28/smart-agriculture-system" target="_blank"
+            rel="noreferrer">View on GitHub</a>
+        </div>
+      </div>
+
+      <!-- Project 4 -->
+      <div class="card reveal">
+        <img class="projImg" src="assets/images/img3.png" alt="Spider Mimic Quadruped preview" loading="lazy" />
+
+        <div class="sep"></div>
+
+        <div class="itemTop">
+          <div>
+            <b id="sasha-spider-mimic-quadruped">Spider Mimic Quadruped</b>
+            <div class="meta">Arduino | IoT | AutoCAD | Mechanical modeling</div>
+          </div>
+        </div>
+
+        <div class="sep"></div>
+
+        <div class="note">
+          Developed a four legged bio inspired robot with mechanical modeling using Arduino, IoT, and AutoCAD.
+        </div>
+
+        <div class="sep"></div>
+
+        <div class="tagRow">
+          <span class="tag">Arduino</span>
+          <span class="tag">AutoCAD</span>
+          <span class="tag">Mechanical</span>
+          <span class="tag">Robotics</span>
+        </div>
+
+        <div class="links" style="margin-top:14px">
+          <a class="btn btnPrimary" href="https://github.com/yashgolani28/Spider-mimic-quadruped" target="_blank"
+            rel="noreferrer">View on GitHub</a>
+        </div>
+      </div>
+
+      <!-- Project 5 -->
+      <div class="card reveal">
+        <img class="projImg" src="assets/images/img4.png" alt="Bank Loan Modelling preview" loading="lazy" />
+
+        <div class="sep"></div>
+
+        <div class="itemTop">
+          <div>
+            <b id="sasha-bank-loan-modelling">Bank Loan Modelling</b>
+            <div class="meta">Python | XGBoost | Linear Regression | Data Cleaning</div>
+          </div>
+        </div>
+
+        <div class="sep"></div>
+
+        <div class="note">
+          Loan approval prediction workflow comparing Linear Regression and XGBoost, with reproducible feature
+          preparation.
+        </div>
+
+        <div class="sep"></div>
+
+        <div class="tagRow">
+          <span class="tag">Python</span>
+          <span class="tag">XGBoost</span>
+          <span class="tag">ML</span>
+          <span class="tag">Finance</span>
+        </div>
+
+        <div class="links" style="margin-top:14px">
+          <a class="btn btnPrimary" href="https://github.com/yashgolani28/loan-approval-ml-model" target="_blank"
+            rel="noreferrer">View on GitHub</a>
+        </div>
+      </div>
+
+      <!-- Project 6 -->
+      <div class="card reveal">
+        <img class="projImg" src="assets/images/img5.png" alt="AI Fitness Trainer preview" loading="lazy" />
+
+        <div class="sep"></div>
+
+        <div class="itemTop">
+          <div>
+            <b id="sasha-ai-fitness-trainer">AI Fitness Trainer</b>
+            <div class="meta">OpenPose | CV | Plan Generation | Personalization</div>
+          </div>
+        </div>
+
+        <div class="sep"></div>
+
+        <div class="note">
+          Virtual AI coach for personalized workout recommendations and progress guidance using OpenPose for CV.
+        </div>
+
+        <div class="sep"></div>
+
+        <div class="tagRow">
+          <span class="tag">OpenPose</span>
+          <span class="tag">CV</span>
+          <span class="tag">AI</span>
+          <span class="tag">Health</span>
+        </div>
+
+        <div class="links" style="margin-top:14px">
+          <a class="btn btnPrimary" href="https://github.com/yashgolani28/ai-fitness-trainer" target="_blank"
+            rel="noreferrer">View on GitHub</a>
+        </div>
+      </div>
+
+      <!-- Project 7 -->
+      <div class="card reveal">
+        <img class="projImg" src="assets/images/img6.png" alt="Traffic VLM preview" loading="lazy" />
+
+        <div class="sep"></div>
+
+        <div class="itemTop">
+          <div>
+            <b id="sasha-traffic-vlm">Traffic VLM</b>
+            <div class="meta">Qwen2.5-VL | LLaVA | Streamlit | Semantic Search</div>
+          </div>
+        </div>
+
+        <div class="sep"></div>
+
+        <div class="note">
+          Offline VLM pipeline for traffic CCTV scene understanding and retrieval using Qwen-VL and LLaVA.
+        </div>
+
+        <div class="sep"></div>
+
+        <div class="tagRow">
+          <span class="tag">VLM</span>
+          <span class="tag">LLM</span>
+          <span class="tag">Computer Vision</span>
+          <span class="tag">Streamlit</span>
+        </div>
+
+        <div class="links" style="margin-top:14px">
+          <a class="btn btnPrimary" href="https://github.com/yashgolani28/vlm-local" target="_blank"
+            rel="noreferrer">View on GitHub</a>
+        </div>
+      </div>
+
+      <!-- Project 8 -->
+      <div class="card reveal">
+        <img class="projImg" src="assets/images/img7.jpg" alt="Stock Price Direction Predictor preview"
+          loading="lazy" />
+
+        <div class="sep"></div>
+
+        <div class="itemTop">
+          <div>
+            <b id="sasha-stock-price-direction-predictor">Stock Price Direction Predictor</b>
+            <div class="meta">XGBoost | VADER | Technical Indicators | Dashboard</div>
+          </div>
+        </div>
+
+        <div class="sep"></div>
+
+        <div class="note">
+          Direction classifier combining technical indicators and sentiment analysis with an interactive dashboard.
+        </div>
+
+        <div class="sep"></div>
+
+        <div class="tagRow">
+          <span class="tag">XGBoost</span>
+          <span class="tag">Sentiment Analysis</span>
+          <span class="tag">Finance</span>
+          <span class="tag">Dashboard</span>
+        </div>
+
+        <div class="links" style="margin-top:14px">
+          <a class="btn btnPrimary"
+            href="https://github.com/yashgolani28/Stock-Price-Direction-Predictor-with-Sentiment-Analysis"
+            target="_blank" rel="noreferrer">View on GitHub</a>
+        </div>
+      </div>
+
+    </div>
+    </section>
+
+    <section id="education" class="reveal">
+<div class="pageTitle reveal">
+      <h1>Education</h1>
+      <p>Academic foundation and the coursework that shaped my build style</p>
+    </div>
+
+    <div class="card eduHero reveal">
+      <div class="eduHeroInner">
+        <div
+          style="display:flex; justify-content:space-between; align-items:flex-start; width:100%; flex-wrap:wrap; gap:16px;">
+          <div>
+            <b style="font-size:1.15rem">B.Tech, Robotics and Automation</b>
+            <div class="meta">Symbiosis Institute of Technology, Pune</div>
+          </div>
+
+
+          <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end">
+            <div class="iconBadge" title="Robotics">
+              <span class="ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M7 14h10"></path>
+                  <path d="M9 18h6"></path>
+                  <path d="M10 2v3"></path>
+                  <path d="M14 2v3"></path>
+                  <path d="M5 9a7 7 0 0 1 14 0v5a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4V9Z"></path>
+                </svg>
+              </span>
+              <span class="note">Robotics</span>
+            </div>
+
+            <div class="iconBadge" title="Automation">
+              <span class="ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14 7l-5 5"></path>
+                  <path d="M9 7h5v5"></path>
+                  <path d="M7 17h10"></path>
+                  <path d="M5 21h14"></path>
+                </svg>
+              </span>
+              <span class="note">Automation</span>
+            </div>
+
+            <div class="iconBadge" title="Applied AI">
+              <span class="ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 3v18"></path>
+                  <path d="M3 12h18"></path>
+                  <path d="M7 7l10 10"></path>
+                  <path d="M17 7L7 17"></path>
+                </svg>
+              </span>
+              <span class="note">Applied AI</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="statGrid">
+          <div class="stat">
+            <div class="k">Batch</div>
+            <div class="v note">2022 to 2026</div>
+          </div>
+          <div class="stat">
+            <div class="k">CGPA</div>
+            <div class="v note">7.51</div>
+          </div>
+          <div class="stat">
+            <div class="k">Focus</div>
+            <div class="v note">Embedded, perception, reliability</div>
+          </div>
+          <div class="stat">
+            <div class="k">Location</div>
+            <div class="v note">Pune, Maharashtra, India</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sectionHeadRow reveal">
+      <div class="left">
+        <div class="iconBadge">
+          <span class="ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M4 19V6"></path>
+              <path d="M20 19V6"></path>
+              <path d="M4 6c3 0 5-2 8-2s5 2 8 2"></path>
+              <path d="M6 8v10"></path>
+              <path d="M18 8v10"></path>
+            </svg>
+          </span>
+          <span class="note">Relevant coursework</span>
+        </div>
+        <span class="note">Grouped by learning phase</span>
+      </div>
+
+      <a class="btn" href="#projects">See projects that used this</a>
+    </div>
+
+    <div class="eduTimeline reveal">
+      <div class="phaseCard">
+        <div class="phaseTop">
+          <div class="phaseTitle">
+            <span class="ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 20V10"></path>
+                <path d="M8 10h8"></path>
+                <path d="M7 20h10"></path>
+                <path d="M9 4h6"></path>
+                <path d="M10 4V2h4v2"></path>
+              </svg>
+            </span>
+            <b>Foundations</b>
+          </div>
+          <span class="phasePill">Year 1</span>
+        </div>
+
+        <ul class="miniList note">
+          <li>Fundamentals of Robotics</li>
+          <li>Introduction to Artificial Intelligence</li>
+          <li>Advanced Python Lab</li>
+          <li>Basics of Operating Systems (with lab)</li>
+          <li>Sensor and Electronics Drives (with lab)</li>
+        </ul>
+
+        <div class="sep"></div>
+        <div class="tagRow">
+          <span class="tag">Math and systems</span>
+          <span class="tag">Programming</span>
+          <span class="tag">Electronics</span>
+        </div>
+      </div>
+
+      <div class="phaseCard">
+        <div class="phaseTop">
+          <div class="phaseTitle">
+            <span class="ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 3l8 4v10l-8 4-8-4V7l8-4Z"></path>
+                <path d="M12 12l8-5"></path>
+                <path d="M12 12l-8-5"></path>
+                <path d="M12 12v9"></path>
+              </svg>
+            </span>
+            <b>Core robotics</b>
+          </div>
+          <span class="phasePill">Year 2</span>
+        </div>
+
+        <ul class="miniList note">
+          <li>Kinematics and Dynamics of Robotics (with lab)</li>
+          <li>Robotic Control Systems (with lab)</li>
+          <li>Robotics Operating System (with lab)</li>
+          <li>Simulator for Robotics Lab</li>
+          <li>Application of AI in Robotics and Automation (with lab)</li>
+        </ul>
+
+        <div class="sep"></div>
+        <div class="tagRow">
+          <span class="tag">Kinematics</span>
+          <span class="tag">Control</span>
+          <span class="tag">ROS</span>
+          <span class="tag">Simulation</span>
+        </div>
+      </div>
+
+      <div class="phaseCard">
+        <div class="phaseTop">
+          <div class="phaseTitle">
+            <span class="ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M9 9h6"></path>
+                <path d="M9 12h6"></path>
+                <path d="M9 15h6"></path>
+                <path d="M7 4h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"></path>
+              </svg>
+            </span>
+            <b>Embedded and automation</b>
+          </div>
+          <span class="phasePill">Year 3</span>
+        </div>
+
+        <ul class="miniList note">
+          <li>Microcontroller and Embedded Systems (with lab)</li>
+          <li>PLC and SCADA (with lab)</li>
+          <li>Lean Manufacturing</li>
+          <li>Introduction to Image Processing</li>
+          <li>Computer Vision for Robotics (with lab)</li>
+        </ul>
+
+        <div class="sep"></div>
+        <div class="tagRow">
+          <span class="tag">Embedded</span>
+          <span class="tag">PLC</span>
+          <span class="tag">Vision</span>
+          <span class="tag">Manufacturing</span>
+        </div>
+      </div>
+
+      <div class="phaseCard">
+        <div class="phaseTop">
+          <div class="phaseTitle">
+            <span class="ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M3 17l6-6 4 4 7-7"></path>
+                <path d="M21 7v6h-6"></path>
+              </svg>
+            </span>
+            <b>Advanced and electives</b>
+          </div>
+          <span class="phasePill">Year 4</span>
+        </div>
+
+        <ul class="miniList note">
+          <li>Data Structures and Algorithms</li>
+          <li>Augmented Reality and Virtual Reality Technology (elective)</li>
+          <li>Robot system design and simulation (capstone focus)</li>
+          <li>Blockchain Technology for Robotics</li>
+          <li>Seminar (presentation and research writing)</li>
+        </ul>
+
+        <div class="sep"></div>
+        <div class="tagRow">
+          <span class="tag">Estimation</span>
+          <span class="tag">Modeling</span>
+          <span class="tag">Design</span>
+          <span class="tag">Research</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="softLine"></div>
+
+    <details class="eduDetails reveal">
+      <summary>
+        <span>Why this coursework matters to my work</span>
+        <span class="chev" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M9 18l6-6-6-6"></path>
+          </svg>
+        </span>
+      </summary>
+
+      <div class="sep"></div>
+
       <div class="grid2">
-        <div class="card">
+        <div class="item">
+          <b>Reliability mindset</b>
+          <div class="sep"></div>
+          <div class="note">
+            Control, sensing, and automation courses pushed me toward building systems that stay stable under noise,
+            drift, and
+            changing environments.
+          </div>
+        </div>
+
+        <div class="item">
+          <b>Perception and verification</b>
+          <div class="sep"></div>
+          <div class="note">
+            Vision and AI in robotics courses map directly to my focus on calibrated outputs, evidence friendly
+            workflows,
+            and reviewer ready results.
+          </div>
+        </div>
+      </div>
+    </details>
+    </section>
+
+    <section id="resume" class="section reveal">
+      <div class="pageTitle">
+        <h1>Resume</h1>
+        <p>Grab the full PDF, or jump back to any section above.</p>
+      </div>
+      <div class="card" style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between">
+        <div>
+          <b style="font-size:1.1rem">Yash Golani &mdash; Robotics &amp; AI Engineer</b>
+          <div class="note" style="margin-top:6px">Full work history, skills, and projects in one document.</div>
+        </div>
+        <div class="tagRow">
+          <a class="btn btnPrimary" href="resume.pdf" target="_blank" rel="noreferrer">Open PDF</a>
+          <a class="btn" href="resume.pdf" download>Download</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section reveal">
+<div class="pageTitle reveal">
+      <h1>Contact</h1>
+      <p>Send a message or reach out directly</p>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <b>Direct</b>
+        <div class="sep"></div>
+
+        <div class="item">
+          <b>Email</b>
+          <div class="meta"><a href="mailto:yashgolani287@gmail.com">yashgolani287@gmail.com</a></div>
+        </div>
+
+        <div class="item" style="margin-top:12px">
+          <b>Phone</b>
+          <div class="meta">Available on formal contact via email</div>
+        </div>
+
+        <div class="item" style="margin-top:12px">
           <b>Profiles</b>
           <div class="sep"></div>
           <div class="tagRow">
@@ -261,16 +1601,47 @@
               rel="noreferrer">LinkedIn</a>
           </div>
         </div>
-        <div class="card">
-          <b>Resume</b>
-          <div class="sep"></div>
-          <div class="tagRow">
-            <a class="btn" href="resume.html">Open resume page</a>
-            <a class="btn" href="resume.pdf" target="_blank" rel="noreferrer">Download
-              PDF</a>
-          </div>
-        </div>
       </div>
+
+      <div class="card">
+        <b>Message</b>
+        <div class="sep"></div>
+
+        <form id="contactForm" action="https://formspree.io/f/mpqdpnjk" method="POST">
+          <div class="formGrid">
+            <div>
+              <label class="note" for="name">Name</label>
+              <input class="input" id="name" name="name" placeholder="Your name" required />
+            </div>
+            <div>
+              <label class="note" for="email">Email</label>
+              <input class="input" id="email" name="email" type="email" placeholder="you@example.com" required />
+            </div>
+          </div>
+
+          <div style="margin-top:12px">
+            <label class="note" for="subject">Subject</label>
+            <input class="input" id="subject" name="subject" placeholder="What is this about?" required />
+          </div>
+
+          <div style="margin-top:12px">
+            <label class="note" for="message">Message</label>
+            <textarea class="textarea" id="message" name="message" placeholder="Write your message..."
+              required></textarea>
+          </div>
+
+          <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap">
+            <button class="btn btnPrimary" type="submit"
+              style="flex:1 1 180px; min-width:150px; width:100%; font-size:16px;">Send message</button>
+            <a class="btn btnPrimary"
+              style="flex:1 1 180px; min-width:150px; width:100%; display:inline-block; text-align:center; font-size:16px;"
+              href="mailto:yashgolani287@gmail.com?subject=Portfolio%20Inquiry&body=Hi%20Yash%2C%0A%0A">Use
+              email instead</a>
+          </div>
+          <p id="formStatus" style="margin:12px 0 0; font-size:14px; color:var(--muted); min-height:20px;"></p>
+        </form>
+      </div>
+    </div>
     </section>
   </main>
 

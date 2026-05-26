@@ -8,8 +8,8 @@
     if (!canvas || typeof THREE === 'undefined') return;
 
     // --- CONFIG ---
-    const particleCount = 400; // More particles to fill the larger volume
-    const maxConnectionDistance = 6.5; 
+    const particleCount = 460; // Fill the full viewport volume
+    const maxConnectionDistance = 6.5;
     const particleSize = 0.08;
     
     // Theme-based parameters
@@ -39,22 +39,29 @@
 
     camera.position.z = 15; // Further back to see the giant network
 
+    // Bounds derived from the camera frustum so the field always fills
+    // the whole viewport (full width on wide screens, not just the center).
+    const SPREAD_Z = 30;
+    let boundX = 12, boundY = 12;
+    function computeBounds() {
+        const visibleH = 2 * Math.tan((camera.fov * Math.PI / 180) / 2) * camera.position.z;
+        boundY = (visibleH / 2) + 4;            // small margin past the edge
+        boundX = (visibleH * camera.aspect / 2) + 4;
+    }
+    computeBounds();
+
     // --- OBJECTS ---
     const geometry = new THREE.BufferGeometry();
     const positions = new Float32Array(particleCount * 3);
     const velocities = [];
 
-    const SPREAD_X = 50; 
-    const SPREAD_Y = 50;
-    const SPREAD_Z = 30;
-
     for (let i = 0; i < particleCount; i++) {
-        positions[i * 3] = (Math.random() - 0.5) * SPREAD_X;     
-        positions[i * 3 + 1] = (Math.random() - 0.5) * SPREAD_Y; 
-        positions[i * 3 + 2] = (Math.random() - 0.5) * SPREAD_Z - (SPREAD_Z/2); 
-        
+        positions[i * 3] = (Math.random() - 0.5) * 2 * boundX;
+        positions[i * 3 + 1] = (Math.random() - 0.5) * 2 * boundY;
+        positions[i * 3 + 2] = (Math.random() - 0.5) * SPREAD_Z - (SPREAD_Z / 2);
+
         velocities.push({
-            x: (Math.random() - 0.5) * 0.03, // Slightly faster for larger volume
+            x: (Math.random() - 0.5) * 0.03,
             y: (Math.random() - 0.5) * 0.03,
             z: (Math.random() - 0.5) * 0.03
         });
@@ -95,6 +102,7 @@
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
+        computeBounds();
     });
 
     // Theme Switch
@@ -129,9 +137,9 @@
             positionsArray[i * 3 + 1] += velocities[i].y;
             positionsArray[i * 3 + 2] += velocities[i].z;
             
-            // Bounds check
-            if (positionsArray[i * 3] > 10 || positionsArray[i * 3] < -10) velocities[i].x *= -1;
-            if (positionsArray[i * 3 + 1] > 10 || positionsArray[i * 3 + 1] < -10) velocities[i].y *= -1;
+            // Bounds check (aspect-aware so the field fills the viewport)
+            if (positionsArray[i * 3] > boundX || positionsArray[i * 3] < -boundX) velocities[i].x *= -1;
+            if (positionsArray[i * 3 + 1] > boundY || positionsArray[i * 3 + 1] < -boundY) velocities[i].y *= -1;
             if (positionsArray[i * 3 + 2] > 0 || positionsArray[i * 3 + 2] < -15) velocities[i].z *= -1;
 
             // Connect nearby nodes
