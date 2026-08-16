@@ -185,8 +185,16 @@
     btn.innerHTML = '<i class="fa-solid fa-chevron-up"></i>';
     document.body.appendChild(btn);
 
+    // Coalesce to one class write per frame instead of one per scroll event.
+    let ticking = false, shown = false;
     window.addEventListener('scroll', () => {
-      btn.classList.toggle('visible', window.scrollY > 300);
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        ticking = false;
+        const next = window.scrollY > 300;
+        if (next !== shown) { shown = next; btn.classList.toggle('visible', next); }
+      });
     }, { passive: true });
 
     btn.addEventListener('click', () => {
@@ -217,11 +225,19 @@
     if (!tiles.length) return;
     if (window.matchMedia('(pointer: coarse)').matches) return; // skip on touch
     tiles.forEach(tile => {
+      // pointermove fires far faster than the display refreshes; writing a
+      // custom property per event forced a style recalc + repaint each time.
+      let pending = null, frame = 0;
       tile.addEventListener('pointermove', (e) => {
-        const r = tile.getBoundingClientRect();
-        tile.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-        tile.style.setProperty('--my', (e.clientY - r.top) + 'px');
-      });
+        pending = e;
+        if (frame) return;
+        frame = requestAnimationFrame(() => {
+          frame = 0;
+          const r = tile.getBoundingClientRect();
+          tile.style.setProperty('--mx', (pending.clientX - r.left) + 'px');
+          tile.style.setProperty('--my', (pending.clientY - r.top) + 'px');
+        });
+      }, { passive: true });
     });
   })();
 

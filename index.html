@@ -20,10 +20,22 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/images/favicon.png">
 
-  <!-- Critical CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+
+  <!-- Critical CSS - the only render-blocking sheet -->
   <link rel="stylesheet" href="assets/css/styles.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+
+  <!-- Icon fonts load without blocking first paint. Devicon is pinned (was
+       @latest, which forces a redirect and defeats long-lived caching). -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css"
+    media="print" onload="this.media='all'" />
+  <noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css" />
+  </noscript>
   <style>
     /* ---- single-page layout ---- */
     section[id],
@@ -610,7 +622,7 @@
             <span>Git</span>
           </div>
           <div class="skillTag">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg" />
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/postman/postman-original.svg" alt="" width="24" height="24" loading="lazy" decoding="async" />
             <span>Postman</span>
           </div>
         </div>
@@ -627,15 +639,15 @@
             <span>Pandas</span>
           </div>
           <div class="skillTag">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/numpy/numpy-original.svg" />
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/numpy/numpy-original.svg" alt="" width="24" height="24" loading="lazy" decoding="async" />
             <span>NumPy</span>
           </div>
           <div class="skillTag">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/matplotlib/matplotlib-original.svg" />
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/matplotlib/matplotlib-original.svg" alt="" width="24" height="24" loading="lazy" decoding="async" />
             <span>Matplotlib</span>
           </div>
           <div class="skillTag">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/scikitlearn/scikitlearn-line.svg" />
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/scikitlearn/scikitlearn-line.svg" alt="" width="24" height="24" loading="lazy" decoding="async" />
             <span>Scikit Learn</span>
           </div>
           <div class="skillTag">
@@ -643,11 +655,11 @@
             <span>TensorFlow</span>
           </div>
           <div class="skillTag">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pytorch/pytorch-original.svg" />
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/pytorch/pytorch-original.svg" alt="" width="24" height="24" loading="lazy" decoding="async" />
             <span>PyTorch</span>
           </div>
           <div class="skillTag">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/keras/keras-line.svg" />
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/keras/keras-line.svg" alt="" width="24" height="24" loading="lazy" decoding="async" />
             <span>Keras</span>
           </div>
           <div class="skillTag">
@@ -802,7 +814,9 @@
           </div>
         </div>
         <p class="xpSummary">
-          Built deployable perception and analytics systems across radar, cameras, ANPR, and production hardening.
+          Built deployable perception and analytics systems end to end &mdash; radar and camera fusion at the sensor,
+          a multi-analytic edge runtime, the unified platform and investigation tooling above it, and the MLOps that
+          keeps the models coming.
         </p>
       </div>
     </section>
@@ -820,7 +834,7 @@
           <div class="wsHeader">
             <i class="fa-solid fa-tower-broadcast"></i>
             <div>
-              <h3 id="sasha-radar-evidence-systems">Radar, Evidence & Camera-Radar Fusion</h3>
+              <h3 id="sasha-radar-evidence-systems">Radar, Evidence &amp; Camera-Radar Fusion</h3>
             </div>
           </div>
           <ul class="wsBullets">
@@ -835,28 +849,74 @@
           </ul>
         </div>
 
-        <!-- Multi-Camera Analytics: ANPR + Face Recognition + Edge Platform -->
+        <!-- Edge analytics runtime -->
         <div class="xpWorkstream" id="ws-analytics">
           <span id="sasha-automatic-number-plate-recognition" aria-hidden="true"></span>
           <span id="sasha-face-recognition-identity-registry" aria-hidden="true"></span>
           <div class="wsHeader">
             <i class="fa-solid fa-layer-group"></i>
             <div>
-              <h3 id="sasha-multi-analytic-edge-platform">Multi-Camera Analytics: ANPR, Recognition & Edge Platform</h3>
+              <h3 id="sasha-multi-analytic-edge-platform">Edge Analytics Runtime</h3>
             </div>
           </div>
           <ul class="wsBullets">
             <li>Built a single-process, single-GPU edge runtime that fans each camera stream into per-analytic threads
               over a shared model registry and inference client, with a REST control plane (start, stop, status,
               restart, backfill).</li>
+            <li>Added an optional multi-process inference mode that isolates each model group in its own worker and
+              passes frames over shared memory, so one heavy model's post-processing cannot stall the rest.</li>
             <li>Hardened multi-camera ingest and restreaming: RTSP handling, automatic reconnection, fallback behavior,
-              and predictable frame access, with Kafka topic partitioning and Redis state sync.</li>
+              and predictable frame access, with message-bus topic partitioning and Redis state sync.</li>
             <li>Delivered ANPR with high OCR correctness and dataset readiness (plate crops, character-ordering logic,
               verification flow, export quality), plus PTZ operational control per camera.</li>
             <li>Built a face-recognition and identity-registry service: operator enrollment (single and bulk), 1:N image
               search with ranked top-K, and watch-list matching with a full alert lifecycle.</li>
-            <li>Ran concurrent analytics, crowd and safety (counting, pose, fall detection), abandoned-object detection,
-              and person-attribute extraction, with tiled inference for small or distant objects.</li>
+            <li>Ran concurrent analytics &mdash; crowd and safety (counting, pose, fall detection), abandoned-object
+              detection, and person-attribute extraction &mdash; with tiled inference for small or distant objects.</li>
+          </ul>
+        </div>
+
+        <!-- Unified application platform -->
+        <div class="xpWorkstream" id="ws-platform">
+          <div class="wsHeader">
+            <i class="fa-solid fa-diagram-project"></i>
+            <div>
+              <h3 id="sasha-unified-analytics-platform">Unified Analytics Platform</h3>
+            </div>
+          </div>
+          <ul class="wsBullets">
+            <li>Consolidated two legacy analytics applications into one service and one UI serving every detection type,
+              keeping downstream consumers working through compatibility routes so integrators only repointed config.</li>
+            <li>Designed a modular monolith with independently scalable ingest workers &mdash; one consumer group per
+              detection type, keyed by camera &mdash; over a schema-per-domain PostgreSQL with vector search.</li>
+            <li>Collapsed every analytic onto a single polymorphic alert model with one writer and per-type hydrators,
+              so alerting, search, and reporting behave identically whatever raised them.</li>
+            <li>Built the realtime push fabric (WebSocket and server-sent events over Redis pub/sub) and
+              permission-scoped JWT auth with token revocation.</li>
+            <li>Added a derived dwell analytic that raises loitering alerts from existing detections with no new
+              detector, plus recorded-clip playback and automatic backfill of camera-downtime gaps.</li>
+          </ul>
+        </div>
+
+        <!-- Investigation -->
+        <div class="xpWorkstream" id="ws-investigation">
+          <div class="wsHeader">
+            <i class="fa-solid fa-magnifying-glass-chart"></i>
+            <div>
+              <h3 id="sasha-investigation-search">Investigation &amp; Cross-Camera Search</h3>
+            </div>
+          </div>
+          <ul class="wsBullets">
+            <li>Built an analyst tool that reconstructs a subject's history across the camera network from a single
+              plate or face &mdash; sighting timeline, road-snapped route, elapsed time, and estimated speed.</li>
+            <li>Flagged physically implausible hops so an operator can separate a genuine route from a misread or a
+              duplicate identity.</li>
+            <li>Mined associations and patterns: companion vehicles, co-occurring faces, and nearby alerts ranked by
+              recurrence, plus repeating route sequences.</li>
+            <li>Added persistent watches that auto-trigger on new sightings with TTL and hit-count termination, and an
+              exportable evidence dossier backed by an audit trail on every lookup.</li>
+            <li>Kept the whole subsystem deployable air-gapped by self-hosting the routing engine and offline map
+              tiles.</li>
           </ul>
         </div>
 
@@ -865,13 +925,25 @@
           <div class="wsHeader">
             <i class="fa-solid fa-arrows-rotate"></i>
             <div>
-              <h3 id="sasha-mlops-platform">MLOps & Platform</h3>
+              <h3 id="sasha-mlops-platform">MLOps &amp; Model Lifecycle</h3>
             </div>
           </div>
           <ul class="wsBullets">
-            <li>Built and maintained Kafka-based service pipelines with debuggability and isolation.</li>
-            <li>Implemented training lifecycle controls: pause, resume, cancel plus job state visibility.</li>
-            <li>Improved dataset aggregation, annotation UX, and operational hygiene: cleanup and retention.</li>
+            <li>Built a self-hosted platform covering ingest &rarr; annotate &rarr; train &rarr; evaluate &rarr; export
+              for every vision task family the products needed: detection, segmentation, oriented boxes, classification,
+              pose, person-attribute recognition, anti-spoofing, and face embedding.</li>
+            <li>Made each task family a pluggable adapter behind one lifecycle runner, so a new task type ships without
+              touching the training, evaluation, or export machinery.</li>
+            <li>Built AI-assisted labeling through the same adapter registry &mdash; any trained model pre-annotates the
+              next dataset, with confidence filtering, class mapping, and bulk approval.</li>
+            <li>Delivered a canvas annotation editor (boxes, polygons, keypoints, attributes) with a review-and-approve
+              workflow and per-item locking against concurrent edits.</li>
+            <li>Implemented training lifecycle controls &mdash; pause, resume from checkpoint, cancel, live per-epoch
+              progress over WebSocket with a polling fallback, and automatic batch-size fallback on out-of-memory.</li>
+            <li>Added model versioning and lineage, fine-tuning from any uploaded weight, head-to-head comparison on
+              held-out splits, multi-format export including ONNX, and generated benchmark reports.</li>
+            <li>Built dataset governance: multi-source ingest, project-level label isolation, and degradation variants
+              (noise, blur, compression) for robustness evaluation.</li>
           </ul>
         </div>
 
@@ -880,13 +952,20 @@
           <div class="wsHeader">
             <i class="fa-solid fa-brain"></i>
             <div>
-              <h3 id="sasha-vlm-retrieval">VLM & Retrieval</h3>
+              <h3 id="sasha-vlm-retrieval">VLM &amp; Retrieval</h3>
             </div>
           </div>
           <ul class="wsBullets">
-            <li>Migrated CCTV VLM pipeline and instrumented per-stage latency.</li>
-            <li>Implemented retrieval upgrade: semantic embeddings plus plate-aware search.</li>
-            <li>Added prompt and token controls to keep latency bounded and predictable.</li>
+            <li>Built a retrieval-first video understanding pipeline: index footage as frames and captions, then answer
+              queries from retrieved evidence rather than feeding full-length video to a model.</li>
+            <li>Structured it as event-driven services over a message bus with a dedicated gRPC inference server, plus
+              retries and exponential backoff so a model stall does not drop the ingest.</li>
+            <li>Implemented hierarchical summarization &mdash; frame to chunk to video to corpus &mdash; so long footage
+              compresses into something an operator can actually read.</li>
+            <li>Delivered grounded Q&amp;A with session context over a vector store with metadata filtering, and a
+              retrieval upgrade combining semantic embeddings with plate-aware search.</li>
+            <li>Migrated the CCTV pipeline, instrumented per-stage latency, and added prompt and token controls to keep
+              response time bounded and predictable.</li>
           </ul>
         </div>
 
@@ -895,7 +974,7 @@
           <div class="wsHeader">
             <i class="fa-solid fa-tower-observation"></i>
             <div>
-              <h3>GIS & Command Centre</h3>
+              <h3>GIS &amp; Command Centre</h3>
             </div>
           </div>
           <ul class="wsBullets">
@@ -903,6 +982,8 @@
             <li>Implemented high-precision radio device tracking and historical movement visualization.</li>
             <li>Built an integrated GIS dashboard for situational awareness and geofence-based alerting.</li>
             <li>Engineered a rule-based mission lifecycle engine for automated resource management.</li>
+            <li>Added incident investigation and interception planning on the map, with alert acknowledgement and clip
+              export wired through to the analytics platform.</li>
           </ul>
         </div>
 
@@ -943,16 +1024,32 @@
           <a class="bentoTile" href="#ws-analytics">
             <i class="fa-solid fa-arrow-up-right bentoArrow" aria-hidden="true"></i>
             <span class="bentoIcon"><i class="fa-solid fa-layer-group"></i></span>
-            <h3>Multi-Camera Analytics</h3>
-            <p class="bentoLine">ANPR, face recognition, and a multi-analytic edge runtime.</p>
+            <h3>Edge Analytics Runtime</h3>
+            <p class="bentoLine">ANPR, face recognition, and crowd analytics on one GPU.</p>
             <div class="bentoStack"><span><i class="devicon-fastapi-plain" aria-hidden="true"></i>FastAPI</span><span><i class="devicon-pytorch-original" aria-hidden="true"></i>PyTorch</span><span><i class="devicon-redis-plain" aria-hidden="true"></i>Redis</span></div>
+          </a>
+
+          <a class="bentoTile" href="#ws-platform">
+            <i class="fa-solid fa-arrow-up-right bentoArrow" aria-hidden="true"></i>
+            <span class="bentoIcon"><i class="fa-solid fa-diagram-project"></i></span>
+            <h3>Unified Platform</h3>
+            <p class="bentoLine">Two legacy apps merged into one service, one alert model.</p>
+            <div class="bentoStack"><span><i class="devicon-postgresql-plain" aria-hidden="true"></i>PostgreSQL</span><span><i class="devicon-apachekafka-original" aria-hidden="true"></i>Kafka</span><span><i class="fa-solid fa-bolt" aria-hidden="true"></i>WebSocket</span></div>
+          </a>
+
+          <a class="bentoTile bentoWide" href="#ws-investigation">
+            <i class="fa-solid fa-arrow-up-right bentoArrow" aria-hidden="true"></i>
+            <span class="bentoIcon"><i class="fa-solid fa-magnifying-glass-chart"></i></span>
+            <h3>Investigation &amp; Cross-Camera Search</h3>
+            <p class="bentoLine">One plate or face &rarr; timeline, route, associations, evidence dossier.</p>
+            <div class="bentoStack"><span><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i>Routing</span><span><i class="fa-solid fa-database" aria-hidden="true"></i>pgvector</span><span><i class="devicon-react-original" aria-hidden="true"></i>React</span></div>
           </a>
 
           <a class="bentoTile" href="#ws-mlops">
             <i class="fa-solid fa-arrow-up-right bentoArrow" aria-hidden="true"></i>
             <span class="bentoIcon"><i class="fa-solid fa-arrows-rotate"></i></span>
-            <h3>MLOps &amp; Platform</h3>
-            <p class="bentoLine">Ingest &rarr; annotate &rarr; train &rarr; export, with job controls.</p>
+            <h3>MLOps &amp; Model Lifecycle</h3>
+            <p class="bentoLine">Ingest &rarr; annotate &rarr; train &rarr; evaluate &rarr; export, across eight task families.</p>
             <div class="bentoStack"><span><i class="fa-solid fa-leaf" aria-hidden="true"></i>Celery</span><span><i class="devicon-docker-plain" aria-hidden="true"></i>Docker</span><span><i class="devicon-apachekafka-original" aria-hidden="true"></i>Kafka</span></div>
           </a>
 
@@ -1009,7 +1106,7 @@
 
       <!-- Project 1 -->
       <div class="card reveal">
-        <img class="projImg" src="assets/images/img8.png" alt="Jarvis preview" loading="lazy" />
+        <img class="projImg" src="assets/images/img8.webp" width="1100" height="400" decoding="async" alt="Jarvis preview" loading="lazy" />
 
         <div class="sep"></div>
 
@@ -1044,7 +1141,7 @@
 
       <!-- Project 2 -->
       <div class="card reveal">
-        <img class="projImg" src="assets/images/img1.jpg" alt="Object detection using Turtlebot 4 preview"
+        <img class="projImg" src="assets/images/img1.webp" width="1100" height="400" decoding="async" alt="Object detection using Turtlebot 4 preview"
           loading="lazy" />
 
         <div class="sep"></div>
@@ -1079,7 +1176,7 @@
 
       <!-- Project 3 -->
       <div class="card reveal">
-        <img class="projImg" src="assets/images/img2.jpg" alt="Smart Agriculture System preview" loading="lazy" />
+        <img class="projImg" src="assets/images/img2.webp" width="1100" height="400" decoding="async" alt="Smart Agriculture System preview" loading="lazy" />
 
         <div class="sep"></div>
 
@@ -1113,7 +1210,7 @@
 
       <!-- Project 4 -->
       <div class="card reveal">
-        <img class="projImg" src="assets/images/img3.png" alt="Spider Mimic Quadruped preview" loading="lazy" />
+        <img class="projImg" src="assets/images/img3.webp" width="1100" height="400" decoding="async" alt="Spider Mimic Quadruped preview" loading="lazy" />
 
         <div class="sep"></div>
 
@@ -1147,7 +1244,7 @@
 
       <!-- Project 5 -->
       <div class="card reveal">
-        <img class="projImg" src="assets/images/img4.png" alt="Bank Loan Modelling preview" loading="lazy" />
+        <img class="projImg" src="assets/images/img4.webp" width="1100" height="400" decoding="async" alt="Bank Loan Modelling preview" loading="lazy" />
 
         <div class="sep"></div>
 
@@ -1182,7 +1279,7 @@
 
       <!-- Project 6 -->
       <div class="card reveal">
-        <img class="projImg" src="assets/images/img5.png" alt="AI Fitness Trainer preview" loading="lazy" />
+        <img class="projImg" src="assets/images/img5.webp" width="1100" height="400" decoding="async" alt="AI Fitness Trainer preview" loading="lazy" />
 
         <div class="sep"></div>
 
@@ -1216,7 +1313,7 @@
 
       <!-- Project 7 -->
       <div class="card reveal">
-        <img class="projImg" src="assets/images/img6.png" alt="Traffic VLM preview" loading="lazy" />
+        <img class="projImg" src="assets/images/img6.webp" width="1100" height="400" decoding="async" alt="Traffic VLM preview" loading="lazy" />
 
         <div class="sep"></div>
 
@@ -1250,7 +1347,7 @@
 
       <!-- Project 8 -->
       <div class="card reveal">
-        <img class="projImg" src="assets/images/img7.jpg" alt="Stock Price Direction Predictor preview"
+        <img class="projImg" src="assets/images/img7.webp" width="1100" height="400" decoding="async" alt="Stock Price Direction Predictor preview"
           loading="lazy" />
 
         <div class="sep"></div>
@@ -1705,7 +1802,7 @@
         style="margin: 0; font-size: clamp(16px, 2.5vw, 24px); color: var(--muted); font-weight: 400; font-family: 'Inter', sans-serif; opacity: 0.9; letter-spacing: 0.5px; transition: opacity 0.8s ease 0.3s;">
         Building the future of perception & robotics</p>
     </div>
-    <spline-viewer
+    <spline-viewer loading-anim-type="none"
       url="https://prod.spline.design/Xn4ie99UWMRRP8KO/scene.splinecode"></spline-viewer>
     <div id="enter-btn-wrap">
       <button id="enter-site-btn" class="btn btnPrimary"
@@ -1714,12 +1811,48 @@
     </div>
   </div>
 
-  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.73/build/spline-viewer.js"></script>
+  <script defer src="assets/js/app.js"></script>
+  <script defer src="assets/js/sasha.js"></script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="assets/js/neural-network.js"></script>
-  <script src="assets/js/app.js"></script>
-  <script src="assets/js/sasha.js"></script>
+  <script>
+    // Heavy third-party 3D is deferred past first paint. Neither the Spline
+    // viewer (~2MB module) nor three.js (~570KB) is needed to read the page,
+    // so they no longer compete with content for bandwidth on load.
+    (function loadDeferredVisuals() {
+      const idle = window.requestIdleCallback || (fn => setTimeout(fn, 200));
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function inject(src, module) {
+        const el = document.createElement('script');
+        if (module) el.type = 'module';
+        el.src = src;
+        el.async = true;
+        document.body.appendChild(el);
+        return el;
+      }
+
+      const SPLINE = 'https://unpkg.com/@splinetool/viewer@1.12.73/build/spline-viewer.js';
+
+      // First visit gates the page behind the Spline intro, so it has to start
+      // straight away. Returning visitors skip the gate - defer it behind the
+      // content instead.
+      let firstVisit = true;
+      try { firstVisit = !localStorage.getItem('has_seen_spline_intro'); } catch (e) { }
+      if (firstVisit) inject(SPLINE, true);
+
+      window.addEventListener('load', () => idle(() => {
+        if (!firstVisit) inject(SPLINE, true);
+
+        // The particle background is decorative: skip it entirely for
+        // reduced-motion users and on narrow/low-core devices.
+        const lowPower = navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4;
+        if (reduced || (window.innerWidth < 700 && lowPower)) return;
+
+        inject('https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js')
+          .addEventListener('load', () => inject('assets/js/neural-network.js'));
+      }), { once: true });
+    })();
+  </script>
 </body>
 
 </html>

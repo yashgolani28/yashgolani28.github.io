@@ -114,7 +114,9 @@
         { label: "Robotics Work", href: "#sasha-object-detection-using-turtlebot-4" },
         { label: "Radar Systems", href: "#sasha-radar-evidence-systems" },
         { label: "ANPR & Vision", href: "#sasha-automatic-number-plate-recognition" },
+        { label: "Investigation", href: "#sasha-investigation-search" },
         { label: "MLOps & Platform", href: "#sasha-mlops-platform" },
+        { label: "VLM & Retrieval", href: "#sasha-vlm-retrieval" },
         { label: "Contact Yash", href: "#contact" }
     ];
 
@@ -275,7 +277,7 @@
 
         const greeting = `
             <div class="sasha-welcome">
-                <img src="assets/images/img9.png" alt="Waving Bot" class="sasha-bot-wave">
+                <img src="assets/images/img9.webp" alt="Waving Bot" class="sasha-bot-wave">
                 <div>${greetingText}<br><br>Quick Links:</div>
             </div>
         `;

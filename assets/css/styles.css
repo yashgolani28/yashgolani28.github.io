@@ -2625,3 +2625,28 @@ a.bentoTile:focus-visible {
 #loader-fact.fade {
   opacity: 0;
 }
+/* ---- Rendering performance ---------------------------------------------
+   The bento grid holds several always-on decorative animations (a 48s orbit,
+   a 3.8s radar sweep) plus blurred surfaces. Skipping render work while a
+   element is offscreen also pauses the animations inside it, so the
+   compositor isn't kept awake for the whole page. Scoped to the decorative
+   elements only - applying it to the content cards made page height depend on
+   a size guess, which jitters the scrollbar. */
+.bentoArt,
+.bentoOrbit {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 260px;
+}
+
+/* Decorative loops have no business running for a reader who asked for
+   less motion, and the blanket rule above only shortens them. */
+@media (prefers-reduced-motion: reduce) {
+  .bentoOrbit,
+  .bentoOrbit > i,
+  .radarViz,
+  .radarViz .blip,
+  .dino-container,
+  .sasha-bot-wave {
+    animation: none !important;
+  }
+}
