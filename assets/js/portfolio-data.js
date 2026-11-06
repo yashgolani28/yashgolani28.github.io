@@ -22,7 +22,7 @@ window.PORTFOLIO = {
         ],
         [
           "R\u00e9sum\u00e9",
-          "resume.pdf"
+          "resume.pdf?v=9892e03b5310"
         ]
       ]
     },
@@ -345,7 +345,7 @@ window.PORTFOLIO = {
         ],
         [
           "Download PDF",
-          "resume.pdf"
+          "resume.pdf?v=9892e03b5310"
         ]
       ]
     },

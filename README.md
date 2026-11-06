@@ -25,7 +25,7 @@ Open http://127.0.0.1:8000/. No application build or installation is needed. Loc
 - `assets/images/projects/`: four generated concept illustrations, PNG originals, optimized WebP assets, and the complete prompt set in `generation.json`.
 - `assets/vendor/three/`: local Three.js bundle and MIT license. No runtime 3D CDN dependency.
 - `resume.html`: editable résumé source, with print styling.
-- `resume.pdf`: its tagged, one-page A4 print export with selectable text and working links. Regenerate from the HTML source with browser headers and footers disabled after résumé edits.
+- `resume.pdf`: its tagged, one-page A4 print export with selectable text and working links. Regenerate from the HTML source with browser headers and footers disabled after résumé edits. PDF links in `index.html` and `assets/js/portfolio-data.js` use the first 12 characters of the PDF SHA-256 as a `v` query parameter; refresh that version and the portfolio-data script URL whenever the PDF changes so mobile viewers request the current file.
 
 Earlier layout styles/scripts are retained in the checkout but are not loaded by the active page. The existing section redirect pages still point into the portfolio.
 
