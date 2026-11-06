@@ -1,0 +1,120 @@
+/* Immersive local edition. Content and native navigation remain in normal flow. */
+:root { --signal:#ff774e;--signal-soft:#ffc5ac;--bg:#08090d;--surface:#111218;--surface-2:#191b24;--max:1320px; }
+[data-theme="light"] { --signal:#ae3519;--signal-soft:#b34b29;--bg:#efeee9;--surface:#faf9f5;--surface-2:#e5e4df; }
+body { overflow-x:clip; }
+body::before { opacity:.017; }
+button,a { -webkit-tap-highlight-color:transparent; }
+.topbar { background:color-mix(in srgb,var(--bg) 80%,transparent); }
+.brand { font-size:1.1rem;letter-spacing:-.06em; }
+.navLinks a { font-size:.75rem; }
+.immersiveHero { position:relative;padding:0;min-height:1050px;isolation:isolate;background:radial-gradient(ellipse at 75% 35%,rgba(74,87,140,.12),transparent 60%);overflow:hidden; }
+.immersiveHero::after { content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,transparent 24.9%,var(--line) 25%,transparent 25.1%,transparent 74.9%,var(--line) 75%,transparent 75.1%);opacity:.28;pointer-events:none; }
+.immersiveHero .sceneStage { position:absolute;inset:0 0 230px;height:auto;z-index:-1; }
+.immersiveHero #work-canvas { touch-action:pan-y; }
+.heroCoordinates { position:absolute;top:28px;left:4vw;right:4vw;display:flex;justify-content:space-between;font:10px/1.6 monospace;letter-spacing:.06em;color:var(--muted);pointer-events:none; }
+.heroIdentity { padding:115px 4vw 160px;pointer-events:none; }
+.heroIdentity .heroEyebrow { font-size:.68rem;letter-spacing:.14em;display:flex;align-items:center;gap:10px; }
+.heroIdentity .heroStatement { font-size:clamp(90px,13.6vw,214px);line-height:.81;letter-spacing:-.075em;margin:38px 0 32px;max-width:900px;font-weight:600; }
+.heroIdentity .heroStatement>span { display:block;color:var(--text); }
+.heroIdentity .heroStatement>.outlineName { -webkit-text-stroke:1.5px var(--text);color:transparent; }
+.namePeriod { -webkit-text-stroke:0;color:var(--signal); }
+.heroManifesto { font-size:clamp(1.1rem,1.8vw,1.65rem);line-height:1.4;letter-spacing:-.04em;margin:32px 0 24px; }
+em { font-style:normal;color:var(--signal); }
+.heroExplore { pointer-events:auto;display:inline-flex;align-items:center;gap:35px;font-size:.78rem;padding:13px 0;border-bottom:1px solid var(--line-strong); }
+.heroExplore:hover { color:var(--signal); }
+.heroExplore span { font-size:1.3rem; }
+.heroUtility { position:absolute;right:4vw;top:610px;text-align:right; }
+.heroUtility .sceneCoordinate { position:static;font:10px/1.6 monospace;letter-spacing:.12em;color:var(--signal-soft); }
+.heroUtility #scene-hint { font-size:.65rem;color:var(--muted);margin:8px 0; }
+.sculptureTools { display:flex;justify-content:flex-end;align-items:center;gap:14px; }
+.sculptureTools button { position:static;border:0;background:none;font:10px/1.5 'Inter',sans-serif;color:var(--muted);padding:10px 0;cursor:pointer;min-height:36px; }
+.sculptureTools #chaos-control { color:var(--text);border-bottom:1px solid var(--line-strong); }
+.sculptureTools button:hover { color:var(--signal); }
+.heroConsole { display:grid;grid-template-columns:1fr 2fr .6fr;gap:5vw;align-items:start;position:absolute;bottom:0;left:4vw;right:4vw;border-top:1px solid var(--line-strong);padding:30px 0 35px; }
+.consoleIntro .sectionKicker { font-size:.58rem; }
+.consoleIntro>span { font-size:clamp(1.2rem,2vw,2rem);line-height:1.2;letter-spacing:-.04em;display:block;margin-top:22px; }
+.consoleBody .sceneModes { padding:0;border:0;gap:10px; }
+.consoleBody .sceneModes button { text-align:left;border-radius:0;border-bottom:1px solid var(--line);padding:0 0 14px;font-size:.75rem; }
+.consoleBody .sceneModes button[aria-pressed="true"] { background:transparent;color:var(--signal-soft);border-bottom:2px solid var(--signal); }
+.consoleBody .sceneModes button:hover:not([aria-pressed="true"]) { background:transparent; }
+.consoleBody .sceneStory { min-height:138px;padding-top:18px; }
+.consoleBody .sceneStory .sectionKicker { display:none; }
+.consoleBody .sceneStory>p { font-size:.78rem;max-width:62ch;line-height:1.7; }
+.consoleBody .sceneStory .textLink { font-size:.7rem; }
+.scrollDisc { width:116px;height:116px;border-radius:50%;border:1px solid var(--line-strong);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;font-size:.56rem;letter-spacing:.1em;justify-self:end;margin-top:8px;transition:background .25s,transform .4s; }
+.scrollDisc b { font-size:25px;font-weight:400; }
+.scrollDisc:hover { background:var(--signal);color:#08090d;transform:rotate(-12deg); }
+.ticker { border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;background:var(--signal);color:#121116;padding:20px 0; }
+.ticker>div { width:max-content;font-family:'Outfit',sans-serif;font-size:clamp(1.2rem,2.5vw,2.6rem);font-weight:600;letter-spacing:-.03em;white-space:nowrap;animation:marquee 40s linear infinite;animation-play-state:paused; }
+.ticker.inView>div { animation-play-state:running; }
+.ticker span { margin:0 32px; }
+@keyframes marquee { to { transform:translateX(-50%); } }
+#main>section { padding-top:90px;padding-bottom:70px; }
+#main>section+section { border-top:1px solid var(--line); }
+#main h2 { font-size:clamp(2.6rem,5.3vw,5rem);line-height:1.04;letter-spacing:-.065em; }
+#main .sectionKicker { font-size:.65rem;margin-bottom:22px;letter-spacing:.14em; }
+.playground { display:grid;grid-template-columns:1fr 1.25fr;gap:7vw;align-items:center; }
+.playgroundIntro>p:not(.sectionKicker) { max-width:37ch;font-size:.9rem;line-height:1.8;color:var(--muted); }
+.playgroundIntro h2 { margin:0 0 28px; }
+.playgroundIntro>.labCaption { font-size:.62rem!important;margin-top:26px; }
+.routingLab { padding:24px;border:1px solid var(--line-strong);border-radius:12px;background:radial-gradient(ellipse at 50% 35%,rgba(94,107,146,.09),transparent 70%); }
+.labTop { display:flex;justify-content:space-between;gap:12px;font:10px/1.5 monospace;color:var(--muted); }
+.labTop>span { display:flex;align-items:center;gap:8px; }
+.labTop button { font:inherit;color:var(--muted);background:transparent;border:0;cursor:pointer; }
+.routingDiagram { height:300px;position:relative;margin:16px 0; }
+.routingWires { position:absolute;inset:0;width:100%;height:100%;overflow:visible; }
+.routingWires path { fill:none;stroke:var(--signal);stroke-width:1;opacity:.55;transition:opacity .3s; }
+.signal { fill:var(--signal-soft);offset-distance:0%;animation:travel 4s linear infinite;animation-play-state:paused; }
+.routingLab.inView .signal { animation-play-state:running; }
+.signalA { offset-path:path('M75 150 C175 150 175 60 300 60 S425 150 525 150'); }
+.signalB { offset-path:path('M75 150 L525 150');animation-delay:-1s; }
+.signalC { offset-path:path('M75 150 C175 150 175 240 300 240 S425 150 525 150');animation-delay:-2s; }
+@keyframes travel { to { offset-distance:100%; } }
+.offline0 .routingWires path:nth-child(1),.offline1 .routingWires path:nth-child(2),.offline2 .routingWires path:nth-child(3) { opacity:.08; }
+.offline0 .signalA,.offline1 .signalB,.offline2 .signalC { visibility:hidden; }
+.routingDiagram[data-active="1"] .signal { animation-duration:2s; }
+.labEndpoint { position:absolute;top:50%;transform:translate(-50%,-50%);background:var(--bg);padding:12px 6px;font:9px monospace;color:var(--muted);text-align:center; }
+.labEndpoint span { display:block;font:12px 'Inter',sans-serif;color:var(--text);margin-top:5px; }
+.sourceEndpoint { left:12.5%; }.outputEndpoint { left:87.5%; }
+.labNode { position:absolute;left:50%;transform:translate(-50%,-50%);display:grid;grid-template-columns:7px 1fr;gap:4px 8px;text-align:left;min-width:110px;padding:12px 14px;background:var(--surface);border:1px solid var(--line-strong);color:var(--text);border-radius:7px;font:12px 'Inter',sans-serif;cursor:pointer;transition:border-color .2s,background .2s; }
+.nodeA { top:20%; }.nodeB { top:50%; }.nodeC { top:80%; }
+.nodeLight { background:var(--signal);width:5px;height:5px;border-radius:50%;margin-top:4px; }
+.nodeState { grid-column:2;color:var(--muted);font-size:9px; }
+.labNode:hover { border-color:var(--signal); }
+.labNode[aria-pressed="false"] { opacity:.55; }
+.labNode[aria-pressed="false"] .nodeLight { background:var(--muted); }
+.labStatus { border-top:1px solid var(--line);padding-top:18px;min-height:120px; }
+.labStatus>span { font-size:1rem;letter-spacing:-.02em; }
+.labStatus>p { font-size:.75rem;line-height:1.8;color:var(--muted); }
+.routingLab>.textLink { font-size:.7rem; }
+.careerLayout { gap:7vw;margin-top:40px; }
+.workRow { padding:30px 0;transition:padding .3s,background .3s; }
+.workRow h3 { font-size:clamp(1.25rem,2vw,1.65rem);letter-spacing:-.04em; }
+.workRow p { font-size:.86rem; }
+.workRow:hover { padding-left:12px;background:linear-gradient(90deg,var(--surface),transparent); }
+.workIndex { color:var(--signal-soft); }
+.workTags span { border:0;padding-left:0;padding-right:14px; }
+.careerRole::before { background:var(--signal); }
+#projects .pageTitle { margin-bottom:32px; }
+.projectsGrid { gap:40px 28px; }
+.projectsGrid>.card { transform:perspective(1000px) rotateX(var(--tilt-x,0deg)) rotateY(var(--tilt-y,0deg));padding:20px;background:var(--surface);border-radius:12px;overflow:hidden; }
+.projectsGrid>.card:hover { transform:perspective(1000px) rotateX(var(--tilt-x,0deg)) rotateY(var(--tilt-y,0deg)); }
+.projectsGrid .projImg { height:280px;filter:grayscale(.6) contrast(1.05);border:0;border-radius:7px;transition:filter .4s,transform .6s; }
+.projectsGrid .card:hover .projImg { filter:grayscale(0);transform:scale(1.025); }
+#skills .skillsGrid { gap:14px; }
+#skills .skillCard { border-radius:8px; }
+#contact h2 { font-size:clamp(3rem,7vw,7rem); }
+.readingProgress { position:fixed;left:0;top:0;height:2px;width:100%;background:var(--signal);transform:scaleX(0);transform-origin:left;z-index:10000;pointer-events:none; }
+.motionPaused .ticker>div,.motionPaused .signal { animation-play-state:paused!important; }
+.sceneFallback { max-width:650px;left:auto;width:60%;right:4%; }
+@media(min-width:1500px){.immersiveHero{min-height:1140px}.heroUtility{top:700px}.heroIdentity{padding-top:140px}}
+@media(max-width:1000px){.heroIdentity .heroStatement{font-size:15vw}.immersiveHero{min-height:1000px}.heroUtility{top:595px}.heroConsole{gap:25px;grid-template-columns:.8fr 1.5fr}.scrollDisc{display:none}.heroIdentity{padding-top:120px}.playground{gap:32px;grid-template-columns:1fr 1.2fr}.routingLab{padding:18px}}
+@media(max-width:760px){
+ .immersiveHero{min-height:1160px}.heroIdentity{padding:75px 5vw 0}.heroIdentity .heroStatement{font-size:20.8vw;line-height:.88;margin:24px 0 22px}.heroIdentity .heroEyebrow{font-size:.56rem}.heroManifesto{font-size:1.2rem;margin:22px 0 10px}.heroExplore{font-size:.72rem;padding:10px 0}.heroCoordinates{font-size:8px;top:20px}.heroCoordinates span:first-child{display:none}.heroCoordinates span:last-child{margin-left:auto}
+ .immersiveHero .sceneStage{top:340px;bottom:290px;height:auto}.heroUtility{left:5vw;right:5vw;top:auto;bottom:290px;text-align:left}.heroUtility #scene-hint{font-size:.6rem}.sculptureTools{justify-content:flex-start;gap:16px}.sculptureTools button{font-size:9px}.heroConsole{left:5vw;right:5vw;padding:24px 0;grid-template-columns:1fr;gap:16px}.consoleIntro{display:none}.consoleBody .sceneStory{min-height:142px}.consoleBody .sceneStory>p{font-size:.76rem}.consoleBody .sceneModes button{font-size:.7rem;padding-bottom:15px}.sceneFallback{left:8%;width:84%;right:auto}.ticker{padding:14px 0}.ticker>div{font-size:1.25rem}.ticker span{margin:0 18px}
+ #main>section{padding-top:64px;padding-bottom:46px}.playground{grid-template-columns:1fr;gap:28px}.playgroundIntro>p:not(.sectionKicker){max-width:45ch}.playgroundIntro h2{font-size:3.2rem}.routingLab{padding:16px}.routingDiagram{height:270px}.labEndpoint{font-size:8px;padding:10px 2px}.labEndpoint span{font-size:10px}.labNode{min-width:98px;padding:10px}.labTop{font-size:8px}.labStatus{min-height:130px}.projectsGrid .projImg{height:220px}.projectsGrid>.card{padding:16px}.careerLayout{gap:28px}.workRow:hover{padding-left:0}.sectionHead>p{font-size:.8rem}.heroConsole .sceneModes button>span{font-size:.5rem;margin-right:3px}
+}
+@media(prefers-reduced-motion:reduce){.ticker>div,.signal{animation:none!important}.projectsGrid>.card,.projectsGrid>.card:hover{transform:none!important}.workRow,.scrollDisc,.projImg{transition:none!important}}
+/* Keep the controls legible even when the particle field fills the canvas. */
+.heroUtility { padding:12px 16px;border-radius:8px;background:color-mix(in srgb,var(--bg) 62%,transparent);backdrop-filter:blur(10px); }
+@media(max-width:760px){.heroUtility{padding:10px 0;background:linear-gradient(0deg,var(--bg),color-mix(in srgb,var(--bg) 65%,transparent));backdrop-filter:blur(5px)}}

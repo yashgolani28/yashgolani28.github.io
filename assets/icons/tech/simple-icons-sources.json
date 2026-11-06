@@ -1,0 +1,45 @@
+{
+  "repository": "https://github.com/simple-icons/simple-icons",
+  "retrieved": "2026-11-06",
+  "usage": "Original brand shapes, filled with the upstream brand hex colour",
+  "icons": [
+    {
+      "title": "Espressif",
+      "hex": "E7352C",
+      "source": "https://www.espressif.com"
+    },
+    {
+      "title": "Hugging Face",
+      "hex": "FFD21E",
+      "source": "https://huggingface.co/brand",
+      "guidelines": "https://huggingface.co/brand"
+    },
+    {
+      "title": "MediaPipe",
+      "hex": "0097A7",
+      "source": "https://developers.google.com/static/mediapipe/images/mediapipe_icon.svg"
+    },
+    {
+      "title": "Ollama",
+      "hex": "000000",
+      "source": "https://github.com/ollama/ollama/issues/2152#issuecomment-1905286922"
+    },
+    {
+      "title": "ONNX",
+      "hex": "005CED",
+      "source": "https://github.com/onnx/onnx.github.io/blob/382e7036b616ce1555499ac41730245a2478513c/images/ONNX-ICON.svg"
+    },
+    {
+      "title": "Qdrant",
+      "hex": "DC244C",
+      "source": "https://qdrant.tech/img/brand-resources-logos/qdrant-brandmark-white.svg",
+      "guidelines": "https://qdrant.tech/brand-resources/"
+    },
+    {
+      "title": "Ultralytics",
+      "hex": "111F68",
+      "source": "https://www.ultralytics.com",
+      "guidelines": "https://www.ultralytics.com/brand"
+    }
+  ]
+}

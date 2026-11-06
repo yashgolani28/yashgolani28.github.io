@@ -1,127 +1,60 @@
-# Yash Golani - Portfolio
+# Yash Golani — Portfolio
 
-A modern, responsive portfolio website showcasing expertise in **Robotics & AI Engineering** with a focus on applied AI systems, reliability engineering, and production-grade solutions.
+A static, scroll-driven portfolio for a Robotics & AI Engineer. The experience follows one continuous visual story through perception, distributed systems, applications, model research, professional experience, and personal projects.
 
-## 🎯 About
+## Local preview
 
-This portfolio highlights professional experience and projects in:
-- **Applied AI & Machine Learning** - Real-world AI system implementation
-- **Radar Perception & Signal Processing** - Advanced sensor analytics
-- **Multi-Camera Analytics & ANPR** - Computer vision solutions
-- **Production Systems & Reliability** - Robust system design and deployment
-
-## 🌐 Website Features
-
-- **Fully Responsive Design** - Optimized for desktop, tablet, and mobile devices
-- **Dark/Light Theme Toggle** - User-preferred color scheme support
-- **Semantic HTML** - Accessible and SEO-friendly markup
-- **Modern CSS** - Clean, maintainable styling with CSS custom properties
-- **Smooth Interactions** - Enhanced UX with JavaScript interactions
-
-## 📁 Project Structure
-
-```
-├── index.html              # Home page - Hero section and introduction
-├── skills.html             # Technical skills and proficiencies
-├── experience.html         # Work experience and career history
-├── projects.html           # Featured projects and case studies
-├── education.html          # Educational background
-├── contact.html            # Contact information and social links
-├── resume.html             # Resume/CV page
-├── 404.html                # Custom error page
-├── assets/
-│   ├── css/
-│   │   └── styles.css      # All styling and theme variables
-│   ├── images/             # Portfolio images and assets
-│   └── js/
-│       └── app.js          # Interactive features (theme toggle, etc.)
-└── README.md               # This file
+```bash
+python3 -m http.server 8000 --bind 127.0.0.1
 ```
 
-## 🚀 Getting Started
+Open http://127.0.0.1:8000/. No application build or installation is needed. Local changes are not automatically committed or deployed.
 
-### Prerequisites
-- A modern web browser (Chrome, Firefox, Safari, Edge)
-- No build tools or dependencies required
+## Active source
 
-### Local Development
+- `index.html`: semantic story, project links, career history, skills, education, and contact form.
+- `assets/css/journey.css`: responsive editorial layout, red/blue light/dark palettes, sticky project reel, project briefs, technology badges, opening sequence, and Sasha panel.
+- `assets/js/journey.js`: native-scroll progress, scene keyframes, project translation, theme preference, project dialogs, index menu, and contact form.
+- `assets/js/journey-world.js`: one parametric sculpture that continuously morphs through metallic knots, orbits, waves, and feedback forms. Pointer deformation, orbiting, pulses, particle dispersion, and the Signal Lab controls share the same renderer.
+- `assets/js/portfolio-data.js`: curated public facts, technologies, and algorithms shared by all eight project briefs and Sasha.
+- `assets/js/tech.js`: technology badge rendering using the inline SVG symbols in `index.html`, derived from locally stored upstream marks.
+- `assets/js/intro.js`: skippable opening tied to document/font readiness, with a maximum 3.5-second wait, keyboard dismissal, and reduced-motion/deep-link bypass.
+- `assets/brand/`: custom Convergence logo, SVG favicon, PNG favicon, and Apple touch icon.
+- `assets/icons/tech/`: original Devicon and Simple Icons brand shapes, source manifests, and upstream licences. Original SVG files are preserved; palette-only derivatives in `monochrome/` retain the upstream path geometry and provide consistent contrast in compact category cards on both themes.
+- `assets/js/sasha.js`: local portfolio guide, contextual questions, topic/project retrieval, and source navigation. No remote AI service, API key, or chat history storage.
+- `assets/images/projects/`: four generated concept illustrations, PNG originals, optimized WebP assets, and the complete prompt set in `generation.json`.
+- `assets/vendor/three/`: local Three.js bundle and MIT license. No runtime 3D CDN dependency.
+- `resume.html`: editable résumé source, with print styling.
+- `resume.pdf`: its tagged, one-page A4 print export with selectable text and working links. Regenerate from the HTML source with browser headers and footers disabled after résumé edits.
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yashgolani28/yashgolani28.github.io.git
-   cd yashgolani28.github.io
-   ```
+Earlier layout styles/scripts are retained in the checkout but are not loaded by the active page. The existing section redirect pages still point into the portfolio.
 
-2. **Open in browser**
-   - Double-click `index.html` or
-   - Use a local server:
-     ```bash
-     # Python 3
-     python -m http.server 8000
-     
-     # Python 2
-     python -m SimpleHTTPServer 8000
-     
-     # Node.js (if http-server is installed)
-     http-server
-     ```
-   - Visit `http://localhost:8000`
+## Scroll and accessibility
 
-## 🎨 Features
+The browser retains normal scrolling: no wheel interception, scroll snapping, or forced chapter advancement. A single fixed canvas responds continuously to page position. The Signal Lab gives the sculpture its own scroll interval with selectable forms, energy control, pulses, and reset. The personal-project reel translates horizontally during its sticky interval, then returns to normal document flow.
 
-### Accessibility
-- Semantic HTML structure
-- ARIA labels and roles
-- Skip navigation links
-- Keyboard navigation support
-- Color contrast compliance
+Reduced-motion mode uses a static scene and a vertical project list. Ambient motion can also be paused manually. Rendering stops when the 3D scene fades out or the browser tab is hidden. WebGL failure retains a static visual; all text and project links remain readable without JavaScript. Keyboard focus brings off-screen project links into the reel viewport.
 
-### Performance
-- Minimal dependencies (vanilla HTML, CSS, JS)
-- Optimized assets
-- Fast load times
-- Mobile-first responsive design
+## Content boundaries
 
-### SEO
-- Descriptive meta tags
-- Semantic HTML elements
-- Open Graph support
-- Structured data
+Employer contributions use generic VA, VMS, and ICCC terminology, without customer names, product imagery, or product performance promises. All artwork is illustrative. The personal-project reel uses newly generated concept illustrations, explicitly labelled as such, rather than photographs of actual builds. Images were created with the built-in image-generation tool; prompts and filenames are recorded in `assets/images/projects/generation.json`.
 
-## 🛠️ Technology Stack
+## Verification
 
-- **HTML5** - Semantic markup
-- **CSS3** - Modern styling with custom properties
-- **Vanilla JavaScript** - Light interactive enhancements
-- **No frameworks or build tools** - Pure static site
+Review desktop and mobile scrolling, every story-index anchor, the entire project reel, keyboard focus, pause/dispersion/pulse controls, Signal Lab form and energy controls, reduced-motion behavior, theme persistence, contribution accordions, project dialogs, Sasha answers and navigation, opening completion/skip/failure recovery, icon loading, every project’s algorithm list, and the résumé. Contact-form tests should mock the Formspree response rather than send a message.
 
-## 📱 Sections
+The theme follows the system preference until a visitor explicitly chooses a theme; that choice is stored locally. All essential portfolio content is available in the page without opening Sasha. The project briefs provide optional additional detail.
 
-| Page | Purpose |
-|------|---------|
-| **Home** | Introduction and key highlights |
-| **About** | Professional background and values |
-| **Skills** | Technical expertise and proficiencies |
-| **Experience** | Career history and roles |
-| **Projects** | Featured work and case studies |
-| **Education** | Academic credentials |
-| **Contact** | Ways to get in touch |
-| **Resume** | Full CV/Resume document |
+## Content and visual refresh
 
-## 🔗 Live Demo
+Project technology details were checked against public READMEs, plus selected source files for TurtleBot, quadruped kinematics, MediaPipe fitness logic, and the agriculture notebook. Fitness copy reflects the implemented rule-based landmark classifier rather than the broader README claim of a trained classifier. Agriculture is attributed as a team project.
 
-Visit the portfolio: [yashgolani28.github.io](https://yashgolani28.github.io)
+The résumé retains the actual Project Engineer title and employment dates. Its justified professional summary and experience bullets describe architecture and implementation scope without inventing a seniority title, performance figures, or deployment guarantees. The portfolio contains the broader project catalogue; the one-page résumé selects Jarvis, Traffic VLM, and TurtleBot.
 
-## 📧 Contact
+The Convergence logo is a custom monochrome connected-node mark: two inputs meet at a diamond junction and continue to an output, representing the connection between perception, software, and action; the SVG is the editable source, with inline copies in the header and loader that inherit theme colours. Its favicon uses a white tile for contrast. Existing generated project illustrations remain concept artwork.
 
-- **Email** - Check contact page
-- **LinkedIn** - Available on portfolio
-- **GitHub** - [github.com/yashgolani28](https://github.com/yashgolani28)
+The current page omits the Signals & autonomy studies. The rabbit-hole projects use compact linked rows with technology and algorithm details in their dialogs. The engineering section replaces the skills card grid with an interactive, illustrative video-processing map. Its full toolkit remains available in a native disclosure. Tech stack & tools is linked in the story index and below those rows. Inline SVG symbols use explicit theme colours rather than image inversion filters.
 
-## 📄 License
+The usability pass covered desktop and touch-mobile Chromium, including a 320 × 568 viewport, repeated project-fragment navigation, modal focus/Escape, the Signal Lab controls, theme persistence, Sasha at a keyboard-sized viewport, reduced motion, no JavaScript, and WebGL failure. Contact success and failure were mocked locally. The fixed header keeps a gradient backing, touch controls have larger hit areas, and archive links retain modified-click browser behaviour.
 
-This portfolio is personal and not open source. Feel free to contact for inquiries.
-
----
-
-Built with ❤️ - A clean, minimal portfolio showcasing expertise in Robotics & AI
+`assets/js/engineering-data.js` contains the public stage summaries and four project mechanism sketches. `engineering.js` handles keyboard-accessible layer selection, a finite flow trace, and project concept/mechanism switches; `assets/css/engineering.css` owns their presentation. The map is a simplified explanation of contributions, not a deployment diagram or live product telemetry. The trace stops offscreen, respects reduced motion, and does not publish performance figures.

@@ -1,424 +1,47 @@
-/**
- * SASHA: Semantic Assistant for Search, Help, and Actions
- * A vanilla JS chatbot for portfolio FAQ and navigation.
- */
-
-(function () {
-    // --- CONFIG & DATA ---
-    const BOT_NAME = "SASHA";
-    const FULL_NAME = "Semantic Assistant for Search, Help, and Actions";
-    const TAGLINE = "Site Guide & FAQ";
-    const STORAGE_KEY = "sasha_data";
-    const MAX_HISTORY = 30;
-
-    const FAQ_DATA = [
-        {
-            keywords: ["who", "you", "yash", "bio"],
-            reply: "I'm SASHA, Yash's Semantic Assistant. Yash is a Robotics & AI Engineer specializing in perception systems, MLOps, and Agentic AI. He builds complex pipelines for radar and camera vision.",
-            actions: [{ label: "About Yash", href: "#home" }]
-        },
-        {
-            keywords: ["radar", "mmwave", "speed", "detection", "tracking", "60+ghz"],
-            reply: "Yash has extensive experience with mmWave radar systems, building high-uptime tracking and evidence bundling for roadside enforcement, with sub-100ms decision latency and real-time multi-target tracking.",
-            actions: [{ label: "See Radar Work", href: "#sasha-radar-evidence-systems" }]
-        },
-        {
-            keywords: ["anpr", "license", "plate", "ocr", "camera", "lpr", "vision"],
-            reply: "The ANPR pipeline Yash built handles high-throughput, multi-camera ingest with seconds-level end-to-end alerting. It features multi-stream ingest and high OCR correctness in real-world conditions.",
-            actions: [{ label: "View ANPR Projects", href: "#sasha-automatic-number-plate-recognition" }]
-        },
-        {
-            keywords: ["vlm", "llm", "ai", "search", "qwen", "llava", "rag", "agent"],
-            reply: "Yash integrates VLMs like Qwen2.5-VL for semantic CCTV search and scene understanding. He also builds RAG pipelines for technical documentation and technical decision support.",
-            actions: [{ label: "Explore VLM", href: "#sasha-vlm-retrieval" }]
-        },
-        {
-            keywords: ["plc", "scada", "automation", "industrial", "essi", "internship", "systems"],
-            reply: "During his internship at ESSI Integrated Technologies, Yash worked on industrial automation including PLC programming and systems engineering for production perception and analytics systems.",
-            actions: [{ label: "Industrial Experience", href: "#sasha-essi-integrated-technologies" }]
-        },
-        {
-            keywords: ["ros", "ros2", "turtlebot", "perception", "gazebo", "rviz", "simulation", "robotics"],
-            reply: "Yash specializes in ROS/ROS2, notably for real-time object detection on Turtlebot 4 and building robust simulation environments using Gazebo and Rviz.",
-            actions: [{ label: "Robotics Projects", href: "#sasha-object-detection-using-turtlebot-4" }]
-        },
-        {
-            keywords: ["arduino", "esp32", "microcontroller", "embedded", "iot", "sensor", "firmware"],
-            reply: "Yash builds embedded systems using ESP32 and Arduino, like his Smart Agriculture System and bio-inspired Spider Quadruped. He is fluent in Embedded C and Python-based IoT.",
-            actions: [{ label: "Embedded Projects", href: "#sasha-smart-agriculture-system" }]
-        },
-        {
-            keywords: ["agri", "agriculture", "hydroponics", "farm", "automated"],
-            reply: "He developed an automated hydroponics system using ESP32 and Firebase, focusing on sensor-driven climate control and real-time data monitoring.",
-            actions: [{ label: "Agri-Tech Project", href: "#sasha-smart-agriculture-system" }]
-        },
-        {
-            keywords: ["finance", "loan", "stock", "sentiment", "trading", "fintech", "market"],
-            reply: "Yash has applied ML to finance, building loan approval classifiers with XGBoost and stock predictors combining sentiment analysis with technical indicators.",
-            actions: [
-                { label: "Bank Loan Modelling", href: "#sasha-bank-loan-modelling" },
-                { label: "Stock Predictor", href: "#sasha-stock-price-direction-predictor" }
-            ]
-        },
-        {
-            keywords: ["fitness", "openpose", "pose", "workout", "exercise", "coach"],
-            reply: "Yash built an AI Fitness Trainer using OpenPose for computer vision-based pose estimation, providing personalized workout recommendations and real-time progress guidance.",
-            actions: [{ label: "AI Fitness Trainer", href: "#sasha-ai-fitness-trainer" }]
-        },
-        {
-            keywords: ["skills", "tech", "stack", "languages", "python", "c++", "docker", "fastapi"],
-            reply: "Core tech: Python (FastAPI), Docker, ROS2, ML (PyTorch/TF), and Agentic AI (LangChain/RAG). He also works with C++ and Raspberry Pi/Jetson hardware.",
-            actions: [{ label: "Full Skill Set", href: "#skills" }]
-        },
-        {
-            keywords: ["resume", "cv", "download", "hiring", "pdf", "job"],
-            reply: "You can view Yash's resume online or download the official PDF version for his full work history and contact details.",
-            actions: [
-                { label: "View Resume", href: "#resume" },
-                { label: "Download PDF", href: "resume.pdf" }
-            ]
-        },
-        {
-            keywords: ["contact", "email", "linkedin", "reach", "message", "hire", "phone"],
-            reply: "You can reach Yash via the contact form, LinkedIn (highly active), or email (yashgolani287@gmail.com). He's currently open to discussing Robotics & AI roles.",
-            actions: [
-                { label: "Contact Form", href: "#contact" },
-                { label: "LinkedIn", href: "https://www.linkedin.com/in/yash-golani-5556a424a" }
-            ]
-        },
-        {
-            keywords: ["projects", "portfolio", "project", "work", "build"],
-            reply: "Yash has worked on diverse projects: Turtlebot object detection, Spider Mimic Quadruped, Smart Agriculture, and ML systems for Finance.",
-            actions: [{ label: "View All Projects", href: "#projects" }]
-        },
-        {
-            keywords: ["education", "college", "degree", "university", "btech", "symbiosis", "study", "cgpa", "pune"],
-            reply: "Yash is pursuing a B.Tech in Robotics and Automation at Symbiosis Institute of Technology, Pune (2022-2026) with a 7.51 CGPA.",
-            actions: [{ label: "Education Details", href: "#education" }]
-        },
-        {
-            keywords: ["experience", "work", "history", "career", "job", "internship"],
-            reply: "Yash has worked on perception systems, MLOps, and automation, including a Systems Engineering internship at ESSI and production radar deployments.",
-            actions: [{ label: "Work Experience", href: "#experience" }]
-        },
-        {
-            keywords: ["where", "page", "current", "explain", "what", "this"],
-            reply: "GENERIC_PAGE_DESCRIPTION", // Placeholder handled in routeQuery
-            actions: []
-        }
-    ];
-
-    const QUICK_ACTIONS = [
-        { label: "Experience", href: "#experience" },
-        { label: "Education", href: "#education" },
-        { label: "Robotics Work", href: "#sasha-object-detection-using-turtlebot-4" },
-        { label: "Radar Systems", href: "#sasha-radar-evidence-systems" },
-        { label: "ANPR & Vision", href: "#sasha-automatic-number-plate-recognition" },
-        { label: "Investigation", href: "#sasha-investigation-search" },
-        { label: "MLOps & Platform", href: "#sasha-mlops-platform" },
-        { label: "VLM & Retrieval", href: "#sasha-vlm-retrieval" },
-        { label: "Contact Yash", href: "#contact" }
-    ];
-
-    // --- STATE ---
-    let isOpen = false;
-    let history = [];
-    let isTyping = false;
-    let hasBeenOpened = false;
-
-    // --- UI ELEMENTS ---
-    let fab, panel, messagesContainer, input, sendBtn;
-
-    // --- INITIALIZATION ---
-    function init() {
-        loadState();
-        ensureHeadingIds();
-        createUI();
-        renderHistory();
-        checkInitialState();
-        handleHashHighlight();
-    }
-
-    function loadState() {
-        const saved = localStorage.getItem(STORAGE_KEY);
-        if (saved) {
-            const parsed = JSON.parse(saved);
-            isOpen = parsed.isOpen || false;
-            history = parsed.history || [];
-            hasBeenOpened = parsed.hasBeenOpened || false;
-        }
-    }
-
-    function saveState() {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify({ isOpen, history, hasBeenOpened }));
-    }
-
-    function ensureHeadingIds() {
-        const main = document.querySelector('main');
-        if (!main) return;
-        const headings = main.querySelectorAll('h1, h2, h3');
-        headings.forEach(h => {
-            if (!h.id) {
-                const slug = h.innerText.toLowerCase()
-                    .replace(/[^\w\s-]/g, '')
-                    .replace(/\s+/g, '-')
-                    .replace(/-+/g, '-')
-                    .trim();
-                h.id = `sasha-${slug}`;
-            }
-        });
-    }
-
-    function createUI() {
-        // FAB
-        fab = document.createElement('button');
-        fab.className = 'sasha-fab';
-        fab.setAttribute('aria-label', 'Open SASHA Assistant');
-        fab.innerHTML = `<svg viewBox="0 0 24 24"><path d="M22,9L22,9c0-1.1-0.9-2-2-2h-3c0-2.21-1.79-4-4-4S9,4.79,9,7H6C4.9,7,4,7.9,4,9L4,9c-1.1,0-2,0.9-2,2v2c0,1.1,0.9,2,2,2v4 c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2v-4c1.1,0,2-0.9,2-2v-2C24,9.9,23.1,9,22,9z M12,5c1.1,0,2,0.9,2,2h-4C10,5.9,10.9,5,12,5z M18,17H6v-6h12V17z M9,12c-0.55,0-1,0.45-1,1s0.45,1,1,1s1-0.45,1-1S9.55,12,9,12z M15,12c-0.55,0-1,0.45-1,1s0.45,1,1,1s1-0.45,1-1S15.55,12,15,12z M6,12 c-0.55,0-1,0.45-1,1c0,0.55,0.45,1,1,1h0c0.55,0,1-0.45,1-1C7,12.45,6.55,12,6,12z M18,12c-0.55,0-1,0.45-1,1c0,0.55,0.45,1,1,1h0 c0.55,0,1-0.45,1-1C19,12.45,18.55,12,18,12z"/></svg>`;
-        fab.onclick = toggle;
-        document.body.appendChild(fab);
-
-        // Panel
-        panel = document.createElement('div');
-        panel.className = 'sasha-panel';
-        panel.innerHTML = `
-      <div class="sasha-header">
-        <div class="sasha-header-info">
-          <span class="sasha-name">${BOT_NAME}</span>
-          <span class="sasha-acronym" title="${FULL_NAME}">${TAGLINE}</span>
-        </div>
-        <div class="sasha-header-actions">
-          <button class="sasha-header-btn" id="sasha-clear" title="Clear Chat" aria-label="Clear Chat">
-            <svg viewBox="0 0 24 24" width="20" height="20"><path d="M19 4h-3.5l-1-1h-5l-1 1H5v2h14V4zM6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12z" fill="currentColor"/></svg>
-          </button>
-          <button class="sasha-header-btn" id="sasha-close" aria-label="Close">
-            <svg viewBox="0 0 24 24" width="20" height="20"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z" fill="currentColor"/></svg>
-          </button>
-        </div>
-      </div>
-      <div class="sasha-messages" id="sasha-messages"></div>
-      <div class="sasha-typing" id="sasha-typing">Sasha is thinking...</div>
-      <form class="sasha-input-area" id="sasha-form">
-        <input type="text" class="sasha-input" id="sasha-input" placeholder="Ask about Yash or site sections..." autocomplete="off">
-        <button type="submit" class="sasha-send" id="sasha-send" disabled aria-label="Send">
-          <svg viewBox="0 0 24 24" width="24" height="24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" fill="currentColor"/></svg>
-        </button>
-      </form>
-      <div class="sasha-footer">
-        <span class="sasha-fullname">${FULL_NAME}</span>
-      </div>
-    `;
-        document.body.appendChild(panel);
-
-        messagesContainer = panel.querySelector('#sasha-messages');
-        input = panel.querySelector('#sasha-input');
-        sendBtn = panel.querySelector('#sasha-send');
-        const form = panel.querySelector('#sasha-form');
-
-        panel.querySelector('#sasha-close').onclick = close;
-        panel.querySelector('#sasha-clear').onclick = clearChat;
-
-        input.oninput = () => { sendBtn.disabled = !input.value.trim(); };
-        form.onsubmit = (e) => {
-            e.preventDefault();
-            handleUserInput();
-        };
-
-        // Accessibility: Esc key
-        window.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && isOpen) close();
-        });
-    }
-
-    function clearChat() {
-        if (confirm("Reset conversation history?")) {
-            history = [];
-            saveState();
-            renderHistory();
-            greet();
-        }
-    }
-
-    function checkInitialState() {
-        if (isOpen) {
-            panel.classList.add('active');
-            input.focus();
-        }
-
-        if (hasBeenOpened && history.length === 0) {
-            greet();
-            saveState();
-        }
-    }
-
-    function toggle() {
-        isOpen ? close() : open();
-    }
-
-    function open() {
-        isOpen = true;
-        panel.classList.add('active');
-        input.focus();
-        if (!hasBeenOpened) {
-            hasBeenOpened = true;
-            if (history.length === 0) greet();
-        }
-        saveState();
-    }
-
-    function close() {
-        isOpen = false;
-        panel.classList.remove('active');
-        saveState();
-    }
-
-    function greet() {
-        const greetingText = `Hi! I'm Sasha, Yash's site guide. I can help find specific projects, tech stack details, or jump you anywhere on the site.`;
-
-        const greeting = `
-            <div class="sasha-welcome">
-                <img src="assets/images/img9.webp" alt="Waving Bot" class="sasha-bot-wave">
-                <div>${greetingText}<br><br>Quick Links:</div>
-            </div>
-        `;
-        const actions = [
-            { label: "Skills", href: "#skills" },
-            { label: "Experience", href: "#experience" },
-            { label: "Contact", href: "#contact" }
-        ];
-
-        renderMessage('assistant', greeting, actions);
-    }
-
-    function handleUserInput(manualText) {
-        const text = manualText || input.value.trim();
-        if (!text) return;
-
-        if (!manualText) input.value = '';
-        sendBtn.disabled = true;
-        renderMessage('user', text);
-
-        // Process query
-        showTyping(true);
-        setTimeout(() => {
-            const response = routeQuery(text);
-            showTyping(false);
-            renderMessage('assistant', response.reply, response.actions);
-        }, 600);
-    }
-
-    function routeQuery(text) {
-        const query = text.toLowerCase();
-        let bestMatch = null;
-        let maxScore = 0;
-
-        for (const item of FAQ_DATA) {
-            let score = 0;
-            item.keywords.forEach(k => {
-                if (query === k) score += 10; // Exact match
-                else if (query.includes(k)) score += 5; // Multi-word match
-                else if (k.includes(query) && query.length > 3) score += 2; // Partial overlap
-            });
-
-            if (score > maxScore) {
-                maxScore = score;
-                bestMatch = item;
-            }
-        }
-
-        if (bestMatch && maxScore >= 4) {
-            if (bestMatch.reply === "GENERIC_PAGE_DESCRIPTION") {
-                return {
-                    reply: "You're exploring Yash Golani's portfolio. I can help you find specific details about his work in Robotics and AI, or jump you to any section.",
-                    actions: QUICK_ACTIONS
-                };
-            }
-            return bestMatch;
-        }
-
-        return {
-            reply: "I'm not quite sure about that. Try asking about FAQs.",
-            actions: QUICK_ACTIONS
-        };
-    }
-
-    function renderMessage(role, text, actions = []) {
-        const msg = { role, text, actions, timestamp: Date.now() };
-        if (role !== 'system') { // history only for user/assistant
-            history.push(msg);
-            if (history.length > MAX_HISTORY) history.shift();
-            saveState();
-        }
-
-        appendMessageToUI(msg);
-    }
-
-    function appendMessageToUI(msg) {
-        const msgEl = document.createElement('div');
-        msgEl.className = `sasha-msg sasha-msg-${msg.role}`;
-        msgEl.innerHTML = `<div>${msg.text}</div>`;
-
-        if (msg.actions && msg.actions.length > 0) {
-            const actionsEl = document.createElement('div');
-            actionsEl.className = 'sasha-actions';
-            msg.actions.forEach(act => {
-                const btn = document.createElement('button');
-                btn.className = 'sasha-action-btn';
-                btn.innerText = act.label;
-                btn.onclick = () => handleAction(act);
-                actionsEl.appendChild(btn);
-            });
-            msgEl.appendChild(actionsEl);
-        }
-
-        messagesContainer.appendChild(msgEl);
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
-    }
-
-    function renderHistory() {
-        messagesContainer.innerHTML = '';
-        history.forEach(appendMessageToUI);
-    }
-
-    function showTyping(show) {
-        isTyping = show;
-        panel.querySelector('#sasha-typing').classList.toggle('active', show);
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
-    }
-
-    function handleAction(action) {
-        if (action.href.startsWith('http') || action.href.endsWith('.pdf')) {
-            window.open(action.href, '_blank');
-            return;
-        }
-        // Single-page: every action is an in-page anchor.
-        const hash = action.href.replace(/^#/, '');
-        if (hash) navigateToHash(hash);
-    }
-
-    function navigateToHash(hash) {
-        const target = document.getElementById(hash);
-        if (target) {
-            target.scrollIntoView({ behavior: 'smooth' });
-            target.classList.add('sasha-highlight');
-            setTimeout(() => target.classList.remove('sasha-highlight'), 2000);
-            if (!window.location.hash.includes(hash)) {
-                window.history.replaceState(null, null, `#${hash}`);
-            }
-        }
-    }
-
-    function handleHashHighlight() {
-        const hash = window.location.hash.substring(1);
-        if (hash && hash.startsWith('sasha-')) {
-            setTimeout(() => navigateToHash(hash), 500);
-        }
-    }
-
-    // --- START ---
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', init);
-    } else {
-        init();
-    }
+/* Sasha: a local guide grounded in the public portfolio, with no remote model. */
+(() => {
+  'use strict';
+  const data=window.PORTFOLIO;if(!data)return;
+  const make=(tag,className,text)=>{const el=document.createElement(tag);if(className)el.className=className;if(text!==undefined)el.textContent=text;return el;};
+  const launch=make('button','sashaLaunch');launch.type='button';launch.setAttribute('aria-label','Ask Sasha about Yash’s work');launch.setAttribute('aria-expanded','false');launch.setAttribute('aria-controls','sasha-panel');
+  launch.innerHTML='<span class="sashaMark" aria-hidden="true">✳</span><span>Ask Sasha</span>';
+  const panel=make('aside','sashaPanel');panel.id='sasha-panel';panel.hidden=true;panel.setAttribute('role','dialog');panel.setAttribute('aria-label','Sasha, your portfolio guide');
+  panel.innerHTML=`<header class="sashaHeader"><div class="sashaIdentity"><span class="sashaMark" aria-hidden="true">✳</span><div><h2>Sasha</h2><p>Your guide to Yash’s work</p></div></div><div class="sashaHeaderActions"><button type="button" id="sasha-clear" aria-label="Clear conversation">↺</button><button type="button" id="sasha-close" aria-label="Close Sasha">×</button></div></header><p class="sashaScope">Answers from this portfolio · questions stay in your browser</p><div id="sasha-log" class="sashaLog" role="log" aria-live="polite" aria-relevant="additions" aria-label="Conversation with Sasha"></div><div class="sashaSuggestions" id="sasha-suggestions" aria-label="Suggested questions"></div><form id="sasha-form" class="sashaForm"><label class="sashaSr" for="sasha-input">Ask about Yash’s experience, projects, skills, or education</label><input id="sasha-input" autocomplete="off" maxlength="500" placeholder="Ask about a project or skill…"><button type="submit" aria-label="Send question">↑</button></form><p class="sashaFooter">Curated facts, not a live AI model. <a href="#contact">Ask Yash directly ↗</a></p>`;
+  document.body.append(launch,panel);
+  const log=panel.querySelector('#sasha-log'),input=panel.querySelector('#sasha-input'),suggestions=panel.querySelector('#sasha-suggestions');
+  let lastTopic=null,opener=launch,count=0,followLatest=true;
+  log.addEventListener('scroll',()=>{followLatest=log.scrollHeight-log.clientHeight-log.scrollTop<40;},{passive:true});
+  new ResizeObserver(()=>{if(!panel.hidden&&followLatest)log.scrollTo({top:log.scrollHeight,behavior:'instant'});}).observe(log);
+  const normal=s=>s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[-–—]/g,' ').replace(/[^a-z0-9+# ]/g,' ').replace(/\s+/g,' ').trim();
+  function linksTo(parent,links){const row=make('div','sashaLinks');for(const [label,href] of links){const a=make('a','',label+' ↗');a.href=href;if(!href.startsWith('#')){a.target='_blank';a.rel='noreferrer';}row.append(a);}parent.append(row);}
+  function add(role,text,links=[]){const entry=make('div','sashaMessage '+role);entry.append(make('span','sashaSpeaker',role==='user'?'You':'Sasha'),make('p','',text));if(links.length)linksTo(entry,links);log.append(entry);while(log.children.length>40)log.firstElementChild.remove();followLatest=true;log.scrollTo({top:log.scrollHeight,behavior:'instant'});}
+  function contextualQuestions(){const label=document.getElementById('chapter-label').textContent.toLowerCase();if(/inside the signal/.test(label))return ['How does the sculpture work?','What is his distributed systems work?','Which personal projects has Yash built?'];if(/project|curiosity/.test(label))return ['Which personal projects has Yash built?','Tell me about Turtlebot','Explain Traffic VLM'];if(/pieces|system/.test(label))return ['What is his distributed systems work?','What does he do with GPUs?','Show his full-stack work'];if(/see|percep/.test(label))return ['What is his video analytics work?','Tell me about face recognition','How does he handle live cameras?'];if(/loop/.test(label))return ['What is his MLOps work?','Tell me about model research','What is his VLM work?'];return ['Give me a quick introduction','What did Yash build at ESSI?','What are his technical skills?'];}
+  function updateSuggestions(){suggestions.replaceChildren();for(const q of contextualQuestions()){const button=make('button','',q);button.type='button';button.addEventListener('click',()=>ask(q));suggestions.append(button);}}
+  function welcome(){log.replaceChildren();lastTopic=null;count=0;add('assistant','Hi, I’m Sasha. I can help you explore Yash’s engineering work, explain a project, or find his skills and résumé. What would you like to know?');updateSuggestions();}
+  function open(){opener=document.activeElement;panel.hidden=false;launch.setAttribute('aria-expanded','true');input.focus();updateSuggestions();}
+  function close(){panel.hidden=true;launch.setAttribute('aria-expanded','false');if(opener&&opener.isConnected)opener.focus();}
+  launch.addEventListener('click',()=>panel.hidden?open():close());panel.querySelector('#sasha-close').addEventListener('click',close);panel.querySelector('#sasha-clear').addEventListener('click',()=>{welcome();input.focus();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!panel.hidden){e.preventDefault();close();}});
+  panel.addEventListener('click',e=>{if(e.target.closest('a[href^="#"]'))close();});
+  function matchScore(query,terms){let score=0;for(const raw of terms){const term=normal(raw);if((' '+query+' ').includes(' '+term+' ')||(' '+query+' ').includes(' '+term+'s '))score+=term.split(' ').length===1?2:6;}return score;}
+  function reply(query){
+    const q=normal(query);
+    if(/who are you|what is your name|what can you do|how can you help/.test(q))return {answer:'I’m Sasha, a local guide to Yash’s portfolio. I can explain his experience, projects, skills, and education, then link you to the relevant section. I use curated portfolio facts, not a live AI model.',links:[['Explore his work','#experience'],['Browse projects','#projects']]};
+    if(/^(hi|hello|hey|thanks|thank you)$/.test(q))return {answer:'You’re welcome here. I can introduce Yash, explain his contributions, or point you to a project and its code.',links:[['Explore the work','#experience'],['Personal projects','#projects']]};
+    if(/\b(salary|availability|available|notice period|hiring|hire|contact|email)\b/.test(q))return data.topics.find(t=>t.id==='contact');
+    if(/\b(accuracy|latency|fps|benchmark|customers|client names|product names|how many cameras|uptime)\b/.test(q))return {answer:'This public portfolio does not publish employer product benchmarks, customer names, or deployment guarantees. It focuses on Yash’s contributions to analytics, architecture, and applications.',links:[['Read the contributions','#contributions'],['Ask Yash directly','#contact']]};
+    if(/\b(more|that project|its stack|its tools)\b/.test(q)&&lastTopic&&lastTopic.project){const p=lastTopic.project;return {answer:p.work+' Tools: '+p.stack.join(', ')+'. Methods: '+(p.algorithms||[]).join('; ')+'.',links:[['View project',p.anchor],['Explore code','https://github.com/yashgolani28/'+p.repo]],project:p};}
+    if(/\b(introduc|overview|summary|summarize|who is|who are|about yash)\w*/.test(q))return data.topics.find(t=>t.id==='overview');
+    if(/what did (yash|he|you) (build|do)|what (has|have) (yash|he|you) (built|done)/.test(q))return data.topics.find(t=>t.id==='experience');
+    const projects=data.projects.map(p=>({project:p,score:matchScore(q,[p.name,...p.terms])})).filter(x=>x.score>0).sort((a,b)=>b.score-a.score);
+    if(projects.length){const p=projects[0].project;return {answer:p.description+' '+p.work+' Tools: '+p.stack.join(', ')+'. Methods: '+(p.algorithms||[]).join('; ')+'.',links:[['View project',p.anchor],['Explore code','https://github.com/yashgolani28/'+p.repo]],project:p};}
+    const topics=data.topics.map(t=>({...t,score:matchScore(q,t.terms)})).filter(t=>t.score>0).sort((a,b)=>b.score-a.score);
+    if(topics.length){const first=topics[0];if(/\band\b|\bcompare\b/.test(q)&&topics[1]&&topics[1].score>=2)return {answer:first.answer+'\n\n'+topics[1].answer,links:[...first.links,...topics[1].links].slice(0,4)};return first;}
+    return {answer:'I don’t have a verified answer to that in this portfolio. I can help with Yash’s work, projects, skills, education, or résumé. For anything beyond that, it’s best to ask him directly.',links:[['Professional work','#experience'],['Contact Yash','#contact']]};
+  }
+  function ask(text){const question=text.trim().slice(0,500);if(!question)return;add('user',question);input.value='';const result=reply(question);lastTopic=result;add('assistant',result.answer,result.links);count++;if(count===1)suggestions.hidden=true;}
+  panel.querySelector('#sasha-form').addEventListener('submit',e=>{e.preventDefault();ask(input.value);});
+  panel.querySelector('#sasha-clear').addEventListener('click',()=>{suggestions.hidden=false;});
+  new MutationObserver(()=>{if(!panel.hidden&&!count)updateSuggestions();}).observe(document.getElementById('chapter-label'),{childList:true});
+  welcome();
 })();

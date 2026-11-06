@@ -1,0 +1,111 @@
+{
+  "source": "Devicon original SVG variants; upstream brand colours preserved",
+  "repository": "https://github.com/devicons/devicon",
+  "commit": "32fe1d3b3f36ad11f90ab94f7db59738139c2bf6",
+  "icons": [
+    {
+      "file": "python.svg",
+      "url": "https://github.com/devicons/devicon/blob/32fe1d3b3f36ad11f90ab94f7db59738139c2bf6/icons/python/python-original.svg"
+    },
+    {
+      "file": "cplusplus.svg",
+      "url": "https://github.com/devicons/devicon/blob/32fe1d3b3f36ad11f90ab94f7db59738139c2bf6/icons/cplusplus/cplusplus-original.svg"
+    },
+    {
+      "file": "javascript.svg",
+      "url": "https://github.com/devicons/devicon/blob/32fe1d3b3f36ad11f90ab94f7db59738139c2bf6/icons/javascript/javascript-original.svg"
+    },
+    {
+      "file": "typescript.svg",
+      "url": "https://github.com/devicons/devicon/blob/32fe1d3b3f36ad11f90ab94f7db59738139c2bf6/icons/typescript/typescript-original.svg"
+    },
+    {
+      "file": "react.svg",
+      "url": "https://github.com/devicons/devicon/blob/32fe1d3b3f36ad11f90ab94f7db59738139c2bf6/icons/react/react-original.svg"
+    },
+    {
+      "file": "fastapi.svg",
+      "url": "https://github.com/devicons/devicon/blob/32fe1d3b3f36ad11f90ab94f7db59738139c2bf6/icons/fastapi/fastapi-original.svg"
+    },
+    {
+      "file": "flask.svg",
+      "url": "https://github.com/devicons/devicon/blob/32fe1d3b3f36ad11f90ab94f7db59738139c2bf6/icons/flask/flask-original.svg"
+    },
+    {
+      "file": "postgresql.svg",
+      "url": "https://github.com/devicons/devicon/blob/32fe1d3b3f36ad11f90ab94f7db59738139c2bf6/icons/postgresql/postgresql-original.svg"
+    },
+    {
+      "file": "apachekafka.svg",
+      "url": "https://github.com/devicons/devicon/blob/32fe1d3b3f36ad11f90ab94f7db59738139c2bf6/icons/apachekafka/apachekafka-original.svg"
+    },
+    {
+      "file": "redis.svg",
+      "url": "https://github.com/devicons/devicon/blob/32fe1d3b3f36ad11f90ab94f7db59738139c2bf6/icons/redis/redis-original.svg"
+    },
+    {
+      "file": "docker.svg",
+      "url": "https://github.com/devicons/devicon/blob/32fe1d3b3f36ad11f90ab94f7db59738139c2bf6/icons/docker/docker-original.svg"
+    },
+    {
+      "file": "git.svg",
+      "url": "https://github.com/devicons/devicon/blob/32fe1d3b3f36ad11f90ab94f7db59738139c2bf6/icons/git/git-original.svg"
+    },
+    {
+      "file": "pytorch.svg",
+      "url": "https://github.com/devicons/devicon/blob/32fe1d3b3f36ad11f90ab94f7db59738139c2bf6/icons/pytorch/pytorch-original.svg"
+    },
+    {
+      "file": "opencv.svg",
+      "url": "https://github.com/devicons/devicon/blob/32fe1d3b3f36ad11f90ab94f7db59738139c2bf6/icons/opencv/opencv-original.svg"
+    },
+    {
+      "file": "tensorflow.svg",
+      "url": "https://github.com/devicons/devicon/blob/32fe1d3b3f36ad11f90ab94f7db59738139c2bf6/icons/tensorflow/tensorflow-original.svg"
+    },
+    {
+      "file": "scikitlearn.svg",
+      "url": "https://github.com/devicons/devicon/blob/32fe1d3b3f36ad11f90ab94f7db59738139c2bf6/icons/scikitlearn/scikitlearn-original.svg"
+    },
+    {
+      "file": "numpy.svg",
+      "url": "https://github.com/devicons/devicon/blob/32fe1d3b3f36ad11f90ab94f7db59738139c2bf6/icons/numpy/numpy-original.svg"
+    },
+    {
+      "file": "pandas.svg",
+      "url": "https://github.com/devicons/devicon/blob/32fe1d3b3f36ad11f90ab94f7db59738139c2bf6/icons/pandas/pandas-original.svg"
+    },
+    {
+      "file": "ros.svg",
+      "url": "https://github.com/devicons/devicon/blob/32fe1d3b3f36ad11f90ab94f7db59738139c2bf6/icons/ros/ros-original.svg"
+    },
+    {
+      "file": "arduino.svg",
+      "url": "https://github.com/devicons/devicon/blob/32fe1d3b3f36ad11f90ab94f7db59738139c2bf6/icons/arduino/arduino-original.svg"
+    },
+    {
+      "file": "firebase.svg",
+      "url": "https://github.com/devicons/devicon/blob/32fe1d3b3f36ad11f90ab94f7db59738139c2bf6/icons/firebase/firebase-original.svg"
+    },
+    {
+      "file": "streamlit.svg",
+      "url": "https://github.com/devicons/devicon/blob/32fe1d3b3f36ad11f90ab94f7db59738139c2bf6/icons/streamlit/streamlit-original.svg"
+    },
+    {
+      "file": "tauri.svg",
+      "url": "https://github.com/devicons/devicon/blob/32fe1d3b3f36ad11f90ab94f7db59738139c2bf6/icons/tauri/tauri-original.svg"
+    },
+    {
+      "file": "matplotlib.svg",
+      "url": "https://github.com/devicons/devicon/blob/32fe1d3b3f36ad11f90ab94f7db59738139c2bf6/icons/matplotlib/matplotlib-original.svg"
+    },
+    {
+      "file": "keras.svg",
+      "url": "https://github.com/devicons/devicon/blob/32fe1d3b3f36ad11f90ab94f7db59738139c2bf6/icons/keras/keras-original.svg"
+    },
+    {
+      "file": "c.svg",
+      "url": "https://github.com/devicons/devicon/blob/32fe1d3b3f36ad11f90ab94f7db59738139c2bf6/icons/c/c-original.svg"
+    }
+  ]
+}
